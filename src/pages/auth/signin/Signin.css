@@ -7,10 +7,15 @@
     justify-content: center;
     min-height: 100vh;
     background: #FCFAFA;
+    padding: 5%;
+}
+
+.signin-container p, .signin-container h2 {
+    text-align: center;
 }
 
 .signin-form {
-    padding: 20px;
+    padding: 3% 7%;
     background-color: #ffffff;
     display: flex;
     flex-direction: column;
@@ -18,15 +23,16 @@
     align-items: center;
     width: 80%;
     max-width: 500px;
+    border-radius: 5px;
 }
 
 
 .signin-btn {
-    background-color: #2D88D4;
+    background-color: #030f2e;
     color: #fff;
-    padding: 10px 20px;
+    padding: 12px 20px;
     border: none;
-    border-radius: 10px;
+    border-radius: 5px;
     width: 100%;
 }
 
@@ -37,7 +43,7 @@
     display: flex;
     align-items: center;
     gap: 8px;
-    padding: 10px 20px;
+    padding: 12px 20px;
     background-color: #333;
-    border-radius: 20px;
+    border-radius: 5px;
 }
