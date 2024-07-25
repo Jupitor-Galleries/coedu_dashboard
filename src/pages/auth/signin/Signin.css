@@ -1,0 +1,43 @@
+.signin-container {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 20px;
+    justify-content: center;
+    min-height: 100vh;
+    background: #FCFAFA;
+}
+
+.signin-form {
+    padding: 20px;
+    background-color: #ffffff;
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+    align-items: center;
+    width: 80%;
+    max-width: 500px;
+}
+
+
+.signin-btn {
+    background-color: #2D88D4;
+    color: #fff;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 10px;
+    width: 100%;
+}
+
+
+.google-auth {
+    color: #fff;
+    /* font-size: 35px; */
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    padding: 10px 20px;
+    background-color: #333;
+    border-radius: 20px;
+}
