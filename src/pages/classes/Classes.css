@@ -1,0 +1,51 @@
+.classes-container {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    align-items: center;
+    justify-content: center;
+    min-height: 100vh;
+    padding: 5%;
+}
+
+.classes-data {
+    padding: 5%;
+    background-color: #bbb;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    border-radius: 5px;
+}
+
+.classes {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+}
+
+.class {
+    display: flex;
+    justify-content: space-between;
+    padding: 12px;
+    border: 1px solid #ccc;
+    background-color: #fff;
+    border-radius: 5px;
+    align-items: center;
+}
+
+.class a {
+    padding: 10px;
+    background-color: #333;
+    color: #fff;
+    border-radius: 5px;
+}
+
+.create-btn {
+    padding: 12px;
+    background-color: #333;
+    border: none;
+    border-radius: 5px;
+    color: #fff;
+}

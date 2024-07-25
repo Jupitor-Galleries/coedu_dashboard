@@ -4,7 +4,12 @@ import './Modal.css';
 const ResouceModal = ({modalOpened, onClose}) => {
 
     const [title, setTitle] = useState("");
+    const [description, setDescription] = useState("");
     const [file, setFile] = useState("");
+
+    const shareResources = () => {
+
+    }
 
   if(!modalOpened) {
     return null
@@ -28,11 +33,15 @@ const ResouceModal = ({modalOpened, onClose}) => {
           <input type="text" value={title} onChange={(e) => setTitle(e.target.value)} />
         </div>
         <div className="form-group">
+          <label htmlFor="description">Description</label>
+          <textarea type="text" value={description} onChange={(e) => setDescription(e.target.value)} />
+        </div>
+        <div className="form-group">
           <label htmlFor="files">Files</label>
           <input type="file" multiple value={file} onChange={(e) => setFile(e.target.value)} />
         </div>
 
-        <button className="c-btn">Share</button>
+        <button className="c-btn" onClick={() => shareResources()}>Share</button>
         </div>
       </div>
     </div>

@@ -8,7 +8,7 @@ import analytic1 from '../../assets/analytic1.png';
 import ResouceModal from '../modal/ResourceModal';
 import StudentModal from '../modal/StudentModal';
 
-const MainPage = () => {
+const MainPage = ({classs}) => {
 
   const [resourceModalOpened, setResourceModalOpened] = useState(false)
   const [studentModalOpened, setStudentModalOpened] = useState(false)
@@ -26,7 +26,7 @@ const MainPage = () => {
               <img src={userImg} alt="" />
             </div>
             <div className="prof-name">
-              Lady O
+              Iceberg
             </div>
             <div className="more-icon">
               <MdExpandMore />
@@ -38,7 +38,7 @@ const MainPage = () => {
         </div>
       </div>
       <div className="d-welcome">
-        <h2>Welcome Lady O</h2>
+        <h2>Welcome Iceberg</h2>
         <p>Manage your class in one place</p>
         <div className="welcome-analytics">
           <div className="analytics-data">
@@ -71,7 +71,7 @@ const MainPage = () => {
         </div>
       </div>
       <div className="dashboard-page-data">
-        <h2>Class Of 2024</h2>
+        <h2>{classs}</h2>
         <div className="d-first-sect">
         <div className="d-asset-overview">
             <div className="card-header">
@@ -95,17 +95,24 @@ const MainPage = () => {
               <h4>Assignments</h4>
               <button className="btn1">Create New Assignment</button>
             </div>
-            
           </div>
+
           <div className="d-asset-overview">
             <div className="card-header">
               <h4>Announcements</h4>
               <button className="btn1" onClick={() => setStudentModalOpened(true)}>Make Announcement</button>
             </div>
-            
           </div>
+
+          
           
         </div>
+        <div className="d-asset-overview">
+            <div className="card-header">
+              <h4>Polls</h4>
+              <button className="btn1" onClick={() => setStudentModalOpened(true)}>Share New Poll</button>
+            </div>
+          </div>
       </div>
       </div>
 

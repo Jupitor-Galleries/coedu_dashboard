@@ -11,11 +11,11 @@ import { BsFuelPumpDiesel } from "react-icons/bs";
 import { LiaRouteSolid } from "react-icons/lia";
 import { FaRegBuilding } from "react-icons/fa";
 
-const SideNav = () => {
+const SideNav = ({organization}) => {
     return (
         <div className='sidenav-container desktop'>
             <div className="logo">
-                <h1>Edtech</h1>
+                <h1>{organization}</h1>
             </div>
             <div className="sidenav-content">
                 <div className="sidenav-data">
