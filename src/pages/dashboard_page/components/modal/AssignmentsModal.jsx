@@ -1,16 +1,21 @@
 import React, { useState, useEffect } from "react";
 import './Modal.css';
-
-const AssignmentsModal = ({modalOpened, onClose}) => {
+import { uploadAssignment } from '../../../../api/class'
+const AssignmentsModal = ({modalOpened, onClose, classId}) => {
 
     const [title, setTitle] = useState("");
     const [description, setDescription] = useState("");
     const [file, setFile] = useState("");
     const [dueDate, setDueDate] = useState("");
 
-    const shareResources = () => {
-
-    }
+    const shareResources = async () => {
+        const res = await uploadAssignment(file, title, description, dueDate, classId)
+        if(res?.status){
+            onClose()
+        }else{
+            alert("failed to upload assignment")
+        }
+      }
 
   if(!modalOpened) {
     return null

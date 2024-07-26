@@ -140,3 +140,65 @@ export const getClassStudents = async (classId)=>{
         console.error('There was a problem with the fetch operation:', error);
     }
 }
+
+export const uploadAssignment = async(file, title, information, dueDate, classId)=>{
+    const url = `${baseUrl}/api/assignments/send`
+    const formData = new FormData();
+    formData.append('file', file);
+    formData.append('title', title);
+    formData.append('information', information);
+    formData.append('dueDate', dueDate);
+    formData.append('classId', classId);
+    try {
+        const token = localStorage.getItem('jwt');
+        const response = await fetch(url, {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+                'Authorization': `Bearer ${token}`
+            },
+            body: formData,
+        });
+        const data = await response.json();
+        console.log("the response", data)
+        if (!response.ok) {
+            console.log("status is false")
+            return { status: false, message: "failed to submit assignment"  }
+        }
+
+        return { status: true, data: data }
+    } catch (error) {
+        console.error('There was a problem with the fetch operation:', error);
+    }
+}
+
+export const sendAnnouncement  = async (classId, content, type)=>{
+    const url = `${baseUrl}/api/content/send`
+    const body = {
+        classId,
+        content,
+        type
+    };
+
+    try {
+        const token = localStorage.getItem('jwt');
+        const response = await fetch(url, {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+                'Authorization': `Bearer ${token}`
+            },
+            body: JSON.stringify(body)
+        });
+        const data = await response.json();
+        console.log("the response", data)
+        if (!response.ok) {
+            console.log("status is false")
+            return { status: false, message: "failed to send announcement"  }
+        }
+
+        return { status: true, data: data }
+    } catch (error) {
+        console.error('There was a problem with the fetch operation:', error);
+    }
+}
