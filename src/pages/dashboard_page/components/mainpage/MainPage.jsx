@@ -70,7 +70,7 @@ const MainPage = ({classs}) => {
           <IoMdMenu />
         </div>
       </div>
-      <div className="d-welcome">
+      {/* <div className="d-welcome">
         <h2>Welcome {userDetails.name}</h2>
         <p>Manage your class in one place</p>
         <div className="welcome-analytics">
@@ -102,7 +102,7 @@ const MainPage = ({classs}) => {
             </div>
           </div>
         </div>
-      </div>
+      </div> */}
       <div className="dashboard-page-data">
         <h2>{classDetails.name}</h2>
         <div className="d-first-sect">

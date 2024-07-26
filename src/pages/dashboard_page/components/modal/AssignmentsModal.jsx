@@ -1,12 +1,27 @@
 import React, { useState} from "react";
 import './Modal.css';
 import {sendass } from '../../../../api/class'
+import { uploadImages } from "../../../../api/uploadFiles";
 const AssignmentsModal = ({modalOpened, onClose, classId}) => {
 
     const [title, setTitle] = useState("");
     const [description, setDescription] = useState("");
     const [file, setFile] = useState("");
-    const [dueDate, setDueDate] = useState("");
+    const [dueDate, setDueDate] = useState(""); 
+    const [filesUrl, setFilesUrl] = useState([]);
+
+    const handleChange = (e) => {
+      if (e.target.files) {
+        setFile(Array.from(e.target.files));
+      }
+    };
+
+    const saveFiles = async() => {
+      const res = await uploadImages(file, "assignments" )
+      if(res) {
+        setFilesUrl(res.url)
+      }
+    }
 
     const shareResources = async () => {
         const fileLink = "https://docs.google.com/document/d/10BI6TCegR5DAPw2ajmp476Dp9o5P4ko1lbr_mnQ9LqU/edit?usp=sharing"
@@ -45,7 +60,7 @@ const AssignmentsModal = ({modalOpened, onClose, classId}) => {
         </div>
         <div className="form-group">
           <label htmlFor="files">Attachments</label>
-          <input type="file" multiple value={file} onChange={(e) => setFile(e.target.value)} />
+          <input type="file" multiple value={file} onChange={handleChange} />
         </div>
 
         <div className="form-group">
