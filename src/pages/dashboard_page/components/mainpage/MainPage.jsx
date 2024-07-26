@@ -165,7 +165,7 @@ const MainPage = ({classs}) => {
       <ResouceModal modalOpened={resourceModalOpened} onClose={() => setResourceModalOpened(false)} />
       <StudentModal modalOpened={studentModalOpened} onClose={() => setStudentModalOpened(false)} classId={classs}/>
       <AssignmentsModal modalOpened={assignmentModalOpened} onClose={() => setAssignmentModalOpened(false)} classId={classs}/>
-      <AnnouncementModal modalOpened={announcementModalOpened} onClose={() => setAnnouncementModalOpened(false)} />
+      <AnnouncementModal modalOpened={announcementModalOpened} onClose={() => setAnnouncementModalOpened(false)} classId={classs}/>
       
     </div>
   )
