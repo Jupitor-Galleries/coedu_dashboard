@@ -34,7 +34,7 @@ export const createUser = async (organization, name, email, password) => {
   };
 
   export const login = async (email, password) => {
-    const url = `${baseUrl}/api/auth/register`
+    const url = `${baseUrl}/api/auth/login`
     const body = {
      email,
      password

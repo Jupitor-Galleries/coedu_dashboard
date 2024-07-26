@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from "react";
+import { addClass } from "../../../api/class"
 
 const ClassModal = ({modalOpened, onClose}) => {
 
@@ -8,9 +9,17 @@ const ClassModal = ({modalOpened, onClose}) => {
     const [description, setDescription] = useState("");
     const [file, setFile] = useState("");
 
-    const createClass = () => {
-
+    const createClass = async() => {
+       
+       const res = await addClass(className, startDate, endDate)
+       if (res.status) {
+           localStorage.setItem('jwt', res.data.token)
+           onClose()
+       }else{
+            alert("failed to create class")
+       }
     }
+    
 
   if(!modalOpened) {
     return null

@@ -22,7 +22,8 @@ export const Steps = () => {
         }
 
       const res = await createUser(schoolName, adminName, email, password)
-        if (res) {
+        if (res.status) {
+            localStorage.setItem('jwt', res.data.token)
             navigate('/classes')
         }
     }
