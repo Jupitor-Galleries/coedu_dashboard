@@ -1,0 +1,13 @@
+.flex-row {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.delete-btn {
+    background-color: red;
+    padding: 12px;
+    border: none;
+    border-radius: 5px;
+    color: #fff;
+}

@@ -23,7 +23,7 @@ export const Steps = () => {
 
       const res = await createUser(schoolName, adminName, email, password)
         if (res) {
-            navigate('/dashboard')
+            navigate('/classes')
         }
     }
 

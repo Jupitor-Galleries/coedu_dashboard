@@ -1,20 +1,24 @@
 import React, { useState } from 'react'
 import { FaGoogle } from 'react-icons/fa';
 import "./Signin.css"
-import { NavLink } from 'react-router-dom';
-import { signinWithGoogle } from '../../../api/auth';
+import { NavLink, useNavigate } from 'react-router-dom';
+import { login, signinWithGoogle } from '../../../api/auth';
 
 
 
 const Signin = () => {
-
     
-
+    const navigate = useNavigate();
     // const [name, setName] = useState("");
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
     
-    const signin = () => {}
+    const signin = async() => {
+        const res = await login()
+        if(res) {
+
+        }
+    }
     
   return (
     <div className='signin-container'>

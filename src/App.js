@@ -5,6 +5,7 @@ import './App.css'
 import Signin from './pages/auth/signin/Signin';
 import Signup from './pages/auth/signup/Signup';
 import Classes from './pages/classes/Classes';
+import Students from './pages/students/Students';
 
 const App = () => {
   return (
@@ -15,6 +16,7 @@ const App = () => {
     <Route path="/signin" element={<Signin />}  />
     <Route path="/:organization/:class" element={<DashboardPage />}  />
     <Route path="/classes" element={<Classes />}  />
+    <Route path="/students" element={<Students />}  />
     </Routes>
   </Router>
   );

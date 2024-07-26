@@ -33,6 +33,33 @@ export const createUser = async (organization, name, email, password) => {
     }
   };
 
+  export const login = async (email, password) => {
+    const url = `${baseUrl}/api/auth/register`
+    const body = {
+     email,
+     password
+    };
+
+    try {
+      const response = await fetch(url, {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json'
+        },
+        body: JSON.stringify(body)
+      });
+
+      if (!response.ok) {
+        throw new Error('Network response was not ok');
+      }
+
+      const data = await response.json();
+      return {status: true, data: data}
+    } catch (error) {
+      console.error('There was a problem with the fetch operation:', error);
+    }
+  };
+
  export const signinWithGoogle = async() => {
     signInWithPopup(auth, provider)
   .then((result) => {
