@@ -1,17 +1,27 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import "./Classes.css";
 import { NavLink } from 'react-router-dom';
 import ClassModal from './modal/ClassModal';
+import { getUserClasses } from '../../api/class'
 
 const Classes = () => {
 
     const [modalOpened, setModalOpened] = useState(false);
-    const [classes, setClasses] = useState([
-        {
-            className: "Tech",
-            schoolName: "nicetyfarm",
-        }
-    ])
+    const [classes, setClasses] = useState([])
+    
+    const fetchUserClasses = async () => {
+            const res = await getUserClasses()
+            if(res.status) {
+                setClasses(res.data.classes)
+            }
+    }
+
+
+    useEffect(() => {
+        fetchUserClasses()
+    },[])
+
+
   return (
     <div className='classes-container'>
          <div className="classes-data">
@@ -21,7 +31,7 @@ const Classes = () => {
                     classes.map((clas) => {
                         return (
                             <div className="class">
-                                <p>{clas.className}</p>
+                                <p>{clas.name}</p>
                                 <NavLink to={`/${clas.schoolName}/${clas.className}`}>Manage</NavLink>
                             </div>
                         )

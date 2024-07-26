@@ -32,3 +32,28 @@ export const addClass = async (name, startDate, endDate) => {
         console.error('There was a problem with the fetch operation:', error);
     }
 }
+
+export const getUserClasses = async() => {
+    const url = `${baseUrl}/api/classes/user`
+
+    try {
+        const token = localStorage.getItem('jwt');
+        const response = await fetch(url, {
+            method: 'GET',
+            headers: {
+                'Content-Type': 'application/json',
+                'Authorization': `Bearer ${token}`
+            }
+        });
+        const data = await response.json();
+
+        if (!response.ok) {
+            console.log("status is false")
+            return { status: false, message: "failed to get classes",data : []  }
+        }
+
+        return { status: true, data: data }
+    } catch (error) {
+        console.error('There was a problem with the fetch operation:', error);
+    }
+}
