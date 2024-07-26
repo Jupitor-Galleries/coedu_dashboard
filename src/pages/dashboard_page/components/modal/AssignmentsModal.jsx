@@ -1,6 +1,6 @@
-import React, { useState, useEffect } from "react";
+import React, { useState} from "react";
 import './Modal.css';
-import { uploadAssignment } from '../../../../api/class'
+import {sendass } from '../../../../api/class'
 const AssignmentsModal = ({modalOpened, onClose, classId}) => {
 
     const [title, setTitle] = useState("");
@@ -9,9 +9,10 @@ const AssignmentsModal = ({modalOpened, onClose, classId}) => {
     const [dueDate, setDueDate] = useState("");
 
     const shareResources = async () => {
-        const res = await uploadAssignment(file, title, description, dueDate, classId)
+        const fileLink = "https://docs.google.com/document/d/10BI6TCegR5DAPw2ajmp476Dp9o5P4ko1lbr_mnQ9LqU/edit?usp=sharing"
+        const res = await sendass (title, description, fileLink, dueDate, classId)
         if(res?.status){
-            onClose()
+            alert("sent an assignment")
         }else{
             alert("failed to upload assignment")
         }
