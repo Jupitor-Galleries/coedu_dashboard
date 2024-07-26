@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from "react";
 import './Modal.css';
+import { uploadImages } from "../../../../api/uploadFiles";
 
 const ResouceModal = ({modalOpened, onClose}) => {
 
@@ -7,7 +8,8 @@ const ResouceModal = ({modalOpened, onClose}) => {
     const [description, setDescription] = useState("");
     const [file, setFile] = useState("");
 
-    const shareResources = () => {
+    const shareResources = async() => {
+      const res = await uploadImages(file, "resources" )
 
     }
 

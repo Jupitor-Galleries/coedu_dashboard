@@ -48,12 +48,13 @@ export const createUser = async (organization, name, email, password) => {
         },
         body: JSON.stringify(body)
       });
-
+      const data = await response.json();
+      console.log(data)
       if (!response.ok) {
         throw new Error('Network response was not ok');
       }
 
-      const data = await response.json();
+     
       return {status: true, data: data}
     } catch (error) {
       console.error('There was a problem with the fetch operation:', error);
