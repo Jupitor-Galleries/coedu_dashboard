@@ -32,7 +32,7 @@ const Classes = () => {
                         return (
                             <div className="class">
                                 <p>{clas.name}</p>
-                                <NavLink to={`/${clas.schoolName}/${clas.className}`}>Manage</NavLink>
+                                <NavLink to={`/class/${clas._id}`}>Manage</NavLink>
                             </div>
                         )
                     })

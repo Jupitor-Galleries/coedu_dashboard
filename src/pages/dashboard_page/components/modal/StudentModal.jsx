@@ -1,12 +1,23 @@
 import React, { useState, useEffect } from "react";
+import { addStudent } from '../../../../api/class'
 import './Modal.css';
 
-const StudentModal = ({modalOpened, onClose}) => {
+const StudentModal = ({modalOpened, onClose, classId}) => {
 
     const [classes, setClasses] = useState(["Business", "Communications", 'Technology']);
     const [fullName, setFullName] = useState("");
     const [classs, setClass] = useState("Business");
     const [whatsappNumber, setWhatsappNumber] = useState([]);
+
+    const submitAddStudent = async ()=>{
+        const res = await addStudent(classId, fullName, whatsappNumber)
+        if(res.status){
+            onClose()
+        }else{
+            alert("failed to add student")
+        }
+        
+    }
 
   if(!modalOpened) {
     return null
@@ -34,7 +45,7 @@ const StudentModal = ({modalOpened, onClose}) => {
           <input type="text" value={whatsappNumber} onChange={(e) => setWhatsappNumber(e.target.value)} />
         </div>
 
-        <div className="form-group">
+        {/* <div className="form-group">
             <label htmlFor="class">Class</label>
           <select name="class" id="class" value={classs} onChange={(e) => setClass(e.target.value)}>
             {
@@ -45,9 +56,9 @@ const StudentModal = ({modalOpened, onClose}) => {
                 })
             }
           </select>
-        </div>
+        </div> */}
 
-        <button className="c-btn">Add</button>
+        <button className="c-btn" onClick={submitAddStudent }>Add</button>
         </div>
       </div>
     </div>

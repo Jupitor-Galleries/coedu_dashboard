@@ -1,21 +1,27 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { NavLink } from 'react-router-dom';
 import './Students.css'
 import StudentModal from '../dashboard_page/components/modal/StudentModal';
+import { useParams } from 'react-router-dom';
+import { getClassStudents } from '../../api/class'
 
 const Students = () => {
-
+    const classId = useParams().classId;
     const [modalOpened, setModalOpened] = useState(false);
-    const [classes, setClasses] = useState([
-        {
-            fullName: "Justine Imasiku",
-            whatsappNumber: "+260779293183",
-        }
-    ])
+    const [classes, setClasses] = useState([])
 
     const broadcast = () => {
 
     }
+    const allStudents = async() => {
+        const res = await getClassStudents(classId)
+        if(res?.status) {
+            setClasses(res.data.students)
+        }
+    }
+    useEffect(() => {
+        allStudents()
+    },[])
   return (
     <div className='classes-container'>
          <div className="classes-data">
@@ -27,7 +33,7 @@ const Students = () => {
                         return (
                             <div className="class">
                                 <div className="flex-row">
-                                <h3>{clas.fullName}</h3>
+                                <h3>{clas.name}</h3>
                                 <p>{clas.whatsappNumber}</p>
                                 </div>
                                 <div className="flex-row">

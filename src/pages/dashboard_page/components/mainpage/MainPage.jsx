@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import './MainPage.css';
 import { IoMdMenu } from "react-icons/io";
 import { MdExpandMore } from "react-icons/md";
@@ -10,6 +10,9 @@ import StudentModal from '../modal/StudentModal';
 import AssignmentsModal from '../modal/AssignmentsModal';
 import AnnouncementModal from '../modal/AnnouncementsModal';
 import { NavLink } from 'react-router-dom';
+import { getClassDetails } from '../../../../api/class'
+import { getCurrentUser } from '../../../../api/auth'
+
 
 const MainPage = ({classs}) => {
 
@@ -17,6 +20,31 @@ const MainPage = ({classs}) => {
   const [studentModalOpened, setStudentModalOpened] = useState(false)
   const [assignmentModalOpened, setAssignmentModalOpened] = useState(false)
   const [announcementModalOpened, setAnnouncementModalOpened] = useState(false)
+  const [classDetails, setClassDetails] = useState({})
+  const [userDetails, setUserDetails] = useState({
+    "_id": "",
+    "name": "username",
+    "email": "email@gmail.com",
+    "role": "teacher",
+    "__v": 0
+})
+  const getUserDetails = async ()=>{
+    const res = await getCurrentUser()
+    if(res?.status){
+      setUserDetails(res.data)
+    }
+  }
+  const fetchClassDetails = async ()=>{
+    const res = await getClassDetails(classs)
+    if(res?.status){
+      setClassDetails(res.data.class)
+    }
+  }
+
+  useEffect(()=>{
+    fetchClassDetails()
+    getUserDetails()
+  },[])
 
   return (
     <div className='mainpage-container'>
@@ -31,7 +59,7 @@ const MainPage = ({classs}) => {
               <img src={userImg} alt="" />
             </div>
             <div className="prof-name">
-              Iceberg
+              {userDetails.name}
             </div>
             <div className="more-icon">
               <MdExpandMore />
@@ -43,7 +71,7 @@ const MainPage = ({classs}) => {
         </div>
       </div>
       <div className="d-welcome">
-        <h2>Welcome Iceberg</h2>
+        <h2>Welcome {userDetails.name}</h2>
         <p>Manage your class in one place</p>
         <div className="welcome-analytics">
           <div className="analytics-data">
@@ -76,7 +104,7 @@ const MainPage = ({classs}) => {
         </div>
       </div>
       <div className="dashboard-page-data">
-        <h2>{classs}</h2>
+        <h2>{classDetails.name}</h2>
         <div className="d-first-sect">
         <div className="d-asset-overview">
             <div className="card-header">
@@ -85,7 +113,7 @@ const MainPage = ({classs}) => {
             </div>
 
             <div className="card-cont">
-              <NavLink to='/students'>View All Students</NavLink>
+              <NavLink to={`/students/${classs}`}>View All Students</NavLink>
             </div>
             
           </div>
@@ -135,7 +163,7 @@ const MainPage = ({classs}) => {
       </div>
 
       <ResouceModal modalOpened={resourceModalOpened} onClose={() => setResourceModalOpened(false)} />
-      <StudentModal modalOpened={studentModalOpened} onClose={() => setStudentModalOpened(false)} />
+      <StudentModal modalOpened={studentModalOpened} onClose={() => setStudentModalOpened(false)} classId={classs}/>
       <AssignmentsModal modalOpened={assignmentModalOpened} onClose={() => setAssignmentModalOpened(false)} />
       <AnnouncementModal modalOpened={announcementModalOpened} onClose={() => setAnnouncementModalOpened(false)} />
       
