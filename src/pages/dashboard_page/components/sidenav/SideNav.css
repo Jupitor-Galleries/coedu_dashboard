@@ -5,9 +5,10 @@
     gap: 40px;
     position: fixed;
     padding: 20px;
-    background-color: #ffffff;
+    background-color: #03042e;
     height: 100vh;
     overflow: auto;
+    color: #fff;
 }
 
 .sidenav-content {
@@ -36,8 +37,8 @@
     gap: 10px;
 }
 
-a {
-    color: #000;
+.sidenav-container a {
+    color: #fff;
 }
 
 .desktop {
