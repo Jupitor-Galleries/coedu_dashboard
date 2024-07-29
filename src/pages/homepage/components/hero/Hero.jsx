@@ -10,6 +10,7 @@ import WaitlistModal from "../modal/WaitlistModal";
 const Hero = () => {
  
 const [modalOpen, setmodalOpen] = useState(false)
+const [email, setEmail] = useState("");
 
 
   return (
@@ -18,10 +19,13 @@ const [modalOpen, setmodalOpen] = useState(false)
       <div className="hero-content">
         <h2>Simplify Your Educational Content Delivery</h2>
         <p>Empower Your Remote Learners with Seamless Content Management and Distribution.</p>
-        <button onClick={() => setmodalOpen(true)}>Join Waitlist</button>
+        <div className="waitlist">
+          <input type="email" name="email" id="email" value={email} onChange={(e) => setEmail(e.target.value)} placeholder="Enter email here" />
+          <button >Join Waitlist</button>
+        </div>
       </div>
       <img className='ellipse' src={ellipse} alt="" />
-      <WaitlistModal modalOpened={modalOpen} onClose={() => setmodalOpen(false)} />
+      {/* <WaitlistModal modalOpened={modalOpen} onClose={() => setmodalOpen(false)} /> */}
     </div>
   );
 };

@@ -20,7 +20,7 @@
     gap: 15px;
 }
 
-hr {
+.features hr {
     color: #A39DFF;
     width: 100%;
     border: 0.3px solid #A39DFF;
@@ -41,7 +41,7 @@ hr {
     .feature {
         width: 30%;
     }
-    hr {
+    .features hr {
         width: 0;
         height: 200px;
     }

@@ -136,15 +136,29 @@
   }
 
   .hero-content p {
-    max-width: 700px;
+    max-width: 450px;
   }
 
   .hero-content button {
     background-color: #070C1B;
-    padding: 12px 30px;
+    padding: 12px 50px;
     border: none;
     border-radius: 25px;
     color: #fff;
+  }
+
+  .waitlist {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    flex-direction: column;
+  }
+
+  .waitlist input {
+    padding: 12px 20px;
+    border:1.5px solid #667085;
+    outline: none;
+    border-radius: 10px;
   }
 
   .ellipse {
@@ -211,6 +225,9 @@
       .hero-content h2 {
         width: 50%;
         font-size: 55px;
+      }
+      .waitlist {
+        flex-direction: row;
       }
   }
   
