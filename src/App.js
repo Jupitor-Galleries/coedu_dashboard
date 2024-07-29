@@ -6,6 +6,7 @@ import Signin from './pages/auth/signin/Signin';
 import Signup from './pages/auth/signup/Signup';
 import Classes from './pages/classes/Classes';
 import Students from './pages/students/Students';
+import Assignments from './pages/assignments/Assignments';
 
 const App = () => {
   return (
@@ -17,6 +18,8 @@ const App = () => {
     <Route path="/class/:classId" element={<DashboardPage />}  />
     <Route path="/classes" element={<Classes />}  />
     <Route path="/students/:classId" element={<Students />}  />
+    <Route path="/students/" element={<Students />}  />
+    <Route path="/assignments/" element={<Assignments />}  />
     </Routes>
   </Router>
   );
