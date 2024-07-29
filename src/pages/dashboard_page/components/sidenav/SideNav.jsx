@@ -10,12 +10,13 @@ import { IoMdTime } from 'react-icons/io';
 import { BsFuelPumpDiesel } from "react-icons/bs";
 import { LiaRouteSolid } from "react-icons/lia";
 import { FaRegBuilding } from "react-icons/fa";
+import logo from '../../assets/logo.png'
 
 const SideNav = ({organization}) => {
     return (
         <div className='sidenav-container desktop'>
             <div className="logo">
-                <h1>{organization}</h1>
+                <img src={logo} alt="" />
             </div>
             <hr />
             <div className="sidenav-content">
