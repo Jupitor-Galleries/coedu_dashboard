@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import "./Classes.css";
 import { NavLink } from 'react-router-dom';
 import ClassModal from './modal/ClassModal';
@@ -22,6 +22,8 @@ const Classes = () => {
             time: "12:35"
         },
     ])
+
+    const ref1 = useRef(null);
     
     const fetchUserClasses = async () => {
             const res = await getUserClasses()
@@ -46,13 +48,12 @@ const Classes = () => {
                     <button className='create-btn' onClick={() => setModalOpened(true)}>Create New Class</button>
                 </div>
             <table className="students">
-                <tr>
+                {/* <tr>
                     <th>Name</th>
-                    <th>Date Created</th>
                     <th>Start Date</th>
                     <th>Time</th>
                     <th>Action</th>
-                </tr>
+                </tr> */}
                 {
                     classes.map((student) => {
                         return (
@@ -61,16 +62,14 @@ const Classes = () => {
                                     {student.name}
                                 </td>
                                 <td>
-                                    {student.date}
+                                <NavLink className='create-bt' to='/students'>Manage Students</NavLink>
                                 </td>
                                 <td>
-                                    {student.sdate}
+                                <NavLink className='create-bt' to='/assignments'>Manage Assignments</NavLink>
                                 </td>
-                                <td>
-                                    {student.time}
-                                </td>
-                                <td>
-                                    <button className='create-btn'>Manage Class</button>
+                                
+                                <td className='fc'>
+                                <NavLink className='create-bt' to='/resources'>Manage Resources</NavLink>
                                 </td>
                             </tr>
                         )

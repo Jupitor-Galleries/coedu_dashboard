@@ -7,6 +7,7 @@ import Signup from './pages/auth/signup/Signup';
 import Classes from './pages/classes/Classes';
 import Students from './pages/students/Students';
 import Assignments from './pages/assignments/Assignments';
+import AssignmentsTracking from './pages/assignments/AssignmentsTracking';
 
 const App = () => {
   return (
@@ -21,6 +22,7 @@ const App = () => {
     <Route path="/students/:classId" element={<Students />}  />
     <Route path="/students/" element={<Students />}  />
     <Route path="/assignments/" element={<Assignments />}  />
+    <Route path="/assignments/:id" element={<AssignmentsTracking />}  />
     </Routes>
   </Router>
   );

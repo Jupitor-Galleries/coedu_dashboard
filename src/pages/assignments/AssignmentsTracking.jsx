@@ -7,22 +7,22 @@ import { getClassStudents } from '../../api/class'
 import SideNav from '../dashboard_page/components/sidenav/SideNav';
 import AssignmentsModal from '../dashboard_page/components/modal/AssignmentsModal';
 
-const Assignments = () => {
+const AssignmentsTracking = () => {
     const classId = useParams().classId;
     const [modalOpened, setModalOpened] = useState(false);
     const [classes, setClasses] = useState([])
     const [assignements, setAssignments] = useState([
         {
-            name: "Data Structures",
+            name: "Justine Imasiku",
+            status: "Submitted",
             date: "22-05-2024",
-            time: "25-05-2024",
-            id: 1
+            time: "12:35"
         },
         {
-            name: "Variables",
+            name: "Justine Imasiku",
+            status: "Submitted",
             date: "22-05-2024",
-            time: "25-05-2024",
-            id: 2
+            time: "12:35"
         },
     ])
 
@@ -49,9 +49,10 @@ const Assignments = () => {
                 </div>
             <table className="students">
                 <tr>
-                    <th>Title</th>
-                    <th>Date Created</th>
-                    <th>Due Date</th>
+                    <th>Name</th>
+                    <th>Status</th>
+                    <th>Date Submitted</th>
+                    <th>Time</th>
                     <th>Action</th>
                 </tr>
                 {
@@ -62,13 +63,16 @@ const Assignments = () => {
                                     {student.name}
                                 </td>
                                 <td>
+                                    {student.status}
+                                </td>
+                                <td>
                                     {student.date}
                                 </td>
                                 <td>
                                     {student.time}
                                 </td>
                                 <td>
-                                    <NavLink to={`/assignments/${student.id}`} className='create-btn2'>View</NavLink>
+                                    <button className='create-btn2'>View Submission</button>
                                 </td>
                             </tr>
                         )
@@ -82,4 +86,4 @@ const Assignments = () => {
   )
 }
 
-export default Assignments
+export default AssignmentsTracking
