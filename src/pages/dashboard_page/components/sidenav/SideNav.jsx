@@ -34,6 +34,12 @@ const SideNav = ({organization}) => {
                                 Classes
                             </NavLink>
                         </li>
+                        <li>
+                            <NavLink to='/analytics' className="sidenav-link">
+                                <TbReport />
+                                Analytics
+                            </NavLink>
+                        </li>
                         {/* <li>
                             <NavLink to='/students' className="sidenav-link">
                                 <IoMdTime />
@@ -63,12 +69,6 @@ const SideNav = ({organization}) => {
                             <NavLink to='/settings' className="sidenav-link">
                                 <IoSettingsOutline />
                                 Settings
-                            </NavLink>
-                        </li>
-                        <li>
-                            <NavLink to='/analytics' className="sidenav-link">
-                                <TbReport />
-                                Analytics
                             </NavLink>
                         </li>
                         {/* <li>

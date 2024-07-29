@@ -16,6 +16,7 @@
     flex-direction: column;
     gap: 20px;
     font-size: 22px;
+    height: 85%;
 }
 
 .sidenav-data {
@@ -51,6 +52,10 @@
         width: 20%;
         min-width: 200px;
         max-width: 400px;
+    }
+    .sidenav-data {
+        justify-content: space-between;
+        height: 100%;
     }
     .desktop {
         display: flex;
