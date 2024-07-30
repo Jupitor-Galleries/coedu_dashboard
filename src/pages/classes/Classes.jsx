@@ -3,11 +3,13 @@ import "./Classes.css";
 import { NavLink } from 'react-router-dom';
 import ClassModal from './modal/ClassModal';
 import { getUserClasses } from '../../api/class'
+import { getCurrentUser } from '../../api/auth'
 import SideNav from '../dashboard_page/components/sidenav/SideNav';
 
 const Classes = () => {
 
     const [modalOpened, setModalOpened] = useState(false);
+    const [user,setUser] = useState({})
     const [classes, setClasses] = useState([
         {
             name: "Tech Nomads",
@@ -22,12 +24,17 @@ const Classes = () => {
             time: "12:35"
         },
     ])
-
     const ref1 = useRef(null);
     
+    const getUserDetails = async ()=>{
+        const res = await getCurrentUser()
+        if(res?.status){
+            setUser(res.data)
+        }
+    }
     const fetchUserClasses = async () => {
             const res = await getUserClasses()
-            if(res.status) {
+            if(res?.status) {
                 setClasses(res.data.classes)
             }
     }
@@ -35,6 +42,7 @@ const Classes = () => {
 
     useEffect(() => {
         fetchUserClasses()
+        getUserDetails()
     },[])
 
 
@@ -44,7 +52,7 @@ const Classes = () => {
         <div className="mainpage-container">
             <div className="students-container">
                 <div className="h">
-                    <h4>School Name</h4>
+                    <h4>{user.organization}</h4>
                     <button className='create-btn' onClick={() => setModalOpened(true)}>Create New Class</button>
                 </div>
             <table className="students">

@@ -13,7 +13,7 @@ const ClassModal = ({modalOpened, onClose}) => {
        
        const res = await addClass(className, startDate, endDate)
        if (res.status) {
-           localStorage.setItem('jwt', res.data.token)
+           alert("Class created successfully");
            onClose()
        }else{
             alert("failed to create class")
