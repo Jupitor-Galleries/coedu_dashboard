@@ -4,35 +4,23 @@ import './Assignments.css'
 import StudentModal from '../dashboard_page/components/modal/StudentModal';
 import { useParams } from 'react-router-dom';
 import { getClassStudents } from '../../api/class'
+import { getAssignmentDetails } from '../../api/assignment'
 import SideNav from '../dashboard_page/components/sidenav/SideNav';
 import AssignmentsModal from '../dashboard_page/components/modal/AssignmentsModal';
 
 const AssignmentsTracking = () => {
-    const classId = useParams().classId;
+    const assignmentId = useParams().assignmentId;
     const [modalOpened, setModalOpened] = useState(false);
     const [classes, setClasses] = useState([])
-    const [assignements, setAssignments] = useState([
-        {
-            name: "Justine Imasiku",
-            status: "Submitted",
-            date: "22-05-2024",
-            time: "12:35"
-        },
-        {
-            name: "Justine Imasiku",
-            status: "Submitted",
-            date: "22-05-2024",
-            time: "12:35"
-        },
-    ])
+    const [assignement, setAssignment] = useState({})
 
     const broadcast = () => {
 
     }
     const allStudents = async() => {
-        const res = await getClassStudents(classId)
+        const res = await getAssignmentDetails(assignmentId)
         if(res?.status) {
-            setAssignments(res.data.students)
+            setAssignment(res.data)
         }
     }
     useEffect(() => {
@@ -56,20 +44,20 @@ const AssignmentsTracking = () => {
                     <th>Action</th>
                 </tr>
                 {
-                    assignements.map((student) => {
+                    assignement?.students?.map((student) => {
                         return (
                             <tr>
                                 <td>
-                                    {student.name}
+                                    {student.studentId.name}
                                 </td>
                                 <td>
                                     {student.status}
                                 </td>
                                 <td>
-                                    {student.date}
+                                    {student?.subDate || "--" }
                                 </td>
                                 <td>
-                                    {student.time}
+                                    {student?.subDate || "--"}
                                 </td>
                                 <td>
                                     <button className='create-btn2'>View Submission</button>
