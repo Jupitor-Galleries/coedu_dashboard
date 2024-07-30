@@ -3,13 +3,13 @@ import { NavLink } from 'react-router-dom';
 import './Students.css'
 import StudentModal from '../dashboard_page/components/modal/StudentModal';
 import { useParams } from 'react-router-dom';
-import { getClassStudents } from '../../api/class'
+import { getClassStudents, getClassDetails } from '../../api/class'
 import SideNav from '../dashboard_page/components/sidenav/SideNav';
 
 const Students = () => {
     const classId = useParams().classId;
     const [modalOpened, setModalOpened] = useState(false);
-    const [classes, setClasses] = useState([])
+    const [clas, setClas] = useState()
     const [students, setStudents] = useState([
         {
             name: "Justine Imasiku",
@@ -28,6 +28,13 @@ const Students = () => {
     const broadcast = () => {
 
     }
+    const classDetails = async()=>{
+        const res = await getClassDetails(classId)
+        console.log("class details", res)
+        if(res?.status){
+            setClas(res.data.class)
+        }
+    }
     const allStudents = async() => {
         const res = await getClassStudents(classId)
         if(res?.status) {
@@ -36,6 +43,7 @@ const Students = () => {
     }
     useEffect(() => {
         allStudents()
+        classDetails()
     },[])
   return (
     <div className='dashboard-container'>
@@ -51,7 +59,7 @@ const Students = () => {
                     <th>Name</th>
                     <th>Whatsapp Number</th>
                     <th>Class</th>
-                    <th>Gender</th>
+                    <th>Status</th>
                     <th>Action</th>
                 </tr>
                 {
@@ -62,13 +70,13 @@ const Students = () => {
                                     {student.name}
                                 </td>
                                 <td>
-                                    {student.wNumber}
+                                    {student.whatsappNumber}
                                 </td>
                                 <td>
-                                    {student.class}
+                                    {clas?.name}
                                 </td>
                                 <td>
-                                    {student.gender}
+                                    {student.accepted == true? "joined" : "pending"}
                                 </td>
                                 <td>
                                     <button className='delete-btn'>Remove</button>
@@ -79,7 +87,7 @@ const Students = () => {
                 }
             </table>
             </div>
-            <StudentModal modalOpened={modalOpened} onClose={() => setModalOpened(false)} />
+            <StudentModal modalOpened={modalOpened} onClose={() => setModalOpened(false)} classId={classId} fetchStudents={allStudents} />
         </div>
     </div>
   )

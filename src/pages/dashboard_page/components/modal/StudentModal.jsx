@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 import { addStudent } from '../../../../api/class'
 import './Modal.css';
 
-const StudentModal = ({modalOpened, onClose, classId}) => {
+const StudentModal = ({modalOpened, onClose, classId, fetchStudents}) => {
 
     const [classes, setClasses] = useState(["Business", "Communications", 'Technology']);
     const [fullName, setFullName] = useState("");
@@ -12,7 +12,9 @@ const StudentModal = ({modalOpened, onClose, classId}) => {
     const submitAddStudent = async ()=>{
         const res = await addStudent(classId, fullName, whatsappNumber)
         if(res.status){
-            onClose()
+            // onClose()
+            alert("student add successfully")
+            fetchStudents()
         }else{
             alert("failed to add student")
         }

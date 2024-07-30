@@ -10,20 +10,7 @@ const Classes = () => {
 
     const [modalOpened, setModalOpened] = useState(false);
     const [user,setUser] = useState({})
-    const [classes, setClasses] = useState([
-        {
-            name: "Tech Nomads",
-            date: "22-05-2024",
-            sdate: "22-05-2024",
-            time: "12:35"
-        },
-        {
-            name: "Asikana Network",
-            date: "22-05-2024",
-            sdate: "22-05-2024",
-            time: "12:35"
-        },
-    ])
+    const [classes, setClasses] = useState([])
     const ref1 = useRef(null);
     
     const getUserDetails = async ()=>{
@@ -34,6 +21,7 @@ const Classes = () => {
     }
     const fetchUserClasses = async () => {
             const res = await getUserClasses()
+            console.log(res)
             if(res?.status) {
                 setClasses(res.data.classes)
             }
@@ -70,7 +58,7 @@ const Classes = () => {
                                     {student.name}
                                 </td>
                                 <td>
-                                <NavLink className='create-bt' to='/students'>Manage Students</NavLink>
+                                <NavLink className='create-bt' to={`/students/${student._id}`}>Manage Students</NavLink>
                                 </td>
                                 <td>
                                 <NavLink className='create-bt' to='/assignments'>Manage Assignments</NavLink>
