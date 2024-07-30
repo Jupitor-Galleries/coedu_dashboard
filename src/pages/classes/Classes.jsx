@@ -61,7 +61,7 @@ const Classes = () => {
                                 <NavLink className='create-bt' to={`/students/${student._id}`}>Manage Students</NavLink>
                                 </td>
                                 <td>
-                                <NavLink className='create-bt' to='/assignments'>Manage Assignments</NavLink>
+                                <NavLink className='create-bt' to={`/assignments/${student._id}`}>Manage Assignments</NavLink>
                                 </td>
                                 
                                 <td className='fc'>
@@ -73,7 +73,7 @@ const Classes = () => {
                 }
             </table>
             </div>
-            <ClassModal modalOpened={modalOpened} onClose={() => setModalOpened(false)} />
+            <ClassModal modalOpened={modalOpened} onClose={() => setModalOpened(false)} fetchUserClasses={fetchUserClasses} />
         </div>
     </div>
   )

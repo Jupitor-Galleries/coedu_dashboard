@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { addClass } from "../../../api/class"
 
-const ClassModal = ({modalOpened, onClose}) => {
+const ClassModal = ({modalOpened, onClose, fetchUserClasses}) => {
 
     const [className, setClassName] = useState("");
     const [startDate, setStartDate] = useState('');
@@ -14,6 +14,7 @@ const ClassModal = ({modalOpened, onClose}) => {
        const res = await addClass(className, startDate, endDate)
        if (res.status) {
            alert("Class created successfully");
+           fetchUserClasses()
            onClose()
        }else{
             alert("failed to create class")

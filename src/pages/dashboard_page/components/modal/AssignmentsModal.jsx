@@ -2,7 +2,7 @@ import React, { useState} from "react";
 import './Modal.css';
 import {sendass } from '../../../../api/class'
 import { uploadImages } from "../../../../api/uploadFiles";
-const AssignmentsModal = ({modalOpened, onClose, classId}) => {
+const AssignmentsModal = ({modalOpened, onClose, classId, allAssignments}) => {
 
     const [title, setTitle] = useState("");
     const [description, setDescription] = useState("");
@@ -26,10 +26,12 @@ const AssignmentsModal = ({modalOpened, onClose, classId}) => {
     const shareResources = async () => {
         const fileLink = "https://docs.google.com/document/d/10BI6TCegR5DAPw2ajmp476Dp9o5P4ko1lbr_mnQ9LqU/edit?usp=sharing"
         const res = await sendass (title, description, fileLink, dueDate, classId)
+        console.log(res)
         if(res?.status){
             alert("sent an assignment")
+            allAssignments()
         }else{
-            alert("failed to upload assignment")
+            alert(res.error)
         }
       }
 

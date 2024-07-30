@@ -193,7 +193,7 @@ export const sendass = async (title, information, fileLink, dueDate, classId) =>
         const data = await response.json();
         console.log("the response", data)
         if (!response.ok) {
-            return { status: false, message: "failed to submit assignment"  }
+            return { status: false, message: "failed to submit assignment",error:data.error  }
         }
 
         
@@ -233,3 +233,29 @@ export const sendAnnouncement  = async (classId, content, type)=>{
         console.error('There was a problem with the fetch operation:', error);
     }
 }
+
+export const getAssignmentsByClass = async (classId)=>{
+    const url = `${baseUrl}/api/classes/assignments/${classId}`
+
+    try {
+        const token = localStorage.getItem('jwt');
+        const response = await fetch(url, {
+            method: 'GET',
+            headers: {
+                'Content-Type': 'application/json',
+                'Authorization': `Bearer ${token}`
+            }
+        });
+        const data = await response.json();
+
+        if (!response.ok) {
+            console.log("status is false")
+            return { status: false, message: "failed to get assignments", data:[] }
+        }
+
+        return { status: true, data: data }
+    } catch (error) {
+        console.error('There was a problem with the fetch operation:', error);
+    }
+}
+    

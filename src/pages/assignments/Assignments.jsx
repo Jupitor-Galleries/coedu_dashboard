@@ -3,40 +3,31 @@ import { NavLink } from 'react-router-dom';
 import './Assignments.css'
 import StudentModal from '../dashboard_page/components/modal/StudentModal';
 import { useParams } from 'react-router-dom';
-import { getClassStudents } from '../../api/class'
+import { getAssignmentsByClass } from '../../api/class'
 import SideNav from '../dashboard_page/components/sidenav/SideNav';
 import AssignmentsModal from '../dashboard_page/components/modal/AssignmentsModal';
 
 const Assignments = () => {
     const classId = useParams().classId;
     const [modalOpened, setModalOpened] = useState(false);
-    const [classes, setClasses] = useState([])
-    const [assignements, setAssignments] = useState([
-        {
-            name: "Data Structures",
-            date: "22-05-2024",
-            time: "25-05-2024",
-            id: 1
-        },
-        {
-            name: "Variables",
-            date: "22-05-2024",
-            time: "25-05-2024",
-            id: 2
-        },
-    ])
+    const [assignements, setAssignments] = useState([])
 
     const broadcast = () => {
 
     }
-    const allStudents = async() => {
-        const res = await getClassStudents(classId)
+    const formatDate = (dateString) => {
+        const date = new Date(dateString);
+        return `${date.toLocaleDateString()} ${date.toLocaleTimeString()}`;
+      };
+    const allAssignments = async() => {
+        const res = await getAssignmentsByClass(classId)
+        console.log(res)
         if(res?.status) {
-            setAssignments(res.data.students)
+            setAssignments(res.data)
         }
     }
     useEffect(() => {
-        allStudents()
+        allAssignments()
     },[])
   return (
     <div className='dashboard-container'>
@@ -55,20 +46,20 @@ const Assignments = () => {
                     <th>Action</th>
                 </tr>
                 {
-                    assignements.map((student) => {
+                    assignements.map((assignment) => {
                         return (
                             <tr>
                                 <td>
-                                    {student.name}
+                                    {assignment.title}
                                 </td>
                                 <td>
-                                    {student.date}
+                                    {formatDate(assignment.createdAt)}
                                 </td>
                                 <td>
-                                    {student.time}
+                                    {formatDate(assignment.dueDate)}
                                 </td>
                                 <td>
-                                    <NavLink to={`/assignments/${student.id}`} className='create-btn2'>View</NavLink>
+                                    <NavLink to={`/assignment/${assignment._id}`} className='create-btn2'>View</NavLink>
                                 </td>
                             </tr>
                         )
@@ -76,7 +67,7 @@ const Assignments = () => {
                 }
             </table>
             </div>
-            <AssignmentsModal modalOpened={modalOpened} onClose={() => setModalOpened(false)} />
+            <AssignmentsModal modalOpened={modalOpened} onClose={() => setModalOpened(false)} allAssignments={allAssignments} classId={classId}/>
         </div>
     </div>
   )

@@ -10,20 +10,7 @@ const Students = () => {
     const classId = useParams().classId;
     const [modalOpened, setModalOpened] = useState(false);
     const [clas, setClas] = useState()
-    const [students, setStudents] = useState([
-        {
-            name: "Justine Imasiku",
-            wNumber: "0779293183",
-            class: "shfskj",
-            gender: "Male"
-        },
-        {
-            name: "Justine Imasiku",
-            wNumber: "0779293183",
-            class: "shfskj",
-            gender: "Male"
-        },
-    ])
+    const [students, setStudents] = useState([])
 
     const broadcast = () => {
 
@@ -58,7 +45,7 @@ const Students = () => {
                 <tr>
                     <th>Name</th>
                     <th>Whatsapp Number</th>
-                    <th>Class</th>
+                    <th>Class Code</th>
                     <th>Status</th>
                     <th>Action</th>
                 </tr>
