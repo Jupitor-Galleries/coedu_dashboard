@@ -1,14 +1,29 @@
 import React, { useState, useEffect } from "react";
 import './Modal.css';
+import { uploadImages } from "../../../../api/uploadFiles";
 
 const ResouceModal = ({modalOpened, onClose}) => {
 
     const [title, setTitle] = useState("");
     const [description, setDescription] = useState("");
     const [file, setFile] = useState("");
+    const [filesUrl, setFilesUrl] = useState([]);
 
-    const shareResources = () => {
+    const handleChange = (e) => {
+      if (e.target.files) {
+        setFile(Array.from(e.target.files));
+      }
+    };
 
+    const saveFiles = async() => {
+      const res = await uploadImages(file, "resources" )
+      if(res) {
+        setFilesUrl(res.url)
+      }
+    }
+
+    const shareResources = async() => {
+      
     }
 
   if(!modalOpened) {
@@ -38,7 +53,7 @@ const ResouceModal = ({modalOpened, onClose}) => {
         </div>
         <div className="form-group">
           <label htmlFor="files">Files</label>
-          <input type="file" multiple value={file} onChange={(e) => setFile(e.target.value)} />
+          <input type="file" multiple value={file} onChange={handleChange} />
         </div>
 
         <button className="c-btn" onClick={() => shareResources()}>Share</button>

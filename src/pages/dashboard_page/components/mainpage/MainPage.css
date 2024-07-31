@@ -188,6 +188,18 @@
     text-decoration: underline;
 }
 
+.d-actions {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    width: 85%;
+}
+
+.action {
+    display: flex;
+    gap: 20px;
+}
+
 
 @media screen and (min-width:768px) {
     .mainpage-data {

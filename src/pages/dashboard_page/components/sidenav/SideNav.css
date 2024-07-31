@@ -5,9 +5,10 @@
     gap: 40px;
     position: fixed;
     padding: 20px;
-    background-color: #ffffff;
+    background-color: #03042e;
     height: 100vh;
     overflow: auto;
+    color: #fff;
 }
 
 .sidenav-content {
@@ -15,6 +16,7 @@
     flex-direction: column;
     gap: 20px;
     font-size: 22px;
+    height: 85%;
 }
 
 .sidenav-data {
@@ -36,8 +38,8 @@
     gap: 10px;
 }
 
-a {
-    color: #000;
+.sidenav-container a {
+    color: #fff;
 }
 
 .desktop {
@@ -50,6 +52,10 @@ a {
         width: 20%;
         min-width: 200px;
         max-width: 400px;
+    }
+    .sidenav-data {
+        justify-content: space-between;
+        height: 100%;
     }
     .desktop {
         display: flex;

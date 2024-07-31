@@ -10,16 +10,18 @@ import { IoMdTime } from 'react-icons/io';
 import { BsFuelPumpDiesel } from "react-icons/bs";
 import { LiaRouteSolid } from "react-icons/lia";
 import { FaRegBuilding } from "react-icons/fa";
+import logo from '../../assets/logo.png'
 
 const SideNav = ({organization}) => {
     return (
         <div className='sidenav-container desktop'>
             <div className="logo">
-                <h1>{organization}</h1>
+                <img src={logo} alt="" />
             </div>
+            <hr />
             <div className="sidenav-content">
                 <div className="sidenav-data">
-                    <NavLink>Home</NavLink>
+                    {/* <NavLink>Home</NavLink> */}
                     <ul className="sidenav-links">
                         <li>
                             <NavLink to='/dashboard' className="sidenav-link">
@@ -28,17 +30,23 @@ const SideNav = ({organization}) => {
                             </NavLink>
                         </li>
                         <li>
-                            <NavLink to='/resources' className="sidenav-link">
+                            <NavLink to='/classes' className="sidenav-link">
                                 <FaRegBuilding />
-                                Resources
+                                Classes
                             </NavLink>
                         </li>
                         <li>
+                            <NavLink to='/analytics' className="sidenav-link">
+                                <TbReport />
+                                Analytics
+                            </NavLink>
+                        </li>
+                        {/* <li>
                             <NavLink to='/students' className="sidenav-link">
                                 <IoMdTime />
                                Students
                             </NavLink>
-                        </li>
+                        </li> */}
                         {/* <li>
                             <NavLink to='/routes' className="sidenav-link">
                                 <LiaRouteSolid />
@@ -51,18 +59,12 @@ const SideNav = ({organization}) => {
                                 Fuel
                             </NavLink>
                         </li> */}
-                        <li>
-                            <NavLink to='/analytics' className="sidenav-link">
-                                <TbReport />
-                                Analytics
-                            </NavLink>
-                        </li>
+                        
                     </ul>
                 </div>
-                <hr />
-                <div className="sidenav-data">
+                {/* <div className="sidenav-data">
                     <NavLink>General</NavLink>
-                </div>
+                </div> */}
                 <ul className="sidenav-links">
                         <li>
                             <NavLink to='/settings' className="sidenav-link">
@@ -70,12 +72,12 @@ const SideNav = ({organization}) => {
                                 Settings
                             </NavLink>
                         </li>
-                        <li>
+                        {/* <li>
                             <NavLink to='/help' className="sidenav-link">
                                 <IoMdHelpCircleOutline />
                                 Help Center
                             </NavLink>
-                        </li>
+                        </li> */}
                         <li>
                             <NavLink className="sidenav-link">
                                 <BiLogOut />

@@ -6,12 +6,12 @@ import { useParams } from 'react-router-dom';
 
 const DashboardPage = () => {
 
-  const organization = useParams().organization;
-  const classs = useParams().class;
+  // const organization = useParams().organization;
+  const classs = useParams().classId;
 
   return (
     <div className='dashboard-container'>
-        <SideNav organization={organization} />
+        <SideNav organization={"organization"} />
         <MainPage classs={classs} />
     </div>
   )

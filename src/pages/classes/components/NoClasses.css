@@ -1,0 +1,23 @@
+.plusButton {
+    font-size: 100px;
+    font-weight: lighter;
+    top: 8.23px;
+    left: 8.23px;
+    gap: 0px;
+    opacity: 0px;
+}
+.noClasses-container{
+    display: flex;
+    flex-direction: row;
+    gap: 20px;
+    align-items: center;
+    /* justify-content: center; */
+    min-height: 78px;
+}
+.add-class {
+    font-size: 14px;
+    font-weight: 400;
+    line-height: 18.63px;
+    text-align: left;
+    color:  #878383;
+}

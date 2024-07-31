@@ -34,7 +34,7 @@ export const createUser = async (organization, name, email, password) => {
   };
 
   export const login = async (email, password) => {
-    const url = `${baseUrl}/api/auth/register`
+    const url = `${baseUrl}/api/auth/login`
     const body = {
      email,
      password
@@ -48,12 +48,13 @@ export const createUser = async (organization, name, email, password) => {
         },
         body: JSON.stringify(body)
       });
-
+      const data = await response.json();
+      console.log(data)
       if (!response.ok) {
         throw new Error('Network response was not ok');
       }
 
-      const data = await response.json();
+     
       return {status: true, data: data}
     } catch (error) {
       console.error('There was a problem with the fetch operation:', error);
@@ -81,4 +82,29 @@ export const createUser = async (organization, name, email, password) => {
     const credential = GoogleAuthProvider.credentialFromError(error);
     // ...
   });
+  }
+
+
+  export const getCurrentUser = async()=>{
+    const url = `${baseUrl}/api/auth/user-details`
+    try {
+        const token = localStorage.getItem('jwt');
+        const response = await fetch(url, {
+            method: 'GET',
+            headers: {
+                'Content-Type': 'application/json',
+                'Authorization': `Bearer ${token}`
+            }
+        });
+        const data = await response.json();
+
+        if (!response.ok) {
+            console.log("status is false")
+            return { status: false, message: "failed to user details", data:{} }
+        }
+
+        return { status: true, data: data }
+    } catch (error) {
+        console.error('There was a problem with the fetch operation:', error);
+    }
   }

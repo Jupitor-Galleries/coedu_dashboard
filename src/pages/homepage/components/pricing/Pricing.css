@@ -1,0 +1,78 @@
+.pricing-container {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 40px;
+    padding: 5%;
+    background-color: #E2E9FF;
+}
+
+.plans {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 20px;;
+}
+
+.plan {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: center;
+    gap: 20px;
+    padding: 20px;
+    background-color: #ffffff;
+    width: 100%;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+    min-height: 500px;
+}
+
+.active-plan {
+    background-color: #C9D6FF;
+}
+
+.plan-data {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
+.price {
+    display: flex;
+    align-items: flex-end;
+}
+
+.price .figure {
+    font-size: 45px;
+}
+
+.benefits {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+}
+
+.benefit {
+    display: flex;
+    gap: 5px;
+    align-items: center;
+}
+
+.plan button {
+    padding: 12px 20px;
+    background-color: #233F96;
+    color: #ffffff;
+    border: none;
+    border-radius: 10px;
+    width: 100%;
+}
+
+
+@media screen and (min-width: 768px) {
+    .plans {
+        flex-direction: row;
+        gap: 30px;
+    }
+}
