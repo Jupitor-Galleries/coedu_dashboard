@@ -38,7 +38,7 @@ const Students = () => {
         <div className="mainpage-container">
             <div className="students-container">
                 <div className="h">
-                    <h4>School Name</h4>
+                    <h4>Asikana Network</h4>
                     <button className='create-btn' onClick={() => setModalOpened(true)}>Add New Student</button>
                 </div>
             <table className="students">

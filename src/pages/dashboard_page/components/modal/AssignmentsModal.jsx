@@ -2,13 +2,14 @@ import React, { useState} from "react";
 import './Modal.css';
 import {sendass } from '../../../../api/class'
 import { uploadImages } from "../../../../api/uploadFiles";
+
 const AssignmentsModal = ({modalOpened, onClose, classId, allAssignments}) => {
 
     const [title, setTitle] = useState("");
     const [description, setDescription] = useState("");
-    const [file, setFile] = useState("");
+    const [file, setFile] = useState(null);
     const [dueDate, setDueDate] = useState(""); 
-    const [filesUrl, setFilesUrl] = useState([]);
+    const [filesUrl, setFilesUrl] = useState(null);
 
     const handleChange = (e) => {
       if (e.target.files) {
@@ -20,19 +21,27 @@ const AssignmentsModal = ({modalOpened, onClose, classId, allAssignments}) => {
       const res = await uploadImages(file, "assignments" )
       if(res) {
         setFilesUrl(res.url)
+        return res[0].url
       }
+       return "https://docs.google.com/document/d/10BI6TCegR5DAPw2ajmp476Dp9o5P4ko1lbr_mnQ9LqU/edit?usp=sharing" 
     }
 
-    const shareResources = async () => {
-        const fileLink = "https://docs.google.com/document/d/10BI6TCegR5DAPw2ajmp476Dp9o5P4ko1lbr_mnQ9LqU/edit?usp=sharing"
-        const res = await sendass (title, description, fileLink, dueDate, classId)
-        console.log(res)
-        if(res?.status){
-            alert("sent an assignment")
-            allAssignments()
-        }else{
-            alert(res.error)
-        }
+    const shareResources = async() => {
+        // const fileLink = "https://docs.google.com/document/d/10BI6TCegR5DAPw2ajmp476Dp9o5P4ko1lbr_mnQ9LqU/edit?usp=sharing"
+        console.log("am here")
+        const filelink = await saveFiles()
+        console.log("file link", filelink)
+        
+          const res = await sendass (title, description, filelink, dueDate, classId)
+          console.log(res)
+          if(res?.status){
+              alert("sent an assignment")
+              allAssignments()
+          }else{
+              alert(res.error)
+          }
+
+       
       }
 
   if(!modalOpened) {
@@ -62,7 +71,7 @@ const AssignmentsModal = ({modalOpened, onClose, classId, allAssignments}) => {
         </div>
         <div className="form-group">
           <label htmlFor="files">Attachments</label>
-          <input type="file" multiple value={file} onChange={handleChange} />
+          <input type="file" multiple onChange={handleChange} />
         </div>
 
         <div className="form-group">

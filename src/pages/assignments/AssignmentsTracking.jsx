@@ -32,7 +32,7 @@ const AssignmentsTracking = () => {
         <div className="mainpage-container">
             <div className="students-container">
                 <div className="h">
-                    <h4>School Name</h4>
+                    <h4>Asikana Network</h4>
                     <button className='create-btn' onClick={() => setModalOpened(true)}>Create New Assignment</button>
                 </div>
             <table className="students">
