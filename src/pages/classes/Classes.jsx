@@ -5,6 +5,7 @@ import ClassModal from './modal/ClassModal';
 import { getUserClasses } from '../../api/class'
 import { getCurrentUser } from '../../api/auth'
 import SideNav from '../dashboard_page/components/sidenav/SideNav';
+// import NoClasses from './components/NoClasses';
 
 const Classes = () => {
 
@@ -35,46 +36,10 @@ const Classes = () => {
 
 
   return (
-    <div className='dashboard-container'>
-        <SideNav organization={"organization"} />
-        <div className="mainpage-container">
-            <div className="students-container">
-                <div className="h">
-                    <h4>{user.organization}</h4>
-                    <button className='create-btn' onClick={() => setModalOpened(true)}>Create New Class</button>
-                </div>
-            <table className="students">
-                {/* <tr>
-                    <th>Name</th>
-                    <th>Start Date</th>
-                    <th>Time</th>
-                    <th>Action</th>
-                </tr> */}
-                {
-                    classes.map((student) => {
-                        return (
-                            <tr>
-                                <td>
-                                    {student.name}
-                                </td>
-                                <td>
-                                <NavLink className='create-bt' to={`/students/${student._id}`}>Manage Students</NavLink>
-                                </td>
-                                <td>
-                                <NavLink className='create-bt' to={`/assignments/${student._id}`}>Manage Assignments</NavLink>
-                                </td>
-                                
-                                <td className='fc'>
-                                <NavLink className='create-bt' to='/resources'>Manage Resources</NavLink>
-                                </td>
-                            </tr>
-                        )
-                    })
-                }
-            </table>
-            </div>
-            <ClassModal modalOpened={modalOpened} onClose={() => setModalOpened(false)} fetchUserClasses={fetchUserClasses} />
-        </div>
+    <div className='class-container'>
+        <p className='welcome-note'>Welcome to CoEdu,<br/>Courtney</p>
+        {/* <NoClasses/> */}
+        <ClassModal modalOpened={modalOpened} onClose={() => setModalOpened(false)} fetchUserClasses={fetchUserClasses} />
     </div>
   )
 }

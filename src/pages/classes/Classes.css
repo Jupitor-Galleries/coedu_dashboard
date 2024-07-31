@@ -58,3 +58,23 @@
     background-color: #fff;
     position: fixed;
 }
+
+.class-container{
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    /* align-items: center; */
+    /* justify-content: center; */
+    min-height: 100vh;
+    padding-left: 200px;
+    padding-top: 103px;
+}
+
+.welcome-note {
+    font-size: 80px;
+    font-weight: 600;
+    line-height: 99.22px;
+    text-align: left;
+    color:#4F4F4F;
+
+}

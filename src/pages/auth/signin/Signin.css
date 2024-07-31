@@ -9,7 +9,15 @@
     background: #FCFAFA;
     padding: 5%;
 }
-
+.signin-container h2{
+    /* font-family: Kumbh Sans; */
+    font-size: 36px;
+    font-weight: 600;
+    line-height: 44.65px;
+    text-align: center;
+    color: #4F4F4F;
+;
+}
 .signin-container p, .signin-container h2 {
     text-align: center;
 }
@@ -46,4 +54,25 @@
     padding: 12px 20px;
     background-color: #333;
     border-radius: 5px;
+}
+
+.form-group{
+    width: 248px;
+    height: 42px;
+    top: 144px;
+    left: 130px;
+    gap: 0px;
+    border-radius: 4px 0px 0px 0px;
+    opacity: 0px;
+    margin-bottom: 14px;
+}
+
+.welcome {
+    font-family: Inter;
+    font-size: 16px;
+    font-weight: 500;
+    line-height: 25px;
+    text-align: center;
+    color: #667085;
+
 }
