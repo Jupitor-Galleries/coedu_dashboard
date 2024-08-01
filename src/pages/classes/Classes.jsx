@@ -5,7 +5,9 @@ import ClassModal from './modal/ClassModal';
 import { getUserClasses } from '../../api/class'
 import { getCurrentUser } from '../../api/auth'
 import SideNav from '../dashboard_page/components/sidenav/SideNav';
-// import NoClasses from './components/NoClasses';
+import NoClasses from './components/NoClasses';
+import ClassesPresent from './components/ClassesPresent';
+import bg from "./assets/bg.png";
 
 const Classes = () => {
 
@@ -36,9 +38,13 @@ const Classes = () => {
 
 
   return (
-    <div className='class-container'>
-        <p className='welcome-note'>Welcome to CoEdu,<br/>Courtney</p>
-        {/* <NoClasses/> */}
+    <div className='classes-container'>
+        <h3 className='welcome-note'>Welcome to CoEdu,<br/>Courtney</h3>
+        {
+            classes.length< 1? <NoClasses addClass={() => setModalOpened(true)}/> : <ClassesPresent addClass={() => setModalOpened(true)} classes={classes}/>
+        }
+        <img src={bg} alt="" />
+        
         <ClassModal modalOpened={modalOpened} onClose={() => setModalOpened(false)} fetchUserClasses={fetchUserClasses} />
     </div>
   )

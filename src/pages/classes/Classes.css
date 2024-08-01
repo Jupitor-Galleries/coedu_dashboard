@@ -2,11 +2,18 @@
     width: 100%;
     display: flex;
     flex-direction: column;
-    gap: 20px;
-    align-items: center;
-    justify-content: center;
+    gap: 50px;
+    /* align-items: center; */
     min-height: 100vh;
-    padding: 5%;
+    padding: 10%;
+}
+
+.classes-container img {
+    width: 200px;
+    position: fixed;
+    z-index: -1;
+    right: 150px;
+    top: 200px;
 }
 
 .classes-data {
@@ -21,7 +28,6 @@
 
 .classes {
     display: flex;
-    flex-direction: column;
     gap: 15px;
 }
 
@@ -29,10 +35,13 @@
     display: flex;
     justify-content: space-between;
     padding: 12px;
-    border: 1px solid #ccc;
-    background-color: #fff;
+    background-color: #DFE7FF;
     border-radius: 5px;
     align-items: center;
+    justify-content: center;
+    width: 180px;
+    text-align: center;
+    color: #4F4F4F;
 }
 
 .class a {
@@ -44,10 +53,18 @@
 
 .create-btn {
     padding: 12px;
-    background-color: #333;
+    background-color: #26439C;
     border: none;
     border-radius: 5px;
     color: #fff;
+}
+
+.create-btn3 {
+    padding: 12px;
+    border: 1px dashed #2671B1;
+    border-radius: 5px;
+    background-color: #fff;
+    color: #2671B1;
 }
 
 .mc-data {
@@ -59,22 +76,15 @@
     position: fixed;
 }
 
-.class-container{
-    display: flex;
-    flex-direction: column;
-    gap: 20px;
-    /* align-items: center; */
-    /* justify-content: center; */
-    min-height: 100vh;
-    padding-left: 200px;
-    padding-top: 103px;
-}
+/*  */
 
-.welcome-note {
-    font-size: 80px;
-    font-weight: 600;
-    line-height: 99.22px;
-    text-align: left;
-    color:#4F4F4F;
 
+
+@media screen and (min-width: 768px) {
+    .welcome-note {
+        font-size: 80px;
+        text-align: left;
+        color:#4F4F4F;
+    
+    }
 }

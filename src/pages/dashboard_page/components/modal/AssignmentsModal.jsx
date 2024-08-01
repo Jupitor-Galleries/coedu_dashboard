@@ -76,7 +76,7 @@ const AssignmentsModal = ({modalOpened, onClose, classId, allAssignments}) => {
 
         <div className="form-group">
             <label htmlFor="duedate">Due date</label>
-            <input type="date" value={dueDate} onChange={(e) => setDueDate(e.target.value)} />
+            <input type="datetime-local" value={dueDate} onChange={(e) => setDueDate(e.target.value)} />
         </div>
 
         <button className="c-btn" onClick={() => shareResources()}>Publish</button>

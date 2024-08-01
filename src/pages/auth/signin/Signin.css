@@ -57,11 +57,8 @@
 }
 
 .form-group{
-    width: 248px;
-    height: 42px;
-    top: 144px;
-    left: 130px;
-    gap: 0px;
+    width: 100%;
+    gap: 5px;
     border-radius: 4px 0px 0px 0px;
     opacity: 0px;
     margin-bottom: 14px;

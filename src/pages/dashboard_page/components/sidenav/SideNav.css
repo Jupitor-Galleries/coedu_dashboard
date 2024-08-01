@@ -2,7 +2,7 @@
     width: 100%;
     display: flex;
     flex-direction: column;
-    gap: 40px;
+    gap: 20px;
     position: fixed;
     padding: 20px;
     background-color: #03042e;
@@ -23,6 +23,19 @@
     display: flex;
     flex-direction: column;
     gap: 20px;
+}
+
+.sidenav-container hr {
+    width: 120%;
+    margin-left: -20px;
+}
+
+.prof-dat {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 15px;
 }
 
 .sidenav-links {

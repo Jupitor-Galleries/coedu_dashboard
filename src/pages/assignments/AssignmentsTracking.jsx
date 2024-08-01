@@ -12,7 +12,13 @@ const AssignmentsTracking = () => {
     const assignmentId = useParams().assignmentId;
     const [modalOpened, setModalOpened] = useState(false);
     const [classes, setClasses] = useState([])
-    const [assignement, setAssignment] = useState({})
+    const [assignement, setAssignment] = useState({});
+
+
+    const [unreadd, setUnread] = useState(0);
+    const [read, setRead] = useState(0);
+    const [submitted, setSubmitted] = useState(0);
+    const [graded, setGraded] = useState(0);
 
     const broadcast = () => {
 
@@ -20,7 +26,15 @@ const AssignmentsTracking = () => {
     const allStudents = async() => {
         const res = await getAssignmentDetails(assignmentId)
         if(res?.status) {
-            setAssignment(res.data)
+            setAssignment(res.data);
+            const unread = res.data?.students.filter((student) => student.status === "failed");
+            setUnread(unread.length);
+            const read = res.data?.students.filter((student) => student.status === "delivered");
+            setRead(read.length);
+            const submitted = res.data?.students.filter((student) => student.status === "submitted");
+            setSubmitted(submitted.length);
+            const graded = res.data?.students.filter((student) => student.status === "graded");
+            setGraded(graded.length);
         }
     }
     useEffect(() => {
@@ -31,10 +45,25 @@ const AssignmentsTracking = () => {
         <SideNav organization={"organization"} />
         <div className="mainpage-container">
             <div className="students-container">
-                <div className="h">
-                    <h4>Asikana Network</h4>
-                    <button className='create-btn' onClick={() => setModalOpened(true)}>Create New Assignment</button>
-                </div>
+                
+                <div className="d-overview">
+            <NavLink className="nav-card2 red">
+              <h4>Undelivered</h4>
+              <h4>{unreadd}</h4>
+            </NavLink>
+            <NavLink className="nav-card2 black">
+              <h4>Unread</h4>
+              <h4>{read}</h4>
+            </NavLink>
+            <NavLink className="nav-card2 blue">
+              <h4>Submitted</h4>
+              <h4>{submitted}</h4>
+            </NavLink>
+            <NavLink className="nav-card2 navy-blue">
+              <h4>Graded</h4>
+              <h4>{graded}</h4>
+            </NavLink>
+          </div>
             <table className="students">
                 <tr>
                     <th>Name</th>
@@ -60,7 +89,10 @@ const AssignmentsTracking = () => {
                                     {student?.subDate || "--"}
                                 </td>
                                 <td>
-                                    <button className='create-btn2'>View Submission</button>
+                                    {
+                                        student.status === 'submitted'?<button className='create-btn2'>View Submission</button>: <button disabled className='create-btn4'>View Submission</button>
+                                    }
+                                    
                                 </td>
                             </tr>
                         )

@@ -6,6 +6,7 @@ import { useParams } from 'react-router-dom';
 import { getAssignmentsByClass } from '../../api/class'
 import SideNav from '../dashboard_page/components/sidenav/SideNav';
 import AssignmentsModal from '../dashboard_page/components/modal/AssignmentsModal';
+import { FaBell } from 'react-icons/fa';
 
 const Assignments = () => {
     const classId = useParams().classId;
@@ -31,13 +32,31 @@ const Assignments = () => {
     },[])
   return (
     <div className='dashboard-container'>
-        <SideNav organization={"organization"} />
+        <SideNav organization={"organization"} classId={classId} />
         <div className="mainpage-container">
             <div className="students-container">
-                <div className="h">
-                    <h4>Asikana Network</h4>
-                    <button className='create-btn' onClick={() => setModalOpened(true)}>Create New Assignment</button>
-                </div>
+            <div className="notif-cont">
+            <div className="ico">
+              <FaBell />
+            </div>
+          </div>
+          <div className="h">
+            <h3>Asikana Network</h3>
+            <div className="flex-row">
+              <button
+                className="create-btn3"
+                onClick={() => setModalOpened(true)}
+              >
+                Create Announcement
+              </button>
+              <button
+                className="create-btn"
+                onClick={() => setModalOpened(true)}
+              >
+                Create Assignement
+              </button>
+            </div>
+          </div>
             <table className="students">
                 <tr>
                     <th>Title</th>
@@ -59,7 +78,7 @@ const Assignments = () => {
                                     {formatDate(assignment.dueDate)}
                                 </td>
                                 <td>
-                                    <NavLink to={`/assignment/${assignment._id}`} className='create-btn2'>View</NavLink>
+                                    <NavLink to={`/assignment/${assignment._id}`} className='create-btn3'>View Assignment</NavLink>
                                 </td>
                             </tr>
                         )

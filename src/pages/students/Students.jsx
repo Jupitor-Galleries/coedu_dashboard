@@ -5,6 +5,8 @@ import StudentModal from '../dashboard_page/components/modal/StudentModal';
 import { useParams } from 'react-router-dom';
 import { getClassStudents, getClassDetails } from '../../api/class'
 import SideNav from '../dashboard_page/components/sidenav/SideNav';
+import { FaDotCircle } from 'react-icons/fa';
+import { IoMdMore } from 'react-icons/io';
 
 const Students = () => {
     const classId = useParams().classId;
@@ -34,7 +36,7 @@ const Students = () => {
     },[])
   return (
     <div className='dashboard-container'>
-        <SideNav organization={"organization"} />
+        <SideNav organization={"organization"} classId={classId} />
         <div className="mainpage-container">
             <div className="students-container">
                 <div className="h">
@@ -45,7 +47,7 @@ const Students = () => {
                 <tr>
                     <th>Name</th>
                     <th>Whatsapp Number</th>
-                    <th>Class Code</th>
+                    {/* <th>Class Code</th> */}
                     <th>Status</th>
                     <th>Action</th>
                 </tr>
@@ -59,14 +61,16 @@ const Students = () => {
                                 <td>
                                     {student.whatsappNumber}
                                 </td>
-                                <td>
+                                {/* <td>
                                     {clas?.name}
-                                </td>
+                                </td> */}
                                 <td>
                                     {student.accepted == true? "joined" : "pending"}
                                 </td>
                                 <td>
-                                    <button className='delete-btn'>Remove</button>
+                                    <div className="ico">
+                                    <IoMdMore />
+                                    </div>
                                 </td>
                             </tr>
                         )

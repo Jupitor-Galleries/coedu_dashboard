@@ -10,55 +10,53 @@ import { IoMdTime } from 'react-icons/io';
 import { BsFuelPumpDiesel } from "react-icons/bs";
 import { LiaRouteSolid } from "react-icons/lia";
 import { FaRegBuilding } from "react-icons/fa";
-import logo from '../../assets/logo.png'
+import userImg from '../../assets/user.png';
 
-const SideNav = ({organization}) => {
+const SideNav = ({organization, classId}) => {
     return (
         <div className='sidenav-container desktop'>
+            <div className="prof-dat">
             <div className="logo">
-                <img src={logo} alt="" />
+                <img src={userImg} alt="" />
             </div>
+            <h4>Courtney Letsa</h4>
+            </div>
+            
             <hr />
             <div className="sidenav-content">
                 <div className="sidenav-data">
                     {/* <NavLink>Home</NavLink> */}
                     <ul className="sidenav-links">
                         <li>
-                            <NavLink to='/dashboard' className="sidenav-link">
+                            <NavLink to={`/class/${classId}`} className="sidenav-link">
                                 <GoHomeFill />
                                 Dashboard
                             </NavLink>
                         </li>
                         <li>
-                            <NavLink to='/classes' className="sidenav-link">
+                            <NavLink to={`/students/${classId}`} className="sidenav-link">
                                 <FaRegBuilding />
-                                Classes
+                                Students
                             </NavLink>
                         </li>
                         <li>
-                            <NavLink to='/analytics' className="sidenav-link">
+                            <NavLink to={`/announcements/${classId}`} className="sidenav-link">
                                 <TbReport />
-                                Analytics
-                            </NavLink>
-                        </li>
-                        {/* <li>
-                            <NavLink to='/students' className="sidenav-link">
-                                <IoMdTime />
-                               Students
-                            </NavLink>
-                        </li> */}
-                        {/* <li>
-                            <NavLink to='/routes' className="sidenav-link">
-                                <LiaRouteSolid />
-                                Routes
+                                Announcements
                             </NavLink>
                         </li>
                         <li>
-                            <NavLink to='/fuel' className="sidenav-link">
-                                <BsFuelPumpDiesel />
-                                Fuel
+                            <NavLink to={`/assignments/${classId}`} className="sidenav-link">
+                                <IoMdTime />
+                               Assignments
                             </NavLink>
-                        </li> */}
+                        </li>
+                        <li>
+                            <NavLink to={`/resources/${classId}`} className="sidenav-link">
+                                <LiaRouteSolid />
+                                Resources
+                            </NavLink>
+                        </li>
                         
                     </ul>
                 </div>
