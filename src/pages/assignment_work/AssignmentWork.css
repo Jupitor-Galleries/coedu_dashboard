@@ -1,0 +1,27 @@
+.ass-work {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    gap: 20px;
+}
+
+.doc {
+    width: 100%;
+}
+
+.grading {
+    width: 100%;
+}
+
+
+@media screen and (min-width: 768px) {
+    .ass-work {
+        flex-direction: row;
+    }
+    .doc {
+        width: 70%;
+    }
+    .grading {
+        width: 28%;
+    }
+}

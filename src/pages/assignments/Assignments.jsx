@@ -78,7 +78,7 @@ const Assignments = () => {
                                     {formatDate(assignment.dueDate)}
                                 </td>
                                 <td>
-                                    <NavLink to={`/assignment/${assignment._id}`} className='create-btn3'>View Assignment</NavLink>
+                                    <NavLink to={`/assignment/${classId}/${assignment._id}`} className='create-btn3'>View Assignment</NavLink>
                                 </td>
                             </tr>
                         )

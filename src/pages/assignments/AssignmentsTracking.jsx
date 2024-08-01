@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { NavLink } from 'react-router-dom';
+import { NavLink, useNavigate } from 'react-router-dom';
 import './Assignments.css'
 import StudentModal from '../dashboard_page/components/modal/StudentModal';
 import { useParams } from 'react-router-dom';
@@ -9,7 +9,9 @@ import SideNav from '../dashboard_page/components/sidenav/SideNav';
 import AssignmentsModal from '../dashboard_page/components/modal/AssignmentsModal';
 
 const AssignmentsTracking = () => {
+    const classId = useParams().classId;
     const assignmentId = useParams().assignmentId;
+    const navigate = useNavigate();
     const [modalOpened, setModalOpened] = useState(false);
     const [classes, setClasses] = useState([])
     const [assignement, setAssignment] = useState({});
@@ -20,12 +22,13 @@ const AssignmentsTracking = () => {
     const [submitted, setSubmitted] = useState(0);
     const [graded, setGraded] = useState(0);
 
-    const broadcast = () => {
-
+    const viewWork = (studentId) => {
+        navigate(`/assignment/${classId}/${assignmentId}/${studentId}`)
     }
     const allStudents = async() => {
         const res = await getAssignmentDetails(assignmentId)
         if(res?.status) {
+            console.log(res.data);
             setAssignment(res.data);
             const unread = res.data?.students.filter((student) => student.status === "failed");
             setUnread(unread.length);
@@ -42,7 +45,7 @@ const AssignmentsTracking = () => {
     },[])
   return (
     <div className='dashboard-container'>
-        <SideNav organization={"organization"} />
+        <SideNav organization={"organization"} classId={classId} />
         <div className="mainpage-container">
             <div className="students-container">
                 
@@ -90,7 +93,7 @@ const AssignmentsTracking = () => {
                                 </td>
                                 <td>
                                     {
-                                        student.status === 'submitted'?<button className='create-btn2'>View Submission</button>: <button disabled className='create-btn4'>View Submission</button>
+                                        student.status === 'submitted'?<button onClick={() => viewWork(student?.studentId._id)} className='create-btn2'>View Submission</button>: <button disabled className='create-btn4'>View Submission</button>
                                     }
                                     
                                 </td>
