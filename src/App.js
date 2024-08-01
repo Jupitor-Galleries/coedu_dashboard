@@ -11,7 +11,7 @@ import AssignmentsTracking from './pages/assignments/AssignmentsTracking';
 import Homepage from './pages/homepage/Homepage';
 import Announcements from './pages/announcements/Announcements';
 import Resources from './pages/resources/Resources';
-import AssignmentWork from './pages/assignment_work/AssignmentWork';
+// import AssignmentWork from './pages/assignment_work/AssignmentWork';
 
 const App = () => {
   return (
@@ -27,7 +27,7 @@ const App = () => {
     <Route path="/students/" element={<Students />}  />
     <Route path="/assignments/:classId" element={<Assignments />}  />
     <Route path="/assignment/:classId/:assignmentId" element={<AssignmentsTracking />}  />
-    <Route path="/assignment/:classId/:assignmentId/:studentId" element={<AssignmentWork />}  />
+    {/* <Route path="/assignment/:classId/:assignmentId/:studentId" element={<AssignmentWork />}  /> */}
     <Route path="/announcements/:classId" element={<Announcements />}  />
     <Route path="/resources/:classId" element={<Resources />}  />
 

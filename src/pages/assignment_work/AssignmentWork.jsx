@@ -1,5 +1,4 @@
 import React, { useState, useEffect } from "react";
-import PDFViewer from 'pdf-viewer-reactjs'
 import { NavLink } from "react-router-dom";
 import "./AssignmentWork.css";
 import { useParams } from "react-router-dom";
@@ -46,11 +45,6 @@ const AssignmentWork = () => {
           </div>
           <div className="ass-work">
             <div className="doc">
-            <PDFViewer
-            document={{
-                url: 'https://firebasestorage.googleapis.com/v0/b/jupitor-galleries.appspot.com/o/USAPCS-Appl-2025-Final.pdf?alt=media&token=b59a2eb4-f4e9-48fe-889a-a9d84729b61e',
-            }}
-        />
             </div>
             <div className="grading">
                 <div className="form-group">

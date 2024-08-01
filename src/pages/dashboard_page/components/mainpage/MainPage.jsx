@@ -85,15 +85,15 @@ const MainPage = ({ classs }) => {
           <div className="d-overview">
             <NavLink to={`/students/${classId}`} className="nav-card cloudy-blue">
               <h4>Class Students</h4>
-              <h4>0</h4>
+              <h4>5</h4>
             </NavLink>
             <NavLink to={`/assignments/${classId}`} className="nav-card black">
               <h4>Active Assignments</h4>
-              <h4>0</h4>
+              <h4>3</h4>
             </NavLink>
             <NavLink to={`/questions/${classId}`} className="nav-card blue">
               <h4>Escalated Questions</h4>
-              <h4>0</h4>
+              <h4>1</h4>
             </NavLink>
             <NavLink to={`/sessions/${classId}`} className="nav-card navy-blue">
               <h4>Today's Sessions</h4>
