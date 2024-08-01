@@ -70,7 +70,7 @@ const MainPage = ({ classs }) => {
                 className="create-btn3"
                 onClick={() => setAnnouncementModalOpened(true)}
               >
-                Create Announcement
+                Make Announcement
               </button>
               <button
                 className="create-btn"
@@ -83,20 +83,20 @@ const MainPage = ({ classs }) => {
           <hr />
 
           <div className="d-overview">
-            <NavLink className="nav-card cloudy-blue">
+            <NavLink to={`/students/${classId}`} className="nav-card cloudy-blue">
               <h4>Class Students</h4>
               <h4>0</h4>
             </NavLink>
-            <NavLink className="nav-card black">
+            <NavLink to={`/assignments/${classId}`} className="nav-card black">
               <h4>Active Assignments</h4>
               <h4>0</h4>
             </NavLink>
-            <NavLink className="nav-card blue">
+            <NavLink to={`/questions/${classId}`} className="nav-card blue">
               <h4>Escalated Questions</h4>
               <h4>0</h4>
             </NavLink>
-            <NavLink className="nav-card navy-blue">
-              <h4>Class Students</h4>
+            <NavLink to={`/sessions/${classId}`} className="nav-card navy-blue">
+              <h4>Today's Sessions</h4>
               <h4>0</h4>
             </NavLink>
           </div>
