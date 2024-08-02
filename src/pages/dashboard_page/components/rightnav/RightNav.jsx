@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import './RightNav.css';
 import { IoMdText } from 'react-icons/io';
 import { FaBell } from 'react-icons/fa';
+import { NavLink } from 'react-router-dom/dist';
 
 const RightNav = () => {
     const [messages, setMessages] = useState([
@@ -11,9 +12,9 @@ const RightNav = () => {
             time: "1 hour ago",
         },
         {
-            text: "I've been trying to submit an assignemt...",
-            by: "Francois Mavunila",
-            time: "1 hour ago",
+            text: "The Dashboard I am building is not showing...",
+            by: "Justine Imasiku",
+            time: "3 hour ago",
         },
     ]);
     const [reminders, setReminders] = useState([
@@ -42,6 +43,11 @@ const RightNav = () => {
                     <p>Messages</p>
                 </div>
                 <p>Clear</p>
+            </div>
+            <div className="msg-nav">
+                <NavLink>Total (44)</NavLink> <hr />
+                <NavLink>Handled by bot (42)</NavLink> <hr />
+                <NavLink>Escalated (2)</NavLink>
             </div>
             {
                 messages.map((message) => {

@@ -62,3 +62,9 @@
     justify-content: space-between;
     gap: 20px;
 }
+
+.msg-nav {
+    font-size: 12px;
+    display: flex;
+    gap: 10px;
+}
