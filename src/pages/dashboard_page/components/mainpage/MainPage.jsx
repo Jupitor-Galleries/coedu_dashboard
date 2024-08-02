@@ -12,6 +12,7 @@ import { NavLink, useParams } from "react-router-dom";
 import { getClassDetails, getClassStudents } from "../../../../api/class";
 import { getCurrentUser } from "../../../../api/auth";
 import { FaBell, FaUser } from "react-icons/fa";
+import RightNav from "../rightnav/RightNav";
 
 const MainPage = ({ classs }) => {
   const classId = useParams().classId;
@@ -29,6 +30,33 @@ const MainPage = ({ classs }) => {
     role: "teacher",
     __v: 0,
   });
+
+  const [recent, setRecent] = useState([
+    {
+      type: "Created Assignment",
+      title: "React Sate Management",
+      delivered: "24",
+      read: "23",
+      submitted: "11",
+      graded: "11",
+      due: "04-08-2024",
+      color: "cloudy-blue",
+      status1: "",
+      status2: "",
+    },
+    {
+      type: "Shared Resource",
+      title: "Introduction To React Hooks",
+      delivered: "24",
+      read: "18",
+      submitted: "6",
+      graded: "75%",
+      due: "",
+      color: "pink",
+      status1: "Completed",
+      status2: "Completion Rate",
+    },
+  ])
   const getUserDetails = async () => {
     const res = await getCurrentUser();
     if (res?.status) {
@@ -56,7 +84,7 @@ const MainPage = ({ classs }) => {
 
   return (
     <div className="mainpage-container">
-      <div className="mainpage-data">
+      <div className="mainpage-data2">
         <div className="dashboard-page-data">
           <div className="notif-cont">
             <div className="ico">
@@ -82,7 +110,59 @@ const MainPage = ({ classs }) => {
           </div>
           <hr />
 
-          <div className="d-overview">
+          <div className="engage-hour">
+            <div className="flex-column">
+            <p>Peak Engagement Hours</p>
+            <h1>20:00 - 22:00</h1>
+            </div>
+            <hr />
+            <div className="flex-column">
+            <p>Average Engagement Time</p>
+            <h1>56 Minutes</h1>
+            </div>
+          </div>
+
+          <h3>Recent Activities</h3>
+
+          {
+            recent.map((rec) => {
+              return (
+                <NavLink className={`rec ${rec.color}`}>
+                <div className="flex-row-space">
+                <h4>{rec.type} - {rec.title}</h4>
+                {
+                  rec.due? <p><i>Due: {rec.due}</i></p> : null
+                }
+                
+                </div>
+                  
+                  <div className="flex-row-space">
+                    <div className="flex-column-center">
+                      <p>Delivered</p>
+                      <h3>{rec.delivered}</h3>
+                    </div>
+                    <hr />
+                    <div className="flex-column-center">
+                      <p>Opened</p>
+                      <h3>{rec.read}</h3>
+                    </div>
+                    <hr />
+                    <div className="flex-column-center">
+                      <p>{rec.status1? rec.status1 : "Submitted"}</p>
+                      <h3>{rec.submitted}</h3>
+                    </div>
+                    <hr />
+                    <div className="flex-column-center">
+                      <p>{rec.status2? rec.status2 : "Graded"}</p>
+                      <h3>{rec.graded}</h3>
+                    </div>
+                  </div>
+                </NavLink>
+              )
+            })
+          }
+
+          {/* <div className="d-overview">
             <NavLink to={`/students/${classId}`} className="nav-card cloudy-blue">
               <h4>Class Students</h4>
               <h4>5</h4>
@@ -99,15 +179,16 @@ const MainPage = ({ classs }) => {
               <h4>Today's Sessions</h4>
               <h4>0</h4>
             </NavLink>
-          </div>
-          <h3>Upcoming Sessions</h3>
-          <div className="session">
+          </div> */}
+          {/* <h3>Upcoming Sessions</h3> */}
+          {/* <div className="session">
             <h4>Introduction To React Hooks</h4>
             <p>13-08-2024 - 2pm</p>
             <p>Venue: Google Meet</p>
             <button className="create-btn">Join</button>
-          </div>
+          </div> */}
         </div>
+        <RightNav />
       </div>
       <AnnouncementModal
         modalOpened={announcementModalOpened}

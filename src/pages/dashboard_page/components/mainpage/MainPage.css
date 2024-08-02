@@ -1,18 +1,23 @@
 .mainpage-container {
     width: 100%;
-    padding: 30px 5%;
+    /* padding: 30px 5%; */
     display: flex;
     flex-direction: column;
     gap: 20px;
     align-items: flex-end;
     min-height: 100vh;
-    background-color: #fff;
 }
 
 .mainpage-data {
     width: 100%;
     display: flex;
     flex-direction: column;
+    gap: 30px;
+}
+
+.mainpage-data2 {
+    width: 100%;
+    display: flex;
     gap: 30px;
 }
 
@@ -100,6 +105,7 @@
     display: flex;
     flex-direction: column;
     gap: 30px;
+    padding: 20px 5%;
 }
 
 .d-first-sect {
@@ -163,7 +169,7 @@
 }
 
 .nav-card {
-    width: 180px;
+    /* width: 180px; */
     height: 120px;
     padding: 20px;
     border-radius: 5px;
@@ -262,9 +268,46 @@
     gap: 20px;
 }
 
+.rec {
+    padding: 20px;
+    border-radius: 5px;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    color: #000;
+    /* background-color: #fff; */
+}
+
+.flex-column {
+    display: flex;
+    flex-direction: column;
+    gap: 7px;
+}
+
+.flex-column-center {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 7px;
+}
+
+.engage-hour {
+    display: flex;
+    gap: 15px;
+}
+
 
 @media screen and (min-width:768px) {
+    .mainpage-container {
+        align-items: flex-end;
+    }
     .mainpage-data {
+        width: 78%;
+    }
+    .dashboard-page-data {
+        width: 69%;
+    }
+    .mainpage-data2 {
         width: 78%;
     }
     .d-first-sect {

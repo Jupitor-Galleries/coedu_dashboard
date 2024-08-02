@@ -1,0 +1,64 @@
+.rightnav-container {
+    width: 30%;
+    background-color: #fff;
+    min-height: 100vh;
+    padding: 30px 15px;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.messages {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.message {
+    padding: 10px;
+    border-radius: 5px;
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+    background-color: #F9F8FF;
+    border: 1px solid #d6d6d6;
+}
+
+.message p {
+    color: #333;
+}
+
+.message small {
+    color: #bbb;
+}
+
+.message button {
+    padding: 5px;
+    border-radius: 5px;
+}
+
+.reminder {
+    padding: 10px;
+    border-radius: 5px;
+    border: 1px solid #F9F8FF;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 10px;
+}
+
+.pink {
+    background-color: #FFC9C9;
+}
+
+.greenish {
+    background-color: #C9FFD8;
+}
+
+.flex-row-space {
+    display: flex;
+    width: 100%;
+    align-items: center;
+    justify-content: space-between;
+    gap: 20px;
+}
