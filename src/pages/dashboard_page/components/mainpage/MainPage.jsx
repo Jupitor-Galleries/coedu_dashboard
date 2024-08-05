@@ -32,30 +32,30 @@ const MainPage = ({ classs, currentUser }) => {
   });
 
   const [recent, setRecent] = useState([
-    {
-      type: "Created Assignment",
-      title: "React Sate Management",
-      delivered: "24",
-      read: "23",
-      submitted: "11",
-      graded: "11",
-      due: "04-08-2024",
-      color: "cloudy-blue",
-      status1: "",
-      status2: "",
-    },
-    {
-      type: "Shared Resource",
-      title: "Introduction To React Hooks",
-      delivered: "24",
-      read: "18",
-      submitted: "6",
-      graded: "75%",
-      due: "",
-      color: "navy-blue",
-      status1: "Completed",
-      status2: "Completion Rate",
-    },
+    // {
+    //   type: "Created Assignment",
+    //   title: "React Sate Management",
+    //   delivered: "24",
+    //   read: "23",
+    //   submitted: "11",
+    //   graded: "11",
+    //   due: "04-08-2024",
+    //   color: "cloudy-blue",
+    //   status1: "",
+    //   status2: "",
+    // },
+    // {
+    //   type: "Shared Resource",
+    //   title: "Introduction To React Hooks",
+    //   delivered: "24",
+    //   read: "18",
+    //   submitted: "6",
+    //   graded: "75%",
+    //   due: "",
+    //   color: "navy-blue",
+    //   status1: "Completed",
+    //   status2: "Completion Rate",
+    // },
   ])
   const getUserDetails = async () => {
     const res = await getCurrentUser();
@@ -109,7 +109,17 @@ const MainPage = ({ classs, currentUser }) => {
             </div>
           </div>
           <hr />
-
+          <div className="engage-hour">
+            <div className="flex-column">
+            <p>Peak Engagement Hours</p>
+            <h1>---</h1>
+            </div>
+            <hr />
+            <div className="flex-column">
+            <p>Average Engagement Time</p>
+            <h1>---</h1>
+            </div>
+          </div>
 
           <h3>Recent Activities</h3>
 
@@ -151,17 +161,7 @@ const MainPage = ({ classs, currentUser }) => {
             })
           }
           
-          <div className="engage-hour">
-            <div className="flex-column">
-            <p>Peak Engagement Hours</p>
-            <h1>20:00 - 22:00</h1>
-            </div>
-            <hr />
-            <div className="flex-column">
-            <p>Average Engagement Time</p>
-            <h1>56 Minutes</h1>
-            </div>
-          </div>
+          
 
           {/* <div className="d-overview">
             <NavLink to={`/students/${classId}`} className="nav-card cloudy-blue">
