@@ -6,9 +6,10 @@
     position: fixed;
     padding: 20px;
     background-color: #ffffff;
-    height: 100vh;
-    overflow: auto;
+    height: 98vh;
     color: #333;
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+    border-radius: 10px;
 }
 
 .sidenav-container a {
@@ -31,7 +32,7 @@
 
 .sidenav-container hr {
     width: 120%;
-    margin-left: -20px;
+    margin-left: -15px;
 }
 
 .prof-dat {
@@ -46,7 +47,7 @@
     display: flex;
     flex-direction: column;
     gap: 20px;
-    font-size: 18px;
+    font-size: 16px;
 }
 
 .sidenav-link {
@@ -56,7 +57,7 @@
 }
 
 .sidenav-container a {
-    color: #979797;
+    color: #000;
 }
 
 .desktop {
@@ -68,7 +69,7 @@
     .sidenav-container {
         width: 20%;
         min-width: 200px;
-        max-width: 400px;
+        max-width: 200px;
     }
     .sidenav-data {
         justify-content: space-between;
