@@ -203,6 +203,10 @@
     justify-content: center;
 }
 
+.nav-card2 p {
+    font-size: 13px;
+}
+
 .cloudy-blue {
     background-color: #D9E2FF;
     color: #1C1C1C;
@@ -278,6 +282,10 @@
     /* background-color: #fff; */
 }
 
+.rec p {
+    font-size: 12px;
+}
+
 .flex-column {
     display: flex;
     flex-direction: column;
@@ -308,7 +316,7 @@
         width: 69%;
     }
     .mainpage-data2 {
-        width: 78%;
+        width: 84%;
     }
     .d-first-sect {
         flex-direction: row;

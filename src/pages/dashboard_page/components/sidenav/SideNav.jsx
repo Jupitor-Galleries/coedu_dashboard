@@ -57,6 +57,12 @@ const SideNav = ({organization, classId}) => {
                                 Resources
                             </NavLink>
                         </li>
+                        <li>
+                            <NavLink to={`/events/${classId}`} className="sidenav-link">
+                                <LiaRouteSolid />
+                                Events
+                            </NavLink>
+                        </li>
                         
                     </ul>
                 </div>

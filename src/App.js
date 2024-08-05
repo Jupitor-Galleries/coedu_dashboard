@@ -11,6 +11,7 @@ import AssignmentsTracking from './pages/assignments/AssignmentsTracking';
 import Homepage from './pages/homepage/Homepage';
 import Announcements from './pages/announcements/Announcements';
 import Resources from './pages/resources/Resources';
+import Events from './pages/events/Events';
 // import AssignmentWork from './pages/assignment_work/AssignmentWork';
 
 const App = () => {
@@ -30,6 +31,7 @@ const App = () => {
     {/* <Route path="/assignment/:classId/:assignmentId/:studentId" element={<AssignmentWork />}  /> */}
     <Route path="/announcements/:classId" element={<Announcements />}  />
     <Route path="/resources/:classId" element={<Resources />}  />
+    <Route path="/events/:classId" element={<Events />}  />
 
     </Routes>
   </Router>

@@ -1,35 +1,33 @@
 import React, { useState, useEffect } from "react";
 import { NavLink } from "react-router-dom";
-import './Announcements.css'
 import StudentModal from "../dashboard_page/components/modal/StudentModal";
 import { useParams } from "react-router-dom";
 import { getAssignmentsByClass } from "../../api/class";
 import SideNav from "../dashboard_page/components/sidenav/SideNav";
 import AssignmentsModal from "../dashboard_page/components/modal/AssignmentsModal";
 import { FaBell } from "react-icons/fa";
-import AnnouncementModal from "../dashboard_page/components/modal/AnnouncementsModal";
-import { getAnnouncements } from "../../api/announcement";
 import RightNav from "../dashboard_page/components/rightnav/RightNav";
+import EventModal from "../dashboard_page/components/modal/EventModal";
 
-const Announcements = () => {
+const Events = () => {
   const classId = useParams().classId;
   const [modalOpened, setModalOpened] = useState(false);
-  const [announcements, setAnnouncements] = useState([]);
+  const [assignements, setAssignments] = useState([]);
 
   const broadcast = () => {};
   const formatDate = (dateString) => {
     const date = new Date(dateString);
     return `${date.toLocaleDateString()} ${date.toLocaleTimeString()}`;
   };
-  const allAnnouncements = async () => {
-    const res = await getAnnouncements(classId);
+  const allAssignments = async () => {
+    const res = await getAssignmentsByClass(classId);
     console.log(res);
     if (res?.status) {
-      setAnnouncements(res.data);
+      setAssignments(res.data);
     }
   };
   useEffect(() => {
-    allAnnouncements();
+    allAssignments();
   }, []);
   return (
     <div className="dashboard-container">
@@ -48,34 +46,22 @@ const Announcements = () => {
                 className="create-btn3"
                 onClick={() => setModalOpened(true)}
               >
-                Schedule Session
+                Make Announcement
               </button> */}
               <button
                 className="create-btn"
                 onClick={() => setModalOpened(true)}
               >
-                Make Announcement
+               Schedule Event
               </button>
             </div>
           </div>
-          <h4>Recent Announcements</h4>
-          <div className="announcements">
-            {
-              announcements.map((ann) => {
-                return (
-                  <div className="ann" key={ann.id}>
-                    <p>{ann.title}</p> {ann.description}
-                  </div>
-                )
-              })
-            }
-          </div>
+          <h4>Events</h4>
         </div>
         <RightNav />
-        <AnnouncementModal
+        <EventModal
           modalOpened={modalOpened}
           onClose={() => setModalOpened(false)}
-          allAssignments={allAnnouncements}
           classId={classId}
         />
       </div>
@@ -83,4 +69,4 @@ const Announcements = () => {
   );
 };
 
-export default Announcements;
+export default Events;

@@ -7,6 +7,7 @@ import { getClassStudents } from '../../api/class'
 import { getAssignmentDetails } from '../../api/assignment'
 import SideNav from '../dashboard_page/components/sidenav/SideNav';
 import AssignmentsModal from '../dashboard_page/components/modal/AssignmentsModal';
+import RightNav from '../dashboard_page/components/rightnav/RightNav';
 
 const AssignmentsTracking = () => {
     const classId = useParams().classId;
@@ -46,7 +47,7 @@ const AssignmentsTracking = () => {
   return (
     <div className='dashboard-container'>
         <SideNav organization={"organization"} classId={classId} />
-        <div className="mainpage-container">
+        <div className="dashboard-page-data2">
             <div className="students-container">
                 
                 <div className="d-overview">
@@ -103,6 +104,7 @@ const AssignmentsTracking = () => {
                 }
             </table>
             </div>
+            <RightNav />
             <AssignmentsModal modalOpened={modalOpened} onClose={() => setModalOpened(false)} />
         </div>
     </div>

@@ -1,13 +1,14 @@
 import React, { useState} from "react";
 import './Modal.css';
-import { sendAnnouncement } from '../../../../api/class'
 import { uploadImages } from "../../../../api/uploadFiles";
+import { sendAnnouncement } from "../../../../api/announcement";
 
 const AnnouncementModal = ({modalOpened, onClose, classId}) => {
 
     const [title, setTitle] = useState("");
     const [description, setDescription] = useState("");
-    const [file, setFile] = useState(""); const [filesUrl, setFilesUrl] = useState([]);
+    const [file, setFile] = useState(null);
+    const [filesUrl, setFilesUrl] = useState([]);
 
     const handleChange = (e) => {
       if (e.target.files) {
@@ -19,13 +20,13 @@ const AnnouncementModal = ({modalOpened, onClose, classId}) => {
       const res = await uploadImages(file, "announcements" )
       if(res) {
         setFilesUrl(res.url)
+        return res[0].url
       }
     }
     
     const shareResources = async() => {
-      const content = `Title: ${title}\nDescription: ${description}`;
-      const type = "text"
-        const res = await sendAnnouncement(classId, content, type)
+      const filelink = await saveFiles()
+        const res = await sendAnnouncement(title, description, filelink, classId)
         if(res?.status){
           alert("Announcement sent successfully!")
         }else{
@@ -60,7 +61,7 @@ const AnnouncementModal = ({modalOpened, onClose, classId}) => {
         </div>
         <div className="form-group">
           <label htmlFor="files">Attachments</label>
-          <input type="file" multiple value={file} onChange={handleChange} />
+          <input type="file" multiple onChange={handleChange} />
         </div>
 
         <button className="c-btn" onClick={() => shareResources()}>Announce</button>

@@ -7,6 +7,7 @@ import { getClassStudents, getClassDetails } from '../../api/class'
 import SideNav from '../dashboard_page/components/sidenav/SideNav';
 import { FaDotCircle } from 'react-icons/fa';
 import { IoMdMore } from 'react-icons/io';
+import RightNav from '../dashboard_page/components/rightnav/RightNav';
 
 const Students = () => {
     const classId = useParams().classId;
@@ -37,7 +38,7 @@ const Students = () => {
   return (
     <div className='dashboard-container'>
         <SideNav organization={"organization"} classId={classId} />
-        <div className="mainpage-container">
+        <div className="dashboard-page-data2">
             <div className="students-container">
                 <div className="h">
                     <h4>Asikana Network</h4>
@@ -78,6 +79,7 @@ const Students = () => {
                 }
             </table>
             </div>
+            <RightNav />
             <StudentModal modalOpened={modalOpened} onClose={() => setModalOpened(false)} classId={classId} fetchStudents={allStudents} />
         </div>
     </div>

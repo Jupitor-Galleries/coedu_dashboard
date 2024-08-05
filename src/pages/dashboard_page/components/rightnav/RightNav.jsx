@@ -21,7 +21,7 @@ const RightNav = () => {
         {
             type: "Meeting",
             when: "Today, 14:00",
-            color: "pink"
+            color: "skysh-blue"
         },
         {
             type: "Share Resources",
@@ -31,7 +31,7 @@ const RightNav = () => {
         {
             type: "End of Week Feedback",
             when: "Today, 16:00",
-            color: "greenish"
+            color: "navy-blue"
         },
     ]);
   return (

@@ -52,7 +52,7 @@ const MainPage = ({ classs }) => {
       submitted: "6",
       graded: "75%",
       due: "",
-      color: "pink",
+      color: "navy-blue",
       status1: "Completed",
       status2: "Completion Rate",
     },
@@ -110,17 +110,6 @@ const MainPage = ({ classs }) => {
           </div>
           <hr />
 
-          <div className="engage-hour">
-            <div className="flex-column">
-            <p>Peak Engagement Hours</p>
-            <h1>20:00 - 22:00</h1>
-            </div>
-            <hr />
-            <div className="flex-column">
-            <p>Average Engagement Time</p>
-            <h1>56 Minutes</h1>
-            </div>
-          </div>
 
           <h3>Recent Activities</h3>
 
@@ -161,6 +150,18 @@ const MainPage = ({ classs }) => {
               )
             })
           }
+          
+          <div className="engage-hour">
+            <div className="flex-column">
+            <p>Peak Engagement Hours</p>
+            <h1>20:00 - 22:00</h1>
+            </div>
+            <hr />
+            <div className="flex-column">
+            <p>Average Engagement Time</p>
+            <h1>56 Minutes</h1>
+            </div>
+          </div>
 
           {/* <div className="d-overview">
             <NavLink to={`/students/${classId}`} className="nav-card cloudy-blue">

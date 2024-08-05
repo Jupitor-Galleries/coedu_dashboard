@@ -7,6 +7,7 @@ import { getAssignmentsByClass } from '../../api/class'
 import SideNav from '../dashboard_page/components/sidenav/SideNav';
 import AssignmentsModal from '../dashboard_page/components/modal/AssignmentsModal';
 import { FaBell } from 'react-icons/fa';
+import RightNav from '../dashboard_page/components/rightnav/RightNav';
 
 const Assignments = () => {
     const classId = useParams().classId;
@@ -33,7 +34,7 @@ const Assignments = () => {
   return (
     <div className='dashboard-container'>
         <SideNav organization={"organization"} classId={classId} />
-        <div className="mainpage-container">
+        <div className="dashboard-page-data2">
             <div className="students-container">
             <div className="notif-cont">
             <div className="ico">
@@ -43,12 +44,12 @@ const Assignments = () => {
           <div className="h">
             <h3>Asikana Network</h3>
             <div className="flex-row">
-              <button
+              {/* <button
                 className="create-btn3"
                 onClick={() => setModalOpened(true)}
               >
                 Make Announcement
-              </button>
+              </button> */}
               <button
                 className="create-btn"
                 onClick={() => setModalOpened(true)}
@@ -86,6 +87,7 @@ const Assignments = () => {
                 }
             </table>
             </div>
+            <RightNav />
             <AssignmentsModal modalOpened={modalOpened} onClose={() => setModalOpened(false)} allAssignments={allAssignments} classId={classId}/>
         </div>
     </div>
