@@ -14,12 +14,16 @@ const Signin = () => {
     const [password, setPassword] = useState("");
     
     const signin = async() => {
+       const classId = localStorage.getItem('lastClass');
         try {
             console.log("called")
             const res = await login(email, password)
             if(res.status) {
                 localStorage.setItem('jwt', res.data.token)
-                navigate('/classes')
+                if(classId) {
+                    navigate(`/class/${classId}`)
+                } else {
+                    navigate('/classes')}
             }
         } catch (error) {
             alert('An error occurred during sign-in. Please try again.')

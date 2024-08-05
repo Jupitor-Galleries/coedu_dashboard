@@ -52,7 +52,7 @@ const MainPage = ({ classs, currentUser }) => {
       submitted: "6",
       graded: "75%",
       due: "",
-      color: "pink",
+      color: "navy-blue",
       status1: "Completed",
       status2: "Completion Rate",
     },

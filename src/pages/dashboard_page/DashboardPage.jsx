@@ -21,7 +21,8 @@ const DashboardPage = () => {
   }
 
   useEffect(() => {
-    getCurrentUs()
+    getCurrentUs();
+    localStorage.setItem('lastClass', classId)
   }, [])
   
 

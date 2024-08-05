@@ -50,7 +50,7 @@ const AssignmentsTracking = () => {
         <div className="dashboard-page-data2">
             <div className="students-container">
                 
-                <div className="d-overview">
+                {/* <div className="d-overview">
             <NavLink className="nav-card2 red">
               <h4>Undelivered</h4>
               <h4>{unreadd}</h4>
@@ -67,7 +67,9 @@ const AssignmentsTracking = () => {
               <h4>Graded</h4>
               <h4>{graded}</h4>
             </NavLink>
-          </div>
+          </div> */}
+
+          <h3>{assignement.title}</h3>
             <table className="students">
                 <tr>
                     <th>Name</th>
@@ -94,7 +96,7 @@ const AssignmentsTracking = () => {
                                 </td>
                                 <td>
                                     {
-                                        student.status === 'submitted'?<button onClick={() => viewWork(student?.studentId._id)} className='create-btn2'>View Submission</button>: <button disabled className='create-btn4'>View Submission</button>
+                                        student.status === 'submitted'?<button onClick={() => viewWork(student?.studentId._id)} className='create-btn2'>View Submission</button>: <button disabled className='create-btn4'>Awaiting Submission</button>
                                     }
                                     
                                 </td>

@@ -229,7 +229,7 @@
 
 .navy-blue {
     background-color: #26439C;
-    color: #fff;
+    color: #fff !important;
 }
 
 .session {
