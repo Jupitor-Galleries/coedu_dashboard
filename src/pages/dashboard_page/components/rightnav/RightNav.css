@@ -21,7 +21,7 @@ box-shadow: 1px 1px 5px 0px rgba(180,181,186,0.7);
 .messages {
     display: flex;
     flex-direction: column;
-    gap: 10px;
+    gap: 20px;
 }
 
 .message {

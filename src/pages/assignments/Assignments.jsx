@@ -8,6 +8,7 @@ import SideNav from '../dashboard_page/components/sidenav/SideNav';
 import AssignmentsModal from '../dashboard_page/components/modal/AssignmentsModal';
 import { FaBell } from 'react-icons/fa';
 import RightNav from '../dashboard_page/components/rightnav/RightNav';
+import { getCurrentUser } from '../../api/auth';
 
 const Assignments = () => {
     const classId = useParams().classId;
@@ -31,9 +32,23 @@ const Assignments = () => {
     useEffect(() => {
         allAssignments()
     },[])
+
+    const [currentUser, setCurrentUser] = useState(null);
+
+    const getCurrentUs = async() => {
+      const res = await getCurrentUser();
+      if(res.status) {
+        console.log(res.data);
+        setCurrentUser(res.data)
+      }
+    }
+  
+    useEffect(() => {
+      getCurrentUs()
+    }, [])
   return (
     <div className='dashboard-container'>
-        <SideNav organization={"organization"} classId={classId} />
+        <SideNav organization={"organization"} classId={classId} currentUser={currentUser} />
         <div className="dashboard-page-data2">
             <div className="students-container">
             <div className="notif-cont">
@@ -42,7 +57,7 @@ const Assignments = () => {
             </div>
           </div>
           <div className="h">
-            <h3>Asikana Network</h3>
+            <h3>{currentUser?.organization.name}</h3>
             <div className="flex-row">
               {/* <button
                 className="create-btn3"

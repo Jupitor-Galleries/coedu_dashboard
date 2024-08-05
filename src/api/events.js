@@ -1,7 +1,7 @@
 import { baseUrl } from "../utils/api";
 
 export const createEvent = async (title, description, eventLink, classId) => {
-    const url = `${baseUrl}/api/announcement`;
+    const url = `${baseUrl}/api/events/create`;
     const body = {
         classId,
         title,
@@ -32,7 +32,7 @@ export const createEvent = async (title, description, eventLink, classId) => {
 };
 
 export const getEvents = async(classId)=>{
-    const url = `${baseUrl}/api/announcement/class/${classId}`
+    const url = `${baseUrl}/api/events/class/${classId}`
     try {
         const token = localStorage.getItem('jwt');
         const response = await fetch(url, {

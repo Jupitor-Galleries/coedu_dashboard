@@ -14,7 +14,7 @@ import { getCurrentUser } from "../../../../api/auth";
 import { FaBell, FaUser } from "react-icons/fa";
 import RightNav from "../rightnav/RightNav";
 
-const MainPage = ({ classs }) => {
+const MainPage = ({ classs, currentUser }) => {
   const classId = useParams().classId;
 
   const [resourceModalOpened, setResourceModalOpened] = useState(false);
@@ -52,7 +52,7 @@ const MainPage = ({ classs }) => {
       submitted: "6",
       graded: "75%",
       due: "",
-      color: "navy-blue",
+      color: "pink",
       status1: "Completed",
       status2: "Completion Rate",
     },
@@ -86,13 +86,13 @@ const MainPage = ({ classs }) => {
     <div className="mainpage-container">
       <div className="mainpage-data2">
         <div className="dashboard-page-data">
-          <div className="notif-cont">
+          {/* <div className="notif-cont">
             <div className="ico">
               <FaBell />
             </div>
-          </div>
+          </div> */}
           <div className="h">
-            <h3>Asikana Network</h3>
+            <h3>{currentUser?.organization.name}</h3>
             <div className="flex-row">
               <button
                 className="create-btn3"

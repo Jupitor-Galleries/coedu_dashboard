@@ -8,6 +8,7 @@ import SideNav from '../dashboard_page/components/sidenav/SideNav';
 import { FaDotCircle } from 'react-icons/fa';
 import { IoMdMore } from 'react-icons/io';
 import RightNav from '../dashboard_page/components/rightnav/RightNav';
+import { getCurrentUser } from '../../api/auth';
 
 const Students = () => {
     const classId = useParams().classId;
@@ -35,13 +36,27 @@ const Students = () => {
         allStudents()
         classDetails()
     },[])
+
+    const [currentUser, setCurrentUser] = useState(null);
+
+    const getCurrentUs = async() => {
+      const res = await getCurrentUser();
+      if(res.status) {
+        console.log(res.data);
+        setCurrentUser(res.data)
+      }
+    }
+  
+    useEffect(() => {
+      getCurrentUs()
+    }, [])
   return (
     <div className='dashboard-container'>
-        <SideNav organization={"organization"} classId={classId} />
+        <SideNav organization={"organization"} classId={classId} currentUser={currentUser} />
         <div className="dashboard-page-data2">
             <div className="students-container">
                 <div className="h">
-                    <h4>Asikana Network</h4>
+                    <h4>{currentUser?.organization.name}</h4>
                     <button className='create-btn' onClick={() => setModalOpened(true)}>Add New Student</button>
                 </div>
             <table className="students">

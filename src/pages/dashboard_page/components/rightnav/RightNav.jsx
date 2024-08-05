@@ -5,34 +5,13 @@ import { FaBell } from 'react-icons/fa';
 import { NavLink } from 'react-router-dom/dist';
 
 const RightNav = () => {
-    const [messages, setMessages] = useState([
-        {
-            text: "I've been trying to submit an assignemt...",
-            by: "Francois Mavunila",
-            time: "1 hour ago",
-        },
-        {
-            text: "The Dashboard I am building is not showing...",
-            by: "Justine Imasiku",
-            time: "3 hour ago",
-        },
-    ]);
+    const [messages, setMessages] = useState(
+       [
+
+       ]
+    );
     const [reminders, setReminders] = useState([
-        {
-            type: "Meeting",
-            when: "Today, 14:00",
-            color: "skysh-blue"
-        },
-        {
-            type: "Share Resources",
-            when: "Today, 15:30",
-            color: "cloudy-blue"
-        },
-        {
-            type: "End of Week Feedback",
-            when: "Today, 16:00",
-            color: "navy-blue"
-        },
+        
     ]);
   return (
     <div className='rightnav-container'>
@@ -45,11 +24,13 @@ const RightNav = () => {
                 <p>Clear</p>
             </div>
             <div className="msg-nav">
-                <NavLink>Total (44)</NavLink> <hr />
-                <NavLink>Handled by bot (42)</NavLink> <hr />
-                <NavLink>Escalated (2)</NavLink>
+                <NavLink>Total (0)</NavLink> <hr />
+                <NavLink>Handled by bot (0)</NavLink> <hr />
+                <NavLink>Escalated (0)</NavLink>
             </div>
             {
+                messages.length<1? <p>You have no messages at the moment</p> : <>
+                {
                 messages.map((message) => {
                     return (
                         <div className="message">
@@ -62,7 +43,9 @@ const RightNav = () => {
                         </div>
                     )
                 })
+            }</>
             }
+            
             <hr />
             <div className="flex-row-space">
                 <div className="flex-row">
@@ -72,6 +55,8 @@ const RightNav = () => {
                 <p>Clear</p>
             </div>
             {
+                reminders.length<1? <p>You have no no active reminders at the moment</p> : <>
+                {
                 reminders.map((reminder) => {
                     return (
                         <div className={`reminder ${reminder.color}`}>
@@ -80,7 +65,9 @@ const RightNav = () => {
                         </div>
                     )
                 })
+            }</>
             }
+            
         </div>
     </div>
   )
