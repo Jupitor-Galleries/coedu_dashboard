@@ -2,6 +2,7 @@ import React, { useState} from "react";
 import './Modal.css';
 import {sendass } from '../../../../api/class'
 import { uploadImages } from "../../../../api/uploadFiles";
+import Loader from '../../../../components/loader/Loader';
 
 const AssignmentsModal = ({modalOpened, onClose, classId, allAssignments}) => {
 
@@ -10,6 +11,7 @@ const AssignmentsModal = ({modalOpened, onClose, classId, allAssignments}) => {
     const [file, setFile] = useState(null);
     const [dueDate, setDueDate] = useState(""); 
     const [filesUrl, setFilesUrl] = useState(null);
+    const [loading, setLoading] = useState(false);
 
     const handleChange = (e) => {
       if (e.target.files) {
@@ -27,13 +29,16 @@ const AssignmentsModal = ({modalOpened, onClose, classId, allAssignments}) => {
     }
 
     const shareResources = async() => {
+      setLoading(true);
         const filelink = await saveFiles()
         
           const res = await sendass (title, description, filelink, dueDate, classId)
           if(res?.status){
+            setLoading(false);
               alert("sent an assignment")
               allAssignments()
           }else{
+            setLoading(false);
               alert(res.error)
           }
 
@@ -78,6 +83,7 @@ const AssignmentsModal = ({modalOpened, onClose, classId, allAssignments}) => {
         <button className="c-btn" onClick={() => shareResources()}>Publish</button>
         </div>
       </div>
+      <Loader loading={loading}/>
     </div>
   );
 };
