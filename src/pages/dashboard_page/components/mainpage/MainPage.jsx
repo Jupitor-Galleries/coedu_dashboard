@@ -112,12 +112,12 @@ const MainPage = ({ classs, currentUser, recent }) => {
           <div className="engage-hour">
             <div className="flex-column">
             <p>Peak Engagement Hours</p>
-            <h1>---</h1>
+            <h2>6-9pm</h2>
             </div>
             <hr />
             <div className="flex-column">
             <p>Average Engagement Time</p>
-            <h1>---</h1>
+            <h2>47 minutes</h2>
             </div>
           </div>
 
