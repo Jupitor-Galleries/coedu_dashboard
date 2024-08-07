@@ -18,7 +18,7 @@
 .mainpage-data2 {
     width: 100%;
     display: flex;
-    gap: 30px;
+    /* gap: 30px; */
 }
 
 .notif-cont {
@@ -105,7 +105,7 @@
     display: flex;
     flex-direction: column;
     gap: 30px;
-    padding: 20px 5%;
+    padding: 20px;
 }
 
 .d-first-sect {
@@ -310,10 +310,11 @@
         align-items: flex-end;
     }
     .mainpage-data {
-        width: 78%;
+        width: 84%;
+        gap: 0;
     }
     .dashboard-page-data {
-        width: 69%;
+        width: 70%;
     }
     .mainpage-data2 {
         width: 84%;

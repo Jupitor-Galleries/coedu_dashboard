@@ -37,7 +37,7 @@ box-shadow: 1px 1px 5px 0px rgba(180,181,186,0.7);
 
 .sidenav-container hr {
     width: 120%;
-    margin-left: -20px;
+    margin-left: -15px;
 }
 
 .prof-dat {
@@ -67,7 +67,7 @@ p {
 }
 
 .sidenav-container a {
-    color: #979797;
+    color: #000;
 }
 
 .desktop {

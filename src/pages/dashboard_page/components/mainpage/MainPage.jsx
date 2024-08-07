@@ -14,7 +14,7 @@ import { getCurrentUser } from "../../../../api/auth";
 import { FaBell, FaUser } from "react-icons/fa";
 import RightNav from "../rightnav/RightNav";
 
-const MainPage = ({ classs, currentUser }) => {
+const MainPage = ({ classs, currentUser, recent }) => {
   const classId = useParams().classId;
 
   const [resourceModalOpened, setResourceModalOpened] = useState(false);
@@ -31,7 +31,7 @@ const MainPage = ({ classs, currentUser }) => {
     __v: 0,
   });
 
-  const [recent, setRecent] = useState([
+  // const [recent, setRecent] = useState([
     // {
     //   type: "Created Assignment",
     //   title: "React Sate Management",
@@ -56,7 +56,7 @@ const MainPage = ({ classs, currentUser }) => {
     //   status1: "Completed",
     //   status2: "Completion Rate",
     // },
-  ])
+  // ])
   const getUserDetails = async () => {
     const res = await getCurrentUser();
     if (res?.status) {
@@ -123,43 +123,94 @@ const MainPage = ({ classs, currentUser }) => {
 
           <h3>Recent Activities</h3>
 
-          {
-            recent.map((rec) => {
-              return (
-                <NavLink className={`rec ${rec.color}`}>
+          {/* { */}
+            {/* recent.map((rec) => {
+              return ( */}
+                <NavLink className={`rec cloudy-blue`}>
                 <div className="flex-row-space">
-                <h4>{rec.type} - {rec.title}</h4>
-                {
-                  rec.due? <p><i>Due: {rec.due}</i></p> : null
-                }
+                <h4>Assignment - {recent?.assignment?.name}</h4>
                 
                 </div>
                   
                   <div className="flex-row-space">
                     <div className="flex-column-center">
+                      <p>Sent</p>
+                      <h3>{recent?.assignment?.sent}</h3>
+                    </div>
+                    <hr />
+                    <div className="flex-column-center">
                       <p>Delivered</p>
-                      <h3>{rec.delivered}</h3>
+                      <h3>{recent?.assignment?.delivered}</h3>
                     </div>
                     <hr />
                     <div className="flex-column-center">
                       <p>Opened</p>
-                      <h3>{rec.read}</h3>
+                      <h3>{recent?.assignment?.read}</h3>
                     </div>
                     <hr />
                     <div className="flex-column-center">
-                      <p>{rec.status1? rec.status1 : "Submitted"}</p>
-                      <h3>{rec.submitted}</h3>
-                    </div>
-                    <hr />
-                    <div className="flex-column-center">
-                      <p>{rec.status2? rec.status2 : "Graded"}</p>
-                      <h3>{rec.graded}</h3>
+                      <p>Submitted</p>
+                      <h3>{recent?.assignment?.submitted}</h3>
                     </div>
                   </div>
                 </NavLink>
-              )
-            })
-          }
+                <NavLink className={`rec cloudy-blue`}>
+                <div className="flex-row-space">
+                <h4>Resource - {recent?.resource?.name || "Introduction To React"}</h4>
+                
+                </div>
+                  
+                  <div className="flex-row-space">
+                    <div className="flex-column-center">
+                      <p>Sent</p>
+                      <h3>{recent?.resource?.sent}</h3>
+                    </div>
+                    <hr />
+                    <div className="flex-column-center">
+                      <p>Delivered</p>
+                      <h3>{recent?.resource?.delivered}</h3>
+                    </div>
+                    <hr />
+                    <div className="flex-column-center">
+                      <p>Opened</p>
+                      <h3>{recent?.resource?.read}</h3>
+                    </div>
+                    {/* <hr />
+                    <div className="flex-column-center">
+                      <p>Submitted</p>
+                      <h3>{recent?.assignment?.submitted}</h3>
+                    </div> */}
+                  </div>
+                </NavLink>
+
+                <NavLink className={`rec cloudy-blue`}>
+                <div className="flex-row-space">
+                <h4>Announcement - {recent?.announcement?.name || "Class today at 6pm"}</h4>
+                
+                </div>
+                  
+                  <div className="flex-row-space">
+                    <div className="flex-column-center">
+                      <p>Sent</p>
+                      <h3>{recent?.announcement?.sent}</h3>
+                    </div>
+                    <hr />
+                    <div className="flex-column-center">
+                      <p>Delivered</p>
+                      <h3>{recent?.announcement?.delivered}</h3>
+                    </div>
+                    <hr />
+                    <div className="flex-column-center">
+                      <p>Opened</p>
+                      <h3>{recent?.announcement?.read}</h3>
+                    </div>
+                    {/* <hr />
+                    <div className="flex-column-center">
+                      <p>Submitted</p>
+                      <h3>{recent?.announcement?.submitted}</h3>
+                    </div> */}
+                  </div>
+                </NavLink>
           
           
 
