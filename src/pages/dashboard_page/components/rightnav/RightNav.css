@@ -1,21 +1,27 @@
 .rightnav-container {
-    width: 30%;
-    background-color: #fff;
-    min-height: 100vh;
+    width: 25%;
+    background-color: rgb(255, 255, 255, 0.3);
+    min-height: 97vh;
     padding: 30px 15px;
     display: flex;
     flex-direction: column;
     gap: 10px;
-    /* box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19); */
     border-radius: 10px;
-    margin-top: -10px;
-    right: 0;
+    -webkit-border-radius: 10px;
+    -moz-border-radius: 10px;
+    -ms-border-radius: 10px;
+    -o-border-radius: 10px;
+    -webkit-box-shadow: 1px 1px 5px 0px rgba(180,181,186,0.7);
+-moz-box-shadow: 1px 1px 5px 0px rgba(180,181,186,0.7);
+box-shadow: 1px 1px 5px 0px rgba(180,181,186,0.7);
+    position: fixed;
+    right: 10px;
 }
 
 .messages {
     display: flex;
     flex-direction: column;
-    gap: 10px;
+    gap: 20px;
 }
 
 .message {
@@ -30,15 +36,21 @@
 
 .message p {
     color: #333;
+    font-size: 12px;
 }
 
-.message small {
+small {
     color: #bbb;
+    font-size: 10px;
 }
 
 .message button {
     padding: 5px;
     border-radius: 5px;
+    font-size: 10px;
+    background-color: #333;
+    color: #fff;
+    border: none;
 }
 
 .reminder {
@@ -51,8 +63,17 @@
     gap: 10px;
 }
 
+.reminder p {
+    font-size: 12px;
+}
+
 .pink {
     background-color: #FFC9C9;
+}
+
+.skysh-blue {
+    background-color: rgb(5, 144, 190);
+    color: #fff;
 }
 
 .greenish {

@@ -12,6 +12,7 @@
     gap: 30px;
     top: 0;
     left: 0;
+    margin: auto;
   }
   
   .gallery-modal-data {
@@ -29,7 +30,16 @@
     -ms-border-radius: 5px;
     -o-border-radius: 5px;
     overflow: auto;
+    max-width: 400px;
+    -ms-overflow-style: none;  /* IE and Edge */
+    scrollbar-width: none;  /* Firefox */
 }
+
+/* Hide scrollbar for Chrome, Safari and Opera */
+.gallery-modal-data::-webkit-scrollbar {
+  display: none;
+}
+
 
   .modal-form {
     width: 100%;
@@ -53,7 +63,7 @@
   
   .c-btn {
     padding: 10px 20px;
-    background-color: #0a1113;
+    background-color: #26439C;
     color: white;
     border: none;
     border-radius: 5px;

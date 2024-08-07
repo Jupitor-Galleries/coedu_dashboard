@@ -203,6 +203,10 @@
     justify-content: center;
 }
 
+.nav-card2 p {
+    font-size: 13px;
+}
+
 .cloudy-blue {
     background-color: #D9E2FF;
     color: #1C1C1C;
@@ -225,7 +229,7 @@
 
 .navy-blue {
     background-color: #26439C;
-    color: #fff;
+    color: #fff !important;
 }
 
 .session {
@@ -276,6 +280,10 @@
     gap: 10px;
     color: #000;
     /* background-color: #fff; */
+}
+
+.rec p {
+    font-size: 12px;
 }
 
 .flex-column {

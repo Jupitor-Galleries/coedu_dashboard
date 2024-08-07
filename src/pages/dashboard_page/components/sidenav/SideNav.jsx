@@ -12,14 +12,14 @@ import { LiaRouteSolid } from "react-icons/lia";
 import { FaRegBuilding } from "react-icons/fa";
 import userImg from '../../assets/user.png';
 
-const SideNav = ({organization, classId}) => {
+const SideNav = ({organization, classId, currentUser}) => {
     return (
         <div className='sidenav-container desktop'>
             <div className="prof-dat">
             <div className="logo">
                 <img src={userImg} alt="" />
             </div>
-            <h4>Courtney Letsa</h4>
+            <h4>{currentUser?.name}</h4>
             </div>
             
             <hr />
@@ -55,6 +55,12 @@ const SideNav = ({organization, classId}) => {
                             <NavLink to={`/resources/${classId}`} className="sidenav-link">
                                 <LiaRouteSolid />
                                 Resources
+                            </NavLink>
+                        </li>
+                        <li>
+                            <NavLink to={`/events/${classId}`} className="sidenav-link">
+                                <LiaRouteSolid />
+                                Events
                             </NavLink>
                         </li>
                         

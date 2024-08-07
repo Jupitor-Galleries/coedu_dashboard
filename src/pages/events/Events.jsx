@@ -1,35 +1,36 @@
 import React, { useState, useEffect } from "react";
 import { NavLink } from "react-router-dom";
+import './Events.css';
 import StudentModal from "../dashboard_page/components/modal/StudentModal";
 import { useParams } from "react-router-dom";
 import { getAssignmentsByClass } from "../../api/class";
 import SideNav from "../dashboard_page/components/sidenav/SideNav";
 import AssignmentsModal from "../dashboard_page/components/modal/AssignmentsModal";
 import { FaBell } from "react-icons/fa";
-import ResouceModal from "../dashboard_page/components/modal/ResourceModal";
 import RightNav from "../dashboard_page/components/rightnav/RightNav";
-import { getResources } from "../../api/resources";
+import EventModal from "../dashboard_page/components/modal/EventModal";
+import { getEvents } from "../../api/events";
 import { getCurrentUser } from "../../api/auth";
 
-const Resources = () => {
+const Events = () => {
   const classId = useParams().classId;
   const [modalOpened, setModalOpened] = useState(false);
-  const [resources, setResources] = useState([]);
+  const [events, setEvents] = useState([]);
 
   const broadcast = () => {};
   const formatDate = (dateString) => {
     const date = new Date(dateString);
     return `${date.toLocaleDateString()} ${date.toLocaleTimeString()}`;
   };
-  const allResources = async () => {
-    const res = await getResources(classId);
+  const allEvents = async () => {
+    const res = await getEvents(classId);
     console.log(res);
     if (res?.status) {
-      setResources(res.data);
+      setEvents(res.data);
     }
   };
   useEffect(() => {
-    allResources();
+    allEvents();
   }, []);
 
   const [currentUser, setCurrentUser] = useState(null);
@@ -58,28 +59,23 @@ const Resources = () => {
           <div className="h">
             <h3>{currentUser?.organization.name}</h3>
             <div className="flex-row">
-              {/* <button
-                className="create-btn3"
-                onClick={() => setModalOpened(true)}
-              >
-                Make Announcement
-              </button> */}
+              
               <button
                 className="create-btn"
                 onClick={() => setModalOpened(true)}
               >
-                Share Resources
+               Schedule Event
               </button>
             </div>
           </div>
-          <h4>Resources Shared</h4>
+          <h4>Events</h4>
           <div className="announcements">
             {
-              resources.map((ann) => {
+              events.map((ann) => {
                 return (
                   <div className="ann" key={ann.id}>
                     <p>{ann.title}</p>
-                    <h4>{ann.description} ({ann.attachmentType})</h4> 
+                    <h4>{ann.description} <a className="b-btn" href={ann.eventLink} target="_blank" rel="noopener noreferrer">Join Meeting</a></h4> 
                   </div>
                 )
               })
@@ -87,10 +83,9 @@ const Resources = () => {
           </div>
         </div>
         <RightNav />
-        <ResouceModal
+        <EventModal
           modalOpened={modalOpened}
           onClose={() => setModalOpened(false)}
-          allAssignments={allResources}
           classId={classId}
         />
       </div>
@@ -98,4 +93,4 @@ const Resources = () => {
   );
 };
 
-export default Resources;
+export default Events;

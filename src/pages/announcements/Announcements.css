@@ -1,0 +1,24 @@
+.announcements {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+}
+
+.ann {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    background-color: #fff;
+    padding: 10px;
+    border-radius: 5px;
+    -webkit-border-radius: 5px;
+    -moz-border-radius: 5px;
+    -ms-border-radius: 5px;
+    -o-border-radius: 5px;
+}
+
+.dashboard-page-data2 h4 {
+    color: #787777;
+    font-size: 15px;
+    font-style: italic;
+}

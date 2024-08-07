@@ -54,6 +54,7 @@ tr:first-child {
 th, td {
     text-align: left;
     width: 200px;
+    font-size: 13px;
 }
 
 .h {
@@ -63,8 +64,15 @@ th, td {
     width: 100%;
 }
 
+.dashboard-page-data2 {
+    width: 80%;
+    display: flex;
+    gap: 50px;
+    margin-left: 220px;
+}
+
 @media screen and (min-width: 768px) {
     .students-container {
-        width: 84%;
+        width: 71%;
     }
 }

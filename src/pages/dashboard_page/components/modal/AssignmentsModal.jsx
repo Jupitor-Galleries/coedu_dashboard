@@ -27,13 +27,9 @@ const AssignmentsModal = ({modalOpened, onClose, classId, allAssignments}) => {
     }
 
     const shareResources = async() => {
-        // const fileLink = "https://docs.google.com/document/d/10BI6TCegR5DAPw2ajmp476Dp9o5P4ko1lbr_mnQ9LqU/edit?usp=sharing"
-        console.log("am here")
         const filelink = await saveFiles()
-        console.log("file link", filelink)
         
           const res = await sendass (title, description, filelink, dueDate, classId)
-          console.log(res)
           if(res?.status){
               alert("sent an assignment")
               allAssignments()

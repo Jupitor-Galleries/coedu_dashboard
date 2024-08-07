@@ -72,11 +72,11 @@ const Signup = () => {
         <h2>Welcome, create your school account</h2>
         <div className="signin-form">
             <Steps />
-            or
+            {/* or
             <div className="google-auth">
                 Signin with Google
             <FaGoogle onClick={() =>  signinWithGoogle()}/>
-            </div>
+            </div> */}
             <p>Already have an account? <NavLink to='/signin'>Login</NavLink> </p>
             
         </div>

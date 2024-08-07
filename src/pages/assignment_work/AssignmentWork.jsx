@@ -32,11 +32,11 @@ const AssignmentWork = () => {
       <SideNav organization={"organization"} classId={classId} />
       <div className="mainpage-container">
         <div className="students-container">
-          <div className="notif-cont">
+          {/* <div className="notif-cont">
             <div className="ico">
               <FaBell />
             </div>
-          </div>
+          </div> */}
           <div className="h">
             <h3>Student Name</h3>
             <div className="flex-row">

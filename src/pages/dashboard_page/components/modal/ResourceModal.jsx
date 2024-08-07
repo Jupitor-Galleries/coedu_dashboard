@@ -1,12 +1,14 @@
 import React, { useState, useEffect } from "react";
 import './Modal.css';
 import { uploadImages } from "../../../../api/uploadFiles";
+import { sendResources } from "../../../../api/resources";
 
-const ResouceModal = ({modalOpened, onClose}) => {
+const ResouceModal = ({modalOpened, onClose, classId}) => {
 
     const [title, setTitle] = useState("");
     const [description, setDescription] = useState("");
-    const [file, setFile] = useState("");
+    const [file, setFile] = useState(null);
+    const [fileType, setFileType] = useState("document");
     const [filesUrl, setFilesUrl] = useState([]);
 
     const handleChange = (e) => {
@@ -19,11 +21,22 @@ const ResouceModal = ({modalOpened, onClose}) => {
       const res = await uploadImages(file, "resources" )
       if(res) {
         setFilesUrl(res.url)
+        return res[0].url
       }
+       return "https://docs.google.com/document/d/10BI6TCegR5DAPw2ajmp476Dp9o5P4ko1lbr_mnQ9LqU/edit?usp=sharing" 
     }
 
     const shareResources = async() => {
-      
+      const filelink = await saveFiles()
+        
+          const res = await sendResources (title, description, fileType, filelink, classId)
+          if(res?.status){
+              alert("Resources have been sent")
+              // allAssignments()
+          }else{
+              alert(res.error)
+          }
+
     }
 
   if(!modalOpened) {
@@ -52,8 +65,17 @@ const ResouceModal = ({modalOpened, onClose}) => {
           <textarea type="text" value={description} onChange={(e) => setDescription(e.target.value)} />
         </div>
         <div className="form-group">
-          <label htmlFor="files">Files</label>
-          <input type="file" multiple value={file} onChange={handleChange} />
+          <label htmlFor="filetype">
+            <select name="filetype" id="filetype" value={fileType} onChange={(e) => setFileType(e.target.value)}>
+              <option value="PDF">PDF</option>
+              <option value="video">Video</option>
+              <option value="image">Image</option>
+            </select>
+          </label>
+        </div>
+        <div className="form-group">
+          <label htmlFor="files">File</label>
+          <input type="file" multiple onChange={handleChange} />
         </div>
 
         <button className="c-btn" onClick={() => shareResources()}>Share</button>

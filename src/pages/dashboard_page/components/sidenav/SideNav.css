@@ -5,11 +5,16 @@
     gap: 20px;
     position: fixed;
     padding: 20px;
-    background-color: #ffffff;
-    height: 98vh;
+    background-color: rgb(255, 255, 255, 0.6);
+    height: 97vh;
     color: #333;
-    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
     border-radius: 10px;
+    -webkit-box-shadow: 1px 1px 5px 0px rgba(180,181,186,0.7);
+-moz-box-shadow: 1px 1px 5px 0px rgba(180,181,186,0.7);
+box-shadow: 1px 1px 5px 0px rgba(180,181,186,0.7);
+    -moz-border-radius: 10px;
+    -ms-border-radius: 10px;
+    -o-border-radius: 10px;
 }
 
 .sidenav-container a {
@@ -47,13 +52,18 @@
     display: flex;
     flex-direction: column;
     gap: 20px;
-    font-size: 16px;
+    font-size: 18px;
+    font-size: 13px;
 }
 
 .sidenav-link {
     display: flex;
     align-items: center;
     gap: 10px;
+}
+
+p {
+    font-size: 13px;
 }
 
 .sidenav-container a {
@@ -67,9 +77,9 @@
 
 @media screen and (min-width: 768px) {
     .sidenav-container {
-        width: 20%;
-        min-width: 200px;
-        max-width: 200px;
+        width: 200px;
+        /* min-width: 200px;
+        max-width: 400px; */
     }
     .sidenav-data {
         justify-content: space-between;
