@@ -8,6 +8,7 @@ import { getAssignmentDetails } from '../../api/assignment'
 import SideNav from '../dashboard_page/components/sidenav/SideNav';
 import AssignmentsModal from '../dashboard_page/components/modal/AssignmentsModal';
 import RightNav from '../dashboard_page/components/rightnav/RightNav';
+import Loader from '../../components/loader/Loader'
 
 const AssignmentsTracking = () => {
     const classId = useParams().classId;
@@ -22,11 +23,13 @@ const AssignmentsTracking = () => {
     const [read, setRead] = useState(0);
     const [submitted, setSubmitted] = useState(0);
     const [graded, setGraded] = useState(0);
+    const [loading, setLoading] = useState(false);
 
     const viewWork = (studentId) => {
         navigate(`/assignment/${classId}/${assignmentId}/${studentId}`)
     }
     const allStudents = async() => {
+        setLoading(true);
         const res = await getAssignmentDetails(assignmentId)
         if(res?.status) {
             console.log(res.data);
@@ -40,6 +43,7 @@ const AssignmentsTracking = () => {
             const graded = res.data?.students.filter((student) => student.status === "graded");
             setGraded(graded.length);
         }
+        setLoading(false)
     }
     useEffect(() => {
         allStudents()
@@ -108,6 +112,7 @@ const AssignmentsTracking = () => {
             </div>
             <RightNav />
             <AssignmentsModal modalOpened={modalOpened} onClose={() => setModalOpened(false)} />
+            <Loader loading={loading} />
         </div>
     </div>
   )

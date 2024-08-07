@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from "react";
 import './Modal.css';
+import { IoMdClose } from "react-icons/io";
 
 const ResouceModal = ({modalOpened, onClose}) => {
 
@@ -22,7 +23,12 @@ const ResouceModal = ({modalOpened, onClose}) => {
      
       
       <div className="gallery-modal-data">
-      <button className="close" onClick={onClose}>Close</button>
+        <div className="modal-close">
+          <button className="close" onClick={onClose}>
+           
+          <IoMdClose />
+          </button>
+        </div>
       <div className="modal-form">
         <div className='user-profile-stats'>
                Create Poll

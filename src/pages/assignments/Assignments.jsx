@@ -9,11 +9,13 @@ import AssignmentsModal from "../dashboard_page/components/modal/AssignmentsModa
 import { FaBell } from "react-icons/fa";
 import RightNav from "../dashboard_page/components/rightnav/RightNav";
 import { getCurrentUser } from "../../api/auth";
+import Loader from '../../components/loader/Loader'
 
 const Assignments = () => {
   const classId = useParams().classId;
   const [modalOpened, setModalOpened] = useState(false);
   const [assignements, setAssignments] = useState([]);
+  const [loading, setLoading] = useState(false);
 
   const broadcast = () => {};
   const formatDate = (dateString) => {
@@ -21,10 +23,12 @@ const Assignments = () => {
     return `${date.toLocaleDateString()} ${date.toLocaleTimeString()}`;
   };
   const allAssignments = async () => {
+    setLoading(true);
     const res = await getAssignmentsByClass(classId);
     console.log(res);
     if (res?.status) {
       setAssignments(res.data);
+      setLoading(false);
     }
   };
   useEffect(() => {
@@ -44,6 +48,7 @@ const Assignments = () => {
   useEffect(() => {
     getCurrentUs();
   }, []);
+
   return (
     <div className="dashboard-container">
       <SideNav
@@ -108,6 +113,7 @@ const Assignments = () => {
           allAssignments={allAssignments}
           classId={classId}
         />
+        <Loader loading={loading}/>
       </div>
     </div>
   );

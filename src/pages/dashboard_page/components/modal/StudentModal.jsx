@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { addStudent } from '../../../../api/class'
 import './Modal.css';
+import { IoMdClose } from "react-icons/io";
 
 const StudentModal = ({modalOpened, onClose, classId, fetchStudents}) => {
 
@@ -32,7 +33,12 @@ const StudentModal = ({modalOpened, onClose, classId, fetchStudents}) => {
      
       
       <div className="gallery-modal-data">
-      <button className="close" onClick={onClose}>Close</button>
+        <div className="modal-close">
+          <button className="close" onClick={onClose}>
+           
+          <IoMdClose />
+          </button>
+        </div>
       <div className="modal-form">
         <div className='user-profile-stats'>
                Add New Student

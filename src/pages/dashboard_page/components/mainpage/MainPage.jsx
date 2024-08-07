@@ -94,17 +94,17 @@ const MainPage = ({ classs, currentUser }) => {
           <div className="h">
             <h3>{currentUser?.organization.name}</h3>
             <div className="flex-row">
-              <button
+              {/* <button
                 className="create-btn3"
                 onClick={() => setAnnouncementModalOpened(true)}
               >
                 Make Announcement
-              </button>
+              </button> */}
               <button
                 className="create-btn"
-                onClick={() => setStudentModalOpened(true)}
+                onClick={() => setAnnouncementModalOpened(true)}
               >
-                Add Student
+                Make Announcement
               </button>
             </div>
           </div>

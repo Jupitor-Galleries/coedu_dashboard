@@ -3,6 +3,7 @@ import './Modal.css';
 import {sendass } from '../../../../api/class'
 import { uploadImages } from "../../../../api/uploadFiles";
 import Loader from '../../../../components/loader/Loader';
+import { IoMdClose } from "react-icons/io";
 
 const AssignmentsModal = ({modalOpened, onClose, classId, allAssignments}) => {
 
@@ -56,7 +57,12 @@ const AssignmentsModal = ({modalOpened, onClose, classId, allAssignments}) => {
      
       
       <div className="gallery-modal-data">
-      <button className="close" onClick={onClose}>Close</button>
+      <div className="modal-close">
+          <button className="close" onClick={onClose}>
+           
+          <IoMdClose />
+          </button>
+        </div>
       <div className="modal-form">
         <div className='user-profile-stats'>
                Add New Assignment

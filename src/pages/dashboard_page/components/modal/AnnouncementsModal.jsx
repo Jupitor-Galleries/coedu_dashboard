@@ -2,6 +2,7 @@ import React, { useState} from "react";
 import './Modal.css';
 import { uploadImages } from "../../../../api/uploadFiles";
 import { sendAnnouncement } from "../../../../api/announcement";
+import { IoMdClose } from "react-icons/io";
 
 const AnnouncementModal = ({modalOpened, onClose, classId}) => {
 
@@ -45,7 +46,12 @@ const AnnouncementModal = ({modalOpened, onClose, classId}) => {
      
       
       <div className="gallery-modal-data">
-      <button className="close" onClick={onClose}>Close</button>
+        <div className="modal-close">
+          <button className="close" onClick={onClose}>
+           
+          <IoMdClose />
+          </button>
+        </div>
       <div className="modal-form">
         <div className='user-profile-stats'>
                Make Announcement

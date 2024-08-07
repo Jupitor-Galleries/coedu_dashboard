@@ -2,6 +2,7 @@ import React, { useState, useEffect } from "react";
 import './Modal.css';
 import { uploadImages } from "../../../../api/uploadFiles";
 import { sendResources } from "../../../../api/resources";
+import { IoMdClose } from "react-icons/io";
 
 const ResouceModal = ({modalOpened, onClose, classId}) => {
 
@@ -50,7 +51,12 @@ const ResouceModal = ({modalOpened, onClose, classId}) => {
      
       
       <div className="gallery-modal-data">
-      <button className="close" onClick={onClose}>Close</button>
+        <div className="modal-close">
+          <button className="close" onClick={onClose}>
+           
+          <IoMdClose />
+          </button>
+        </div>
       <div className="modal-form">
         <div className='user-profile-stats'>
                Add New resources
