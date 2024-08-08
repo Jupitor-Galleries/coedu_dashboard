@@ -14,6 +14,9 @@ import { getCurrentUser } from "../../../../api/auth";
 import { FaBell, FaUser } from "react-icons/fa";
 import RightNav from "../rightnav/RightNav";
 import Loader from "../../../../components/loader/Loader";
+import CanvasJSReact from '@canvasjs/react-charts';
+
+var CanvasJSChart = CanvasJSReact.CanvasJSChart;
 
 const MainPage = ({ classs, currentUser, recent, classes, setClasses, querries }) => {
   const classId = useParams().classId;
@@ -34,32 +37,32 @@ const MainPage = ({ classs, currentUser, recent, classes, setClasses, querries }
     __v: 0,
   });
 
-  // const [recent, setRecent] = useState([
-    // {
-    //   type: "Created Assignment",
-    //   title: "React Sate Management",
-    //   delivered: "24",
-    //   read: "23",
-    //   submitted: "11",
-    //   graded: "11",
-    //   due: "04-08-2024",
-    //   color: "cloudy-blue",
-    //   status1: "",
-    //   status2: "",
-    // },
-    // {
-    //   type: "Shared Resource",
-    //   title: "Introduction To React Hooks",
-    //   delivered: "24",
-    //   read: "18",
-    //   submitted: "6",
-    //   graded: "75%",
-    //   due: "",
-    //   color: "navy-blue",
-    //   status1: "Completed",
-    //   status2: "Completion Rate",
-    // },
-  // ])
+  const options = {
+    title: {
+      text: "Daily Engagement Hours"
+    },
+    data: [{
+      type: "column",
+      dataPoints: [
+        { label: "6am",  y: 10  },
+        { label: "7am", y: 15  },
+        { label: "8am", y: 25  },
+        { label: "9am",  y: 30  },
+        { label: "10am",  y: 28  },
+        { label: "11am",  y: 10  },
+        { label: "12pm", y: 15  },
+        { label: "2pm", y: 25  },
+        { label: "3pm",  y: 30  },
+        { label: "4pm",  y: 28  },
+        { label: "15pm",  y: 10  },
+        { label: "6pm", y: 15  },
+        { label: "7pm", y: 25  },
+        { label: "8pm",  y: 30  },
+        { label: "9pmm",  y: 28  },
+      ]
+    }]
+  }
+
   const getUserDetails = async () => {
     const res = await getCurrentUser();
     if (res?.status) {
@@ -144,6 +147,10 @@ const MainPage = ({ classs, currentUser, recent, classes, setClasses, querries }
             <h2>47 minutes</h2>
             </div>
           </div> */}
+
+<CanvasJSChart options = {options}
+        /* onRef = {ref => this.chart = ref} */
+      />
 
           <h3>Recent Activities</h3>
 
