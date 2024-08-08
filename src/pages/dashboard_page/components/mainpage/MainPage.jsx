@@ -38,27 +38,46 @@ const MainPage = ({ classs, currentUser, recent, classes, setClasses, querries }
   });
 
   const options = {
-    title: {
-      text: "Daily Engagement Hours"
+    animationEnabled: true,
+    title:{
+      text: "Hourly Engagement"
+    },
+    axisX: {
+      title: "Time",
+      valueFormatString: ""
+    },
+    axisY: {
+      title: "Number of Students",
+      prefix: ""
     },
     data: [{
-      type: "column",
+      yValueFormatString: "#",
+      xValueFormatString: "##",
+      type: "spline",
       dataPoints: [
-        { label: "6am",  y: 10  },
-        { label: "7am", y: 15  },
-        { label: "8am", y: 25  },
-        { label: "9am",  y: 30  },
-        { label: "10am",  y: 28  },
-        { label: "11am",  y: 10  },
-        { label: "12pm", y: 15  },
-        { label: "2pm", y: 25  },
-        { label: "3pm",  y: 30  },
-        { label: "4pm",  y: 28  },
-        { label: "15pm",  y: 10  },
-        { label: "6pm", y: 15  },
-        { label: "7pm", y: 25  },
-        { label: "8pm",  y: 30  },
-        { label: "9pmm",  y: 28  },
+        { x: 0, y: 2 },
+        { x: 1, y: 1 },
+        { x: 3, y: 0 },
+        { x: 4, y: 0 },
+        { x: 5, y: 0 },
+        { x: 6, y: 1 },
+        { x: 7, y: 0 },
+        { x: 8, y: 5 },
+        { x: 9, y: 3 },
+        { x: 10, y: 1 },
+        { x:  11, y: 3 },
+        { x:  12, y: 1 },
+        { x:  13, y: 0 },
+        { x:  14, y: 0 },
+        { x:  15, y: 0 },
+        { x:  16, y: 2 },
+        { x:  17, y: 1 },
+        { x:  18, y: 3 },
+        { x:  19, y: 4 },
+        { x:  20, y: 5 },
+        { x:  21, y: 6 },
+        { x:  22, y: 5 },
+        { x:  23, y: 2 },
       ]
     }]
   }
