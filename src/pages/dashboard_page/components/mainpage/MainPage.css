@@ -280,7 +280,7 @@
     gap: 10px;
     color: #000;
     border-left: 3px solid blue;
-    background-color: #fff;
+    /* background-color: #fff; */
     
     -webkit-box-shadow: 1px 1px 5px 0px rgba(180,181,186,0.7);
 -moz-box-shadow: 1px 1px 5px 0px rgba(180,181,186,0.7);
