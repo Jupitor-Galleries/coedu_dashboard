@@ -71,7 +71,7 @@ const SideNav = ({organization, classId, currentUser}) => {
                 </div> */}
                 <ul className="sidenav-links">
                         <li>
-                            <NavLink to='/settings' className="sidenav-link">
+                            <NavLink className="sidenav-link">
                                 <IoSettingsOutline />
                                 Settings
                             </NavLink>
