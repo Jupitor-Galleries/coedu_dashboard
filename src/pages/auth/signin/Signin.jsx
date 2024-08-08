@@ -3,6 +3,7 @@ import { FaGoogle } from 'react-icons/fa';
 import "./Signin.css"
 import { NavLink, useNavigate } from 'react-router-dom';
 import { login, signinWithGoogle } from '../../../api/auth';
+import { getUserClasses } from '../../../api/class';
 
 
 
@@ -20,12 +21,16 @@ const Signin = () => {
             const res = await login(email, password)
             if(res.status) {
                 localStorage.setItem('jwt', res.data.token)
-                if(classId) {
+                console.log("haha")
+                const cls = await getUserClasses()
+                
+                if(classId && cls.data.classes.some(c => c._id == classId)) {
                     navigate(`/class/${classId}`)
                 } else {
                     navigate('/classes')}
             }
         } catch (error) {
+            console.log(error)
             alert('An error occurred during sign-in. Please try again.')
         }
     }
