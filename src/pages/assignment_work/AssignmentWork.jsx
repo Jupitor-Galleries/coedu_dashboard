@@ -6,11 +6,23 @@ import { getAssignmentsByClass } from "../../api/class";
 import SideNav from "../dashboard_page/components/sidenav/SideNav";
 import AssignmentsModal from "../dashboard_page/components/modal/AssignmentsModal";
 import { FaBell } from "react-icons/fa";
+import { getQuerries } from "../../api/querries";
 
 const AssignmentWork = () => {
   const classId = useParams().classId;
   const [modalOpened, setModalOpened] = useState(false);
   const [assignements, setAssignments] = useState([]);
+
+  const [querries, setQuerries] = useState([]);
+
+const fetchQuerries = async() => {
+  const res = await getQuerries(classId)
+  console.log(res);
+  
+  if(res?.status) {
+      setQuerries(res.data)
+  }
+}
 
   const broadcast = () => {};
   const formatDate = (dateString) => {
@@ -26,6 +38,7 @@ const AssignmentWork = () => {
   };
   useEffect(() => {
     allAssignments();
+    fetchQuerries();
   }, []);
   return (
     <div className="dashboard-container">

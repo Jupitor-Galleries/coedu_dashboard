@@ -11,11 +11,23 @@ import RightNav from "../dashboard_page/components/rightnav/RightNav";
 import EventModal from "../dashboard_page/components/modal/EventModal";
 import { getEvents } from "../../api/events";
 import { getCurrentUser } from "../../api/auth";
+import { getQuerries } from "../../api/querries";
 
 const Events = () => {
   const classId = useParams().classId;
   const [modalOpened, setModalOpened] = useState(false);
   const [events, setEvents] = useState([]);
+
+  const [querries, setQuerries] = useState([]);
+
+const fetchQuerries = async() => {
+  const res = await getQuerries(classId)
+  console.log(res);
+  
+  if(res?.status) {
+      setQuerries(res.data)
+  }
+}
 
   const broadcast = () => {};
   const formatDate = (dateString) => {
@@ -31,6 +43,7 @@ const Events = () => {
   };
   useEffect(() => {
     allEvents();
+    fetchQuerries();
   }, []);
 
   const [currentUser, setCurrentUser] = useState(null);
@@ -82,7 +95,7 @@ const Events = () => {
             }
           </div>
         </div>
-        <RightNav />
+        <RightNav querries={querries} />
         <EventModal
           modalOpened={modalOpened}
           onClose={() => setModalOpened(false)}

@@ -13,15 +13,18 @@ import { getClassDetails, getClassStudents } from "../../../../api/class";
 import { getCurrentUser } from "../../../../api/auth";
 import { FaBell, FaUser } from "react-icons/fa";
 import RightNav from "../rightnav/RightNav";
+import Loader from "../../../../components/loader/Loader";
 
-const MainPage = ({ classs, currentUser, recent }) => {
+const MainPage = ({ classs, currentUser, recent, classes, setClasses, querries }) => {
   const classId = useParams().classId;
 
   const [resourceModalOpened, setResourceModalOpened] = useState(false);
   const [studentModalOpened, setStudentModalOpened] = useState(false);
   const [assignmentModalOpened, setAssignmentModalOpened] = useState(false);
   const [announcementModalOpened, setAnnouncementModalOpened] = useState(false);
+  const [loading, setLoading] = useState(false);
   const [classDetails, setClassDetails] = useState({});
+  const [currentClass, setCurrentClass] = useState(currentUser?.organization.name);
   const [students, setStudents] = useState([]);
   const [userDetails, setUserDetails] = useState({
     _id: "",
@@ -64,10 +67,12 @@ const MainPage = ({ classs, currentUser, recent }) => {
     }
   };
   const fetchClassDetails = async () => {
+    setLoading(true);
     const res = await getClassDetails(classs);
     if (res?.status) {
       setClassDetails(res.data.class);
     }
+    setLoading(false);
   };
 
   const allStudents = async () => {
@@ -82,6 +87,10 @@ const MainPage = ({ classs, currentUser, recent }) => {
     getUserDetails();
   }, []);
 
+  useEffect(() => {
+    // allStudents();
+  }, []);
+
   return (
     <div className="mainpage-container">
       <div className="mainpage-data2">
@@ -92,7 +101,22 @@ const MainPage = ({ classs, currentUser, recent }) => {
             </div>
           </div> */}
           <div className="h">
-            <h3>{currentUser?.organization.name}</h3>
+            {/* <h3>{currentUser?.organization.name}</h3> */}
+            <select name="class" id="class" defaultValue={currentClass} value={currentClass?.name} onChange={(e) => setCurrentClass(e.target.value)}>
+            <option value={currentUser?.organization.name}>
+                {currentUser?.organization.name}
+              </option>
+              {
+                classes.map((classs) => {
+                  return (
+                    <option value={classs._id}><NavLink to={`/class/${classs._id}`}>{classs.name}</NavLink></option>
+                  )
+                })
+              }
+              <option value="new">
+                Create New
+              </option>
+            </select>
             <div className="flex-row">
               {/* <button
                 className="create-btn3"
@@ -109,7 +133,7 @@ const MainPage = ({ classs, currentUser, recent }) => {
             </div>
           </div>
           <hr />
-          <div className="engage-hour">
+          {/* <div className="engage-hour">
             <div className="flex-column">
             <p>Peak Engagement Hours</p>
             <h2>6-9pm</h2>
@@ -119,7 +143,7 @@ const MainPage = ({ classs, currentUser, recent }) => {
             <p>Average Engagement Time</p>
             <h2>47 minutes</h2>
             </div>
-          </div>
+          </div> */}
 
           <h3>Recent Activities</h3>
 
@@ -214,33 +238,8 @@ const MainPage = ({ classs, currentUser, recent }) => {
           
           
 
-          {/* <div className="d-overview">
-            <NavLink to={`/students/${classId}`} className="nav-card cloudy-blue">
-              <h4>Class Students</h4>
-              <h4>5</h4>
-            </NavLink>
-            <NavLink to={`/assignments/${classId}`} className="nav-card black">
-              <h4>Active Assignments</h4>
-              <h4>3</h4>
-            </NavLink>
-            <NavLink to={`/questions/${classId}`} className="nav-card blue">
-              <h4>Escalated Questions</h4>
-              <h4>1</h4>
-            </NavLink>
-            <NavLink to={`/sessions/${classId}`} className="nav-card navy-blue">
-              <h4>Today's Sessions</h4>
-              <h4>0</h4>
-            </NavLink>
-          </div> */}
-          {/* <h3>Upcoming Sessions</h3> */}
-          {/* <div className="session">
-            <h4>Introduction To React Hooks</h4>
-            <p>13-08-2024 - 2pm</p>
-            <p>Venue: Google Meet</p>
-            <button className="create-btn">Join</button>
-          </div> */}
         </div>
-        <RightNav />
+        <RightNav querries={querries} />
       </div>
       <AnnouncementModal
         modalOpened={announcementModalOpened}
@@ -254,6 +253,7 @@ const MainPage = ({ classs, currentUser, recent }) => {
         classId={classId}
         fetchStudents={allStudents}
       />
+        <Loader loading={loading}/>
     </div>
   );
 };

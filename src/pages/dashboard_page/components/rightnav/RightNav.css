@@ -1,7 +1,7 @@
 .rightnav-container {
     width: 25%;
     background-color: rgb(255, 255, 255, 0.3);
-    min-height: 97vh;
+    height: 97vh;
     padding: 30px 15px;
     display: flex;
     flex-direction: column;
@@ -16,6 +16,7 @@
 box-shadow: 1px 1px 5px 0px rgba(180,181,186,0.7);
     position: fixed;
     right: 10px;
+    overflow: scroll;
 }
 
 .messages {

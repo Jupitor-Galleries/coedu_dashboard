@@ -9,6 +9,7 @@ import SideNav from '../dashboard_page/components/sidenav/SideNav';
 import AssignmentsModal from '../dashboard_page/components/modal/AssignmentsModal';
 import RightNav from '../dashboard_page/components/rightnav/RightNav';
 import Loader from '../../components/loader/Loader'
+import { getQuerries } from '../../api/querries';
 
 const AssignmentsTracking = () => {
     const classId = useParams().classId;
@@ -17,6 +18,17 @@ const AssignmentsTracking = () => {
     const [modalOpened, setModalOpened] = useState(false);
     const [classes, setClasses] = useState([])
     const [assignement, setAssignment] = useState({});
+
+    const [querries, setQuerries] = useState([]);
+
+const fetchQuerries = async() => {
+  const res = await getQuerries(classId)
+  console.log(res);
+  
+  if(res?.status) {
+      setQuerries(res.data)
+  }
+}
 
 
     const [unreadd, setUnread] = useState(0);
@@ -46,7 +58,8 @@ const AssignmentsTracking = () => {
         setLoading(false)
     }
     useEffect(() => {
-        allStudents()
+        allStudents();
+        fetchQuerries();
     },[])
   return (
     <div className='dashboard-container'>
@@ -110,7 +123,7 @@ const AssignmentsTracking = () => {
                 }
             </table>
             </div>
-            <RightNav />
+            <RightNav querries={querries} />
             <AssignmentsModal modalOpened={modalOpened} onClose={() => setModalOpened(false)} />
             <Loader loading={loading} />
         </div>

@@ -10,11 +10,23 @@ import ResouceModal from "../dashboard_page/components/modal/ResourceModal";
 import RightNav from "../dashboard_page/components/rightnav/RightNav";
 import { getResources } from "../../api/resources";
 import { getCurrentUser } from "../../api/auth";
+import { getQuerries } from "../../api/querries";
 
 const Resources = () => {
   const classId = useParams().classId;
   const [modalOpened, setModalOpened] = useState(false);
   const [resources, setResources] = useState([]);
+
+  const [querries, setQuerries] = useState([]);
+
+const fetchQuerries = async() => {
+  const res = await getQuerries(classId)
+  console.log(res);
+  
+  if(res?.status) {
+      setQuerries(res.data)
+  }
+}
 
   const broadcast = () => {};
   const formatDate = (dateString) => {
@@ -30,6 +42,7 @@ const Resources = () => {
   };
   useEffect(() => {
     allResources();
+    fetchQuerries();
   }, []);
 
   const [currentUser, setCurrentUser] = useState(null);
@@ -86,7 +99,7 @@ const Resources = () => {
             }
           </div>
         </div>
-        <RightNav />
+        <RightNav querries={querries} />
         <ResouceModal
           modalOpened={modalOpened}
           onClose={() => setModalOpened(false)}

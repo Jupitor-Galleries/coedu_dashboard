@@ -313,6 +313,31 @@ box-shadow: 1px 1px 5px 0px rgba(180,181,186,0.7);
     gap: 15px;
 }
 
+.h select {
+    padding: 10px;
+    padding-right: 50px;
+    border: none;
+    outline: none;
+    background-color: transparent;
+    font-weight: bold;
+    font-size: 25px;
+}
+
+.h select option {
+    /* font-weight: bold; */
+    font-size: 20px;
+    padding: 0;
+    border: none;
+}
+
+.h select a {
+    padding: 10px;
+}
+
+button {
+    cursor: pointer;
+}
+
 
 @media screen and (min-width:768px) {
     .mainpage-container {

@@ -11,11 +11,23 @@ import AnnouncementModal from "../dashboard_page/components/modal/AnnouncementsM
 import { getAnnouncements } from "../../api/announcement";
 import RightNav from "../dashboard_page/components/rightnav/RightNav";
 import { getCurrentUser } from "../../api/auth";
+import { getQuerries } from "../../api/querries";
 
 const Announcements = () => {
   const classId = useParams().classId;
   const [modalOpened, setModalOpened] = useState(false);
   const [announcements, setAnnouncements] = useState([]);
+
+  const [querries, setQuerries] = useState([]);
+
+const fetchQuerries = async() => {
+  const res = await getQuerries(classId)
+  console.log(res);
+  
+  if(res?.status) {
+      setQuerries(res.data)
+  }
+}
 
   const broadcast = () => {};
   const formatDate = (dateString) => {
@@ -31,6 +43,7 @@ const Announcements = () => {
   };
   useEffect(() => {
     allAnnouncements();
+    fetchQuerries();
   }, []);
 
   const [currentUser, setCurrentUser] = useState(null);
@@ -86,7 +99,7 @@ const Announcements = () => {
             }
           </div>
         </div>
-        <RightNav />
+        <RightNav querries={querries} />
         <AnnouncementModal
           modalOpened={modalOpened}
           onClose={() => setModalOpened(false)}

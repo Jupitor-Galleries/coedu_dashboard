@@ -10,12 +10,24 @@ import { FaBell } from "react-icons/fa";
 import RightNav from "../dashboard_page/components/rightnav/RightNav";
 import { getCurrentUser } from "../../api/auth";
 import Loader from '../../components/loader/Loader'
+import { getQuerries } from "../../api/querries";
 
 const Assignments = () => {
   const classId = useParams().classId;
   const [modalOpened, setModalOpened] = useState(false);
   const [assignements, setAssignments] = useState([]);
   const [loading, setLoading] = useState(false);
+
+  const [querries, setQuerries] = useState([]);
+
+const fetchQuerries = async() => {
+  const res = await getQuerries(classId)
+  console.log(res);
+  
+  if(res?.status) {
+      setQuerries(res.data)
+  }
+}
 
   const broadcast = () => {};
   const formatDate = (dateString) => {
@@ -33,6 +45,7 @@ const Assignments = () => {
   };
   useEffect(() => {
     allAssignments();
+    fetchQuerries();
   }, []);
 
   const [currentUser, setCurrentUser] = useState(null);
@@ -106,7 +119,7 @@ const Assignments = () => {
             })}
           </table>
         </div>
-        <RightNav />
+        <RightNav querries={querries} />
         <AssignmentsModal
           modalOpened={modalOpened}
           onClose={() => setModalOpened(false)}

@@ -9,12 +9,24 @@ import { FaDotCircle } from 'react-icons/fa';
 import { IoMdMore } from 'react-icons/io';
 import RightNav from '../dashboard_page/components/rightnav/RightNav';
 import { getCurrentUser } from '../../api/auth';
+import { getQuerries } from '../../api/querries';
 
 const Students = () => {
     const classId = useParams().classId;
     const [modalOpened, setModalOpened] = useState(false);
     const [clas, setClas] = useState()
     const [students, setStudents] = useState([])
+
+    const [querries, setQuerries] = useState([]);
+
+const fetchQuerries = async() => {
+  const res = await getQuerries(classId)
+  console.log(res);
+  
+  if(res?.status) {
+      setQuerries(res.data)
+  }
+}
 
     const broadcast = () => {
 
@@ -48,7 +60,8 @@ const Students = () => {
     }
   
     useEffect(() => {
-      getCurrentUs()
+      getCurrentUs();
+      fetchQuerries();
     }, [])
   return (
     <div className='dashboard-container'>
@@ -94,7 +107,7 @@ const Students = () => {
                 }
             </table>
             </div>
-            <RightNav />
+            <RightNav querries={querries} />
             <StudentModal modalOpened={modalOpened} onClose={() => setModalOpened(false)} classId={classId} fetchStudents={allStudents} />
         </div>
     </div>
