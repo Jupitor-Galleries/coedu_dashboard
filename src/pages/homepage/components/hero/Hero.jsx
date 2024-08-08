@@ -22,8 +22,9 @@ const joinList = async ()=>{
     <div className="hero-container">
       <Header />
       <div className="hero-content">
-        <h2>Simplify Your Educational Content Delivery</h2>
-        <p>Empower Your Remote Learners with Seamless Content Management and Distribution.</p>
+        <h2>Reach students with Learning content on their preferred platforms
+        </h2>
+        <p>Coedu leverages the power of WhatsApp and Telegram to deliver engaging learning materials from learning institutions directly to students' fingertips.</p>
         <div className="waitlist">
           <input type="email" name="email" id="email" value={email} onChange={(e) => setEmail(e.target.value)} placeholder="Enter email here" />
           <button onClick={joinList}>Join Waitlist</button>
