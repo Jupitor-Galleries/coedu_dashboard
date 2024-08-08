@@ -21,7 +21,7 @@ const Signin = () => {
             const res = await login(email, password)
             if(res.status) {
                 localStorage.setItem('jwt', res.data.token)
-                console.log("haha")
+              
                 const cls = await getUserClasses()
                 
                 if(classId && cls.data.classes.some(c => c._id == classId)) {
