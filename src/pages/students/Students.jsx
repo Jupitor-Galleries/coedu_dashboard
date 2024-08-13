@@ -1,4 +1,6 @@
 import React, { useState, useEffect } from 'react';
+import ReactDOM from 'react-dom';
+import {CopyToClipboard} from 'react-copy-to-clipboard';
 import { NavLink } from 'react-router-dom';
 import './Students.css'
 import StudentModal from '../dashboard_page/components/modal/StudentModal';
@@ -18,6 +20,9 @@ const Students = () => {
     const [clas, setClas] = useState()
     const [students, setStudents] = useState([]);
     const [data, setData] = useState([]);
+    const [textToCopy, setTextToCopy] = useState(`Hi students,
+
+To streamline student enquiries, resource sharing, assignments, quizzes, surveys, etc we are exploring an AI-based enrichment tool to facilitate this. You will need to click on [this WhatsApp link] and send a text 'I want to join a class' to rejoin the class and begin the journey with our chatbot.`);
 
     const [querries, setQuerries] = useState([]);
 
@@ -30,9 +35,16 @@ const fetchQuerries = async() => {
   }
 }
 
-    const broadcast = () => {
 
-    }
+const handleCopyClick = () => {
+    navigator.clipboard.writeText(textToCopy)
+      .then(() => {
+        alert('Text copied to clipboard!');
+      })
+      .catch(err => {
+        console.error('Failed to copy text: ', err);
+      });
+  };
     const classDetails = async()=>{
         const res = await getClassDetails(classId)
         console.log("class details", res)
@@ -73,6 +85,11 @@ const fetchQuerries = async() => {
                 <div className="h">
                     <h4>{currentUser?.organization.name}</h4>
                     <button className='create-btn' onClick={() => setModalOpened(true)}>Add New Students</button>
+                </div>
+
+                <div className="flex-row">
+                    <p>Copy this student onboarding message and send it to them to complete onboarding</p>
+                    <button onClick={handleCopyClick}>Copy Message</button>
                 </div>
             <table className="students">
                 <tr>

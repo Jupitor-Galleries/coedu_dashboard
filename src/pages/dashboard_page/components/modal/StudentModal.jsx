@@ -14,6 +14,8 @@ const StudentModal = ({ modalOpened, onClose, classId, fetchStudents }) => {
   const [classs, setClass] = useState("Business");
   const [whatsappNumber, setWhatsappNumber] = useState([]);
   const [data, setData] = useState([]);
+  const [students, setStudents] = useState([]);
+  const [status, setStatus] = useState("upload");
 
   const submitAddStudent = async () => {
     const res = await addStudent(classId, fullName, whatsappNumber);
@@ -34,8 +36,17 @@ const StudentModal = ({ modalOpened, onClose, classId, fetchStudents }) => {
       const workbook = XLSX.read(data, { type: "array" });
       const sheet = workbook.Sheets[workbook.SheetNames[0]];
       const rows = XLSX.utils.sheet_to_json(sheet);
-      console.log(rows);
       setData(rows);
+      const studs = [];
+      rows.forEach((row) => {
+        const student = {
+          name: row.name,
+          number: row.number,
+          gender: row.gender,
+        }
+        studs.push(student);
+      })
+      setStudents(studs)
     };
     reader.readAsArrayBuffer(file);
   }
@@ -55,18 +66,24 @@ const StudentModal = ({ modalOpened, onClose, classId, fetchStudents }) => {
             <IoMdClose />
           </button>
         </div>
-        <div className="modal-form">
-          <input
+        <h4>Import from Excel</h4>
+        <div className="form-group">
+        <input
             type="file"
             accept=".xlsx, .xls"
             name="excel"
             id="excel"
             onChange={handleFileUpload}
           />
-          <div className="user-profile-stats">
-            Add New Student
           </div>
-          <hr />
+          
+          {/* <button className="c-btn" onClick={submitAddStudent}>Upload</button> */}
+          {/* <div className="user-profile-stats">
+            Add New Student
+          </div> */}
+          <h4>OR</h4>
+        <div className="modal-form">
+          
           <div className="form-group">
             <label htmlFor="fullname">Full Name</label>
             <input
