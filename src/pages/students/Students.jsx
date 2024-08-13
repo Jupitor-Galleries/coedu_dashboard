@@ -10,12 +10,14 @@ import { IoMdMore } from 'react-icons/io';
 import RightNav from '../dashboard_page/components/rightnav/RightNav';
 import { getCurrentUser } from '../../api/auth';
 import { getQuerries } from '../../api/querries';
+import * as XLSX from 'xlsx';
 
 const Students = () => {
     const classId = useParams().classId;
     const [modalOpened, setModalOpened] = useState(false);
     const [clas, setClas] = useState()
-    const [students, setStudents] = useState([])
+    const [students, setStudents] = useState([]);
+    const [data, setData] = useState([]);
 
     const [querries, setQuerries] = useState([]);
 
@@ -70,7 +72,7 @@ const fetchQuerries = async() => {
             <div className="students-container">
                 <div className="h">
                     <h4>{currentUser?.organization.name}</h4>
-                    <button className='create-btn' onClick={() => setModalOpened(true)}>Add New Student</button>
+                    <button className='create-btn' onClick={() => setModalOpened(true)}>Add New Students</button>
                 </div>
             <table className="students">
                 <tr>
