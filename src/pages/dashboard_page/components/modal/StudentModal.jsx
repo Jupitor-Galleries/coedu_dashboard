@@ -2,7 +2,8 @@ import React, { useEffect, useState } from "react";
 import { addStudent } from "../../../../api/class";
 import "./Modal.css";
 import { IoMdClose } from "react-icons/io";
-import * as XLSX from 'xlsx';
+import * as XLSX from "xlsx";
+import { addStudents } from "../../../../api/students";
 
 const StudentModal = ({ modalOpened, onClose, classId, fetchStudents }) => {
   const [classes, setClasses] = useState([
@@ -28,6 +29,17 @@ const StudentModal = ({ modalOpened, onClose, classId, fetchStudents }) => {
     }
   };
 
+  const submitAddStudents = async () => {
+    const res = await addStudents(students, classId);
+    if (res.status) {
+      // onClose()
+      alert("students add successfully");
+      fetchStudents();
+    } else {
+      alert("failed to add student");
+    }
+  };
+
   const handleFileUpload = (e) => {
     const file = e.target.files[0];
     const reader = new FileReader();
@@ -43,16 +55,15 @@ const StudentModal = ({ modalOpened, onClose, classId, fetchStudents }) => {
           name: row.name,
           number: row.number,
           gender: row.gender,
-        }
+        };
         studs.push(student);
-      })
-      setStudents(studs)
+      });
+      setStudents(studs);
     };
     reader.readAsArrayBuffer(file);
-  }
+  };
 
   console.log(data);
-  
 
   if (!modalOpened) {
     return null;
@@ -66,24 +77,40 @@ const StudentModal = ({ modalOpened, onClose, classId, fetchStudents }) => {
             <IoMdClose />
           </button>
         </div>
+        {
+          students? <>
+          {
+                    students.map((student) => {
+                        return (
+                            <tr>
+                                <td>
+                                    {student.name}
+                                </td>
+                                <td>
+                                    {student.number}
+                                </td>
+                                <td>
+                                    {student.gender}
+                                </td>
+                            </tr>
+                            
+                        )
+                    })
+                }
+          </> : <></>
+        }
         <h4>Import from Excel</h4>
         <div className="form-group">
-        <input
+          <input
             type="file"
             accept=".xlsx, .xls"
             name="excel"
             id="excel"
             onChange={handleFileUpload}
           />
-          </div>
-          
-          {/* <button className="c-btn" onClick={submitAddStudent}>Upload</button> */}
-          {/* <div className="user-profile-stats">
-            Add New Student
-          </div> */}
-          <h4>OR</h4>
+        </div>
+        <h4>OR</h4>
         <div className="modal-form">
-          
           <div className="form-group">
             <label htmlFor="fullname">Full Name</label>
             <input
@@ -101,8 +128,7 @@ const StudentModal = ({ modalOpened, onClose, classId, fetchStudents }) => {
             />
           </div>
 
-          {
-            /* <div className="form-group">
+          {/* <div className="form-group">
             <label htmlFor="class">Class</label>
           <select name="class" id="class" value={classs} onChange={(e) => setClass(e.target.value)}>
             {
@@ -113,10 +139,11 @@ const StudentModal = ({ modalOpened, onClose, classId, fetchStudents }) => {
                 })
             }
           </select>
-        </div> */
-          }
+        </div> */}
 
-          <button className="c-btn" onClick={submitAddStudent}>Add</button>
+          <button className="c-btn" onClick={submitAddStudent}>
+            Add
+          </button>
         </div>
       </div>
     </div>
