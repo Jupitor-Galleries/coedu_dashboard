@@ -1,12 +1,13 @@
 import { baseUrl } from "../utils/api";
 
-export const addClass = async (name, startDate, endDate) => {
+export const addClass = async (name, startDate, endDate, languages) => {
     const url = `${baseUrl}/api/classes/create`
 
     const body = {
         name,
         startDate,
-        endDate
+        endDate,
+        languages
     };
 
     try {
