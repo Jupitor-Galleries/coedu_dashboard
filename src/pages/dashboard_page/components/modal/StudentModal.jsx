@@ -52,9 +52,9 @@ const StudentModal = ({ modalOpened, onClose, classId, fetchStudents }) => {
       const studs = [];
       rows.forEach((row) => {
         const student = {
-          name: row.name,
-          number: row.number,
-          gender: row.gender,
+          name: row.Name,
+          number: row.Number,
+          gender: row.Gender,
         };
         studs.push(student);
       });
@@ -77,58 +77,83 @@ const StudentModal = ({ modalOpened, onClose, classId, fetchStudents }) => {
             <IoMdClose />
           </button>
         </div>
-        {
-          students? <>
-          {
-                    students.map((student) => {
-                        return (
-                            <tr>
-                                <td>
-                                    {student.name}
-                                </td>
-                                <td>
-                                    {student.number}
-                                </td>
-                                <td>
-                                    {student.gender}
-                                </td>
-                            </tr>
-                            
-                        )
-                    })
-                }
-          </> : <></>
-        }
-        <h4>Import from Excel</h4>
-        <div className="form-group">
-          <input
-            type="file"
-            accept=".xlsx, .xls"
-            name="excel"
-            id="excel"
-            onChange={handleFileUpload}
-          />
-        </div>
-        <h4>OR</h4>
-        <div className="modal-form">
-          <div className="form-group">
-            <label htmlFor="fullname">Full Name</label>
-            <input
-              type="text"
-              value={fullName}
-              onChange={(e) => setFullName(e.target.value)}
-            />
-          </div>
-          <div className="form-group">
-            <label htmlFor="appnumber">Whatsapp number</label>
-            <input
-              type="text"
-              value={whatsappNumber}
-              onChange={(e) => setWhatsappNumber(e.target.value)}
-            />
-          </div>
+        {students.length > 0
+          ? (
+            <>
+              {students.map((student) => {
+                return (
+                  <table>
+                    <tr>
+                      <td>
+                        {student.name}
+                      </td>
+                      <td>
+                        {student.number}
+                      </td>
+                      <td>
+                        {student.gender}
+                      </td>
+                    </tr>
+                  </table>
+                );
+              })}
+              <button className="c-btn" onClick={submitAddStudents}>
+                Add
+              </button>
+            </>
+          )
+          : (
+            <>
+              <div className="modal-form">
+                <h4>Import from Excel</h4>
 
-          {/* <div className="form-group">
+                <p>
+                  Tips 💡 </p>
+                  <p><b>Column Headers</b>: Ensure your Excel file has columns titled
+                  '<b>Name</b>' (Required), '<b>Number</b>' (Required), '<b>Gender</b>' (Required),
+                  'Age'(Optional), and 'Level of Education'(Optional)</p>
+                  <p><b>Number
+                  Format</b>: Please include the country code before the student's
+                  number (e.g., +233541234567) Data Consistency: Maintain
+                  consistent data entry throughout the file</p>
+                {/* </p> */}
+                <div className="form-group">
+                  <input
+                    type="file"
+                    accept=".xlsx, .xls"
+                    name="excel"
+                    id="excel"
+                    onChange={handleFileUpload}
+                  />
+                </div>
+                <h4>Or Add Single Student</h4>
+                <div className="modal-form">
+                  <div className="form-group">
+                    <label htmlFor="fullname">Full Name</label>
+                    <input
+                      type="text"
+                      value={fullName}
+                      onChange={(e) => setFullName(e.target.value)}
+                    />
+                  </div>
+                  <div className="form-group">
+                    <label htmlFor="appnumber">Whatsapp number</label>
+                    <input
+                      type="text"
+                      value={whatsappNumber}
+                      onChange={(e) => setWhatsappNumber(e.target.value)}
+                    />
+                  </div>
+                  <button className="c-btn" onClick={submitAddStudent}>
+                    Add
+                  </button>
+                </div>
+              </div>
+            </>
+          )}
+
+        {
+          /* <div className="form-group">
             <label htmlFor="class">Class</label>
           <select name="class" id="class" value={classs} onChange={(e) => setClass(e.target.value)}>
             {
@@ -139,12 +164,8 @@ const StudentModal = ({ modalOpened, onClose, classId, fetchStudents }) => {
                 })
             }
           </select>
-        </div> */}
-
-          <button className="c-btn" onClick={submitAddStudent}>
-            Add
-          </button>
-        </div>
+        </div> */
+        }
       </div>
     </div>
   );
