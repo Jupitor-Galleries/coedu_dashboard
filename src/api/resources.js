@@ -1,12 +1,12 @@
 import { baseUrl } from "../utils/api";
 
-export const sendResources = async (title, description, attachmentType, attachmentUrl, classId) => {
+export const sendResources = async (title, description, attachmentType, filesData, classId) => {
     const url = `${baseUrl}/api/resources/send`;
     const body = {
         title,
         description,
         attachmentType,
-        attachmentUrl,
+        filesData,
         classId,
     };
     const token = localStorage.getItem('jwt');

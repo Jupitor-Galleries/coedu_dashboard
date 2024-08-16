@@ -59,6 +59,8 @@ export const getUserClasses = async() => {
     }
 }
 
+
+
 export const getClassDetails = async (id) => {
     const url = `${baseUrl}/api/classes/${id}`
     try {

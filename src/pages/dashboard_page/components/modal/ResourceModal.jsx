@@ -9,8 +9,12 @@ const ResouceModal = ({modalOpened, onClose, classId}) => {
     const [title, setTitle] = useState("");
     const [description, setDescription] = useState("");
     const [file, setFile] = useState(null);
+    const [file2, setFile2] = useState(null);
+    const [files, setFiles] = useState([file, file2]);
     const [fileType, setFileType] = useState("document");
     const [filesUrl, setFilesUrl] = useState([]);
+    const [language, setLanguage] = useState("English");
+    const [language2, setLanguage2] = useState(null);
 
     const handleChange = (e) => {
       if (e.target.files) {
@@ -18,8 +22,14 @@ const ResouceModal = ({modalOpened, onClose, classId}) => {
       }
     };
 
-    const saveFiles = async() => {
-      const res = await uploadImages(file, "resources" )
+    const handleChange2 = (e) => {
+      if (e.target.files) {
+        setFile2(Array.from(e.target.files));
+      }
+    };
+
+    const saveFiles = async(fil) => {
+      const res = await uploadImages(fil, "resources" )
       if(res) {
         setFilesUrl(res.url)
         return res[0].url
@@ -28,9 +38,21 @@ const ResouceModal = ({modalOpened, onClose, classId}) => {
     }
 
     const shareResources = async() => {
-      const filelink = await saveFiles()
+      const filelink = await saveFiles(file)
+      const filelink2 = await saveFiles(file2)
         
-          const res = await sendResources (title, description, fileType, filelink, classId)
+      const filesData = [
+        {
+          attachmentUrl: filelink,
+          language: language
+        },
+        {
+          attachmentUrl: filelink2,
+          language: language2
+        },
+      ];
+        
+          const res = await sendResources (title, description, fileType, filesData, classId)
           if(res?.status){
               alert("Resources have been sent")
               // allAssignments()
@@ -73,16 +95,21 @@ const ResouceModal = ({modalOpened, onClose, classId}) => {
         <div className="form-group">
           <label htmlFor="filetype">
             <select name="filetype" id="filetype" value={fileType} onChange={(e) => setFileType(e.target.value)}>
-              <option value="PDF">PDF</option>
+              <option value="document">Document</option>
               <option value="video">Video</option>
               <option value="image">Image</option>
             </select>
           </label>
         </div>
         <div className="form-group">
-          <label htmlFor="files">File</label>
+          <label htmlFor="files">{language} File</label>
           <input type="file" multiple onChange={handleChange} />
         </div>
+        <div className="form-group">
+          <label htmlFor="files">{language2} File</label>
+          <input type="file" multiple onChange={handleChange2} />
+        </div>
+        
 
         <button className="c-btn" onClick={() => shareResources()}>Share</button>
         </div>

@@ -60,6 +60,8 @@ box-shadow: 1px 1px 5px 0px rgba(180,181,186,0.7);
     display: flex;
     align-items: center;
     gap: 10px;
+    border: none;
+    background-color: transparent;
 }
 
 p {

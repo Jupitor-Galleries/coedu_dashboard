@@ -18,6 +18,8 @@ const Classes = () => {
     
     const getUserDetails = async ()=>{
         const res = await getCurrentUser()
+        console.log(res);
+        
         if(res?.status){
             setUser(res.data)
         }
@@ -39,7 +41,7 @@ const Classes = () => {
 
   return (
     <div className='classes-container'>
-        <h3 className='welcome-note'>Welcome to CoEdu,<br/>Courtney</h3>
+        <h3 className='welcome-note'>Welcome to CoEdu,<br/>{user.name}</h3>
         {
             classes.length< 1? <NoClasses addClass={() => setModalOpened(true)}/> : <ClassesPresent addClass={() => setModalOpened(true)} classes={classes}/>
         }

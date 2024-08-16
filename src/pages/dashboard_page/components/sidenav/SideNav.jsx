@@ -1,6 +1,6 @@
 import React from 'react';
 import './SideNav.css';
-import { NavLink } from 'react-router-dom';
+import { NavLink, useNavigate } from 'react-router-dom';
 import { GoHomeFill } from "react-icons/go";
 import { BiLogOut } from "react-icons/bi";
 import { IoSettingsOutline } from "react-icons/io5";
@@ -13,6 +13,13 @@ import { FaRegBuilding } from "react-icons/fa";
 import userImg from '../../assets/user.png';
 
 const SideNav = ({organization, classId, currentUser}) => {
+
+    const navigate = useNavigate();
+
+    const logout = () => {
+        localStorage.removeItem('jwt');
+        navigate("/")
+    }
     return (
         <div className='sidenav-container desktop'>
             <div className="prof-dat">
@@ -83,10 +90,10 @@ const SideNav = ({organization, classId, currentUser}) => {
                             </NavLink>
                         </li> */}
                         <li>
-                            <NavLink className="sidenav-link">
+                            <button className="sidenav-link" onClick={logout}>
                                 <BiLogOut />
                                 Logout
-                            </NavLink>
+                            </button>
                         </li>
                     </ul>
             </div>
