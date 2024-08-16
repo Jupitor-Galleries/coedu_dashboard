@@ -9,6 +9,8 @@ export const sendResources = async (title, description, attachmentType, filesDat
         filesData,
         classId,
     };
+    console.log(body);
+    
     const token = localStorage.getItem('jwt');
     try {
         const response = await fetch(url, {

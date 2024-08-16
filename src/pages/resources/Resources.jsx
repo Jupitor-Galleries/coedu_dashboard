@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 import { NavLink } from "react-router-dom";
 import StudentModal from "../dashboard_page/components/modal/StudentModal";
 import { useParams } from "react-router-dom";
-import { getAssignmentsByClass } from "../../api/class";
+import { getAssignmentsByClass, getClassDetails } from "../../api/class";
 import SideNav from "../dashboard_page/components/sidenav/SideNav";
 import AssignmentsModal from "../dashboard_page/components/modal/AssignmentsModal";
 import { FaBell } from "react-icons/fa";
@@ -16,7 +16,7 @@ const Resources = () => {
   const classId = useParams().classId;
   const [modalOpened, setModalOpened] = useState(false);
   const [resources, setResources] = useState([]);
-
+  const [clas, setClas] = useState();
   const [querries, setQuerries] = useState([]);
 
 const fetchQuerries = async() => {
@@ -45,6 +45,16 @@ const fetchQuerries = async() => {
     fetchQuerries();
   }, []);
 
+  const getClass = async() => {
+    console.log("Heeeerrree");
+    
+    const res = await getClassDetails(classId);
+    console.log(res);
+    
+    if (res.status) {
+        setClas(res.data)}
+  }
+
   const [currentUser, setCurrentUser] = useState(null);
 
     const getCurrentUs = async() => {
@@ -56,7 +66,8 @@ const fetchQuerries = async() => {
     }
   
     useEffect(() => {
-      getCurrentUs()
+      getCurrentUs();
+      getClass();
     }, [])
   return (
     <div className="dashboard-container">
@@ -105,6 +116,7 @@ const fetchQuerries = async() => {
           onClose={() => setModalOpened(false)}
           allAssignments={allResources}
           classId={classId}
+          languages={clas?.class.languages}
         />
       </div>
     </div>

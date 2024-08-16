@@ -85,13 +85,14 @@ export const getClassDetails = async (id) => {
     }
 }
 
-export const addStudent = async (classId, name, whatsappNumber)=>{
+export const addStudent = async (classId, name, whatsappNumber, gender)=>{
     const url = `${baseUrl}/api/students/add`
 
     const body = {
         classId,
         name,
-        whatsappNumber
+        whatsappNumber,
+        gender,
     };
 
     try {

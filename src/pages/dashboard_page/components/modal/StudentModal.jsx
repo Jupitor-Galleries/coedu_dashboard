@@ -12,6 +12,7 @@ const StudentModal = ({ modalOpened, onClose, classId, fetchStudents }) => {
     "Technology",
   ]);
   const [fullName, setFullName] = useState("");
+  const [gender, setGender] = useState("Female")
   const [classs, setClass] = useState("Business");
   const [whatsappNumber, setWhatsappNumber] = useState([]);
   const [data, setData] = useState([]);
@@ -19,7 +20,7 @@ const StudentModal = ({ modalOpened, onClose, classId, fetchStudents }) => {
   const [status, setStatus] = useState("upload");
 
   const submitAddStudent = async () => {
-    const res = await addStudent(classId, fullName, whatsappNumber);
+    const res = await addStudent(classId, fullName, whatsappNumber, gender);
     if (res.status) {
       // onClose()
       alert("student add successfully");
@@ -143,6 +144,13 @@ const StudentModal = ({ modalOpened, onClose, classId, fetchStudents }) => {
                       value={whatsappNumber}
                       onChange={(e) => setWhatsappNumber(e.target.value)}
                     />
+                  </div>
+                  <div className="form-group">
+                    <label htmlFor="gender">Gender</label>
+                    <select name="gender" id="gender" onChange={(e) => setGender(e.target.value)} value={gender}>
+                      <option value="Female">Female</option>
+                      <option value="Male">Male</option>
+                    </select>
                   </div>
                   <button className="c-btn" onClick={submitAddStudent}>
                     Add

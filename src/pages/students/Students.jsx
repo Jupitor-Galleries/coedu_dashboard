@@ -20,11 +20,15 @@ const Students = () => {
     const [clas, setClas] = useState()
     const [students, setStudents] = useState([]);
     const [data, setData] = useState([]);
+    const [currentUser, setCurrentUser] = useState(null);
     const [textToCopy, setTextToCopy] = useState(`Hi students,
 
-To streamline student enquiries, resource sharing, assignments, quizzes, surveys, etc we are exploring an AI-based enrichment tool to facilitate this. You will need to click on [this WhatsApp link] and send a text 'I want to join a class' to rejoin the class and begin the journey with our chatbot.`);
+To streamline student enquiries, resource sharing, assignments, quizzes, surveys, etc we are exploring an AI-based enrichment tool to facilitate this. You will need to click on https://wa.me/+15550640082?text=4123 and send a text 'I want to join a class' to rejoin the class and begin the journey with our chatbot.`);
 
     const [querries, setQuerries] = useState([]);
+
+    console.log(currentUser?.organization.whatsappNumber, clas?.class?.classCode);
+    
 
 const fetchQuerries = async() => {
   const res = await getQuerries(classId)
@@ -33,6 +37,15 @@ const fetchQuerries = async() => {
   if(res?.status) {
       setQuerries(res.data)
   }
+}
+
+const getClass = async() => {
+    const res = await getClassDetails(classId);
+    console.log(res);
+    
+    if (res.status) {
+        setClas(res.data)
+    }
 }
 
 
@@ -60,10 +73,9 @@ const handleCopyClick = () => {
     }
     useEffect(() => {
         allStudents()
-        classDetails()
+        getClass()
     },[])
 
-    const [currentUser, setCurrentUser] = useState(null);
 
     const getCurrentUs = async() => {
       const res = await getCurrentUser();

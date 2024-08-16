@@ -3,6 +3,7 @@ import './Modal.css';
 import { uploadImages } from "../../../../api/uploadFiles";
 import { sendResources } from "../../../../api/resources";
 import { IoMdClose } from "react-icons/io";
+import { getClassDetails } from "../../../../api/class";
 
 const ResouceModal = ({modalOpened, onClose, classId}) => {
 
@@ -15,6 +16,7 @@ const ResouceModal = ({modalOpened, onClose, classId}) => {
     const [filesUrl, setFilesUrl] = useState([]);
     const [language, setLanguage] = useState("English");
     const [language2, setLanguage2] = useState(null);
+    const [clas, setClas] = useState({});
 
     const handleChange = (e) => {
       if (e.target.files) {
@@ -27,6 +29,17 @@ const ResouceModal = ({modalOpened, onClose, classId}) => {
         setFile2(Array.from(e.target.files));
       }
     };
+
+    const getClass = async() => {
+      const res = await getClassDetails(classId);
+      console.log(res);
+      
+      if (res.status) {
+          setClas(res.data);
+          setLanguage(res.data.class.languages[0]);
+          setLanguage2(res.data.class.languages[1]);
+        }
+    }
 
     const saveFiles = async(fil) => {
       const res = await uploadImages(fil, "resources" )
@@ -61,6 +74,10 @@ const ResouceModal = ({modalOpened, onClose, classId}) => {
           }
 
     }
+
+    useEffect(() => {
+      getClass()
+    }, [])
 
   if(!modalOpened) {
     return null
