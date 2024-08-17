@@ -75,4 +75,9 @@ th, td {
     .students-container {
         width: 71%;
     }
+
+    .students-container2 {
+        width: 100%;
+        padding: 5%;
+    }
 }

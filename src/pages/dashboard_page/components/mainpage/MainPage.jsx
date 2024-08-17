@@ -1,20 +1,14 @@
 import React, { useEffect, useState } from "react";
 import "./MainPage.css";
-import { IoMdMenu } from "react-icons/io";
-import { MdExpandMore } from "react-icons/md";
-import { IoMdNotificationsOutline } from "react-icons/io";
-import analytic1 from "../../assets/analytic1.png";
-import ResouceModal from "../modal/ResourceModal";
 import StudentModal from "../modal/StudentModal";
-import AssignmentsModal from "../modal/AssignmentsModal";
 import AnnouncementModal from "../modal/AnnouncementsModal";
 import { NavLink, useParams } from "react-router-dom";
 import { getClassDetails, getClassStudents } from "../../../../api/class";
 import { getCurrentUser } from "../../../../api/auth";
-import { FaBell, FaUser } from "react-icons/fa";
 import RightNav from "../rightnav/RightNav";
 import Loader from "../../../../components/loader/Loader";
 import CanvasJSReact from '@canvasjs/react-charts';
+import { LineChart } from '@mui/x-charts/LineChart';
 
 var CanvasJSChart = CanvasJSReact.CanvasJSChart;
 
@@ -36,51 +30,6 @@ const MainPage = ({ classs, currentUser, recent, classes, setClasses, querries }
     role: "teacher",
     __v: 0,
   });
-
-  const options = {
-    animationEnabled: true,
-    title:{
-      text: "Hourly Engagement"
-    },
-    axisX: {
-      title: "Time",
-      valueFormatString: ""
-    },
-    axisY: {
-      title: "Number of Students",
-      prefix: ""
-    },
-    data: [{
-      yValueFormatString: "#",
-      xValueFormatString: "##",
-      type: "spline",
-      dataPoints: [
-        { x: 0, y: 2 },
-        { x: 1, y: 1 },
-        { x: 3, y: 0 },
-        { x: 4, y: 0 },
-        { x: 5, y: 0 },
-        { x: 6, y: 1 },
-        { x: 7, y: 0 },
-        { x: 8, y: 5 },
-        { x: 9, y: 3 },
-        { x: 10, y: 1 },
-        { x:  11, y: 3 },
-        { x:  12, y: 1 },
-        { x:  13, y: 0 },
-        { x:  14, y: 0 },
-        { x:  15, y: 0 },
-        { x:  16, y: 2 },
-        { x:  17, y: 1 },
-        { x:  18, y: 3 },
-        { x:  19, y: 4 },
-        { x:  20, y: 5 },
-        { x:  21, y: 6 },
-        { x:  22, y: 5 },
-        { x:  23, y: 2 },
-      ]
-    }]
-  }
 
   const getUserDetails = async () => {
     const res = await getCurrentUser();
@@ -155,21 +104,17 @@ const MainPage = ({ classs, currentUser, recent, classes, setClasses, querries }
             </div>
           </div>
           <hr />
-          {/* <div className="engage-hour">
-            <div className="flex-column">
-            <p>Peak Engagement Hours</p>
-            <h2>6-9pm</h2>
-            </div>
-            <hr />
-            <div className="flex-column">
-            <p>Average Engagement Time</p>
-            <h2>47 minutes</h2>
-            </div>
-          </div> */}
 
-<CanvasJSChart options = {options}
-        /* onRef = {ref => this.chart = ref} */
-      />
+<LineChart
+      xAxis={[{ data: [1, 2, 3, 5, 8, 10] }]}
+      series={[
+        {
+          data: [2, 5.5, 2, 8.5, 1.5, 5],
+        },
+      ]}
+      width={700}
+      height={300}
+    />
 
           <h3>Recent Activities</h3>
 

@@ -43,23 +43,28 @@ const fetchQuerries = async() => {
   return (
     <div className="dashboard-container">
       <SideNav organization={"organization"} classId={classId} />
-      <div className="mainpage-container">
-        <div className="students-container">
+      <div className="mainpage-container2">
+        <div className="students-container2">
           {/* <div className="notif-cont">
             <div className="ico">
               <FaBell />
             </div>
           </div> */}
           <div className="h">
-            <h3>Student Name</h3>
-            <div className="flex-row">
-              <p>Assignment 1</p>
+            <div className="flex-column">
+            <h3>Student Name</h3> <br />
+            <h2>Score: Not Graded Yet</h2>
             </div>
+            
+            
           </div>
           <div className="ass-work">
             <div className="doc">
             </div>
             <div className="grading">
+            <div className="flex-row">
+              <p>Assignment 1</p>
+            </div>
                 <div className="form-group">
                     <label htmlFor="grade">Grade</label>
                     <input type="text" name="grade" id="grade" />
