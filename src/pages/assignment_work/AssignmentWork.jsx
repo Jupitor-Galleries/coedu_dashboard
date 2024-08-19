@@ -73,6 +73,11 @@ const fetchQuerries = async() => {
                     <label htmlFor="grade">Comment</label>
                     <textarea type="text" name="comment" id="comment" />
                 </div>
+                <div className="form-group">
+                    <button className="c-btn">Submit</button>
+                </div>
+                <hr />
+                <p>Recent Comments</p>
             </div>
           </div>
         </div>
