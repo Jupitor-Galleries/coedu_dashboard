@@ -105,16 +105,22 @@ const MainPage = ({ classs, currentUser, recent, classes, setClasses, querries }
           </div>
           <hr />
 
+<div className="gra">
+<p>Engangement Time</p>
 <LineChart
-      xAxis={[{ data: [1, 2, 3, 5, 8, 10] }]}
+      xAxis={[{ data: [1, 2, 3, 5, 8, 10, 18, 24] }]}
       series={[
         {
-          data: [2, 5.5, 2, 8.5, 1.5, 5],
+          data: [2, 5.5, 2, 8.5, 1.5, 5, 7, 1],
         },
       ]}
       width={700}
       height={300}
     />
+    <p style={{textAlign: "center"}}>Time in hours</p>
+</div>
+
+    
 
           <h3>Recent Activities</h3>
 
