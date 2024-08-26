@@ -21,10 +21,14 @@ const Students = () => {
     const [students, setStudents] = useState([]);
     const [data, setData] = useState([]);
     const [currentUser, setCurrentUser] = useState(null);
-    const [textToCopy, setTextToCopy] = useState(`Hi students,
-
-To streamline student enquiries, resource sharing, assignments, quizzes, surveys, etc we are exploring an AI-based enrichment tool to facilitate this. You will need to click on https://wa.me/+15550640082?text=4123 and send a text 'I want to join a class' to rejoin the class and begin the journey with our chatbot.`);
-
+    const [firstMessage, setFirstMessage] = useState("Hi students, To streamline inquiries, resource sharing, assignments, quizzes, surveys, etc we are exploring an AI-based enrichment tool. You will need to click on");
+    const [secondMessage, setSecondMessage] = useState("to start your journey with our assistant.");
+    const [thirdMessage, setThirdMessage] = useState("If you are using a mobile phone, submit the preloaded class code you see to join the class.");
+    const [fourthMessage, setFourthMessage] = useState("If you are using a WhatsApp on your PC, send");
+    const [fifthMessage, setFifthMessage] = useState("to join the class.");
+    const [sixthMessage, setSixthMessage] = useState("Start your journey with our AI assistant today.");
+    const [code, setCode] = useState(4123);
+    const [whatsappNumber, setWhatsappNumber] = useState("+26079293183");
     const [querries, setQuerries] = useState([]);
 
     console.log(currentUser?.organization.whatsappNumber, clas?.class?.classCode);
@@ -50,13 +54,22 @@ const getClass = async() => {
 
 
 const handleCopyClick = () => {
-    navigator.clipboard.writeText(textToCopy)
-      .then(() => {
-        alert('Text copied to clipboard!');
-      })
-      .catch(err => {
-        console.error('Failed to copy text: ', err);
-      });
+    console.log("I'm here", textToCopy);
+    
+    const textToCopy = `${firstMessage} https://wa.me/${whatsappNumber}?text=${code} ${secondMessage}
+    
+    ${thirdMessage}
+    
+    ${fourthMessage} ${code} ${fifthMessage}
+    
+    ${sixthMessage}`
+    // navigator.clipboard.writeText(textToCopy)
+    //   .then(() => {
+    //     alert('Text copied to clipboard!', textToCopy, navigator.clipboard);
+    //   })
+    //   .catch(err => {
+    //     console.error('Failed to copy text: ', err);
+    //   });
   };
     const classDetails = async()=>{
         const res = await getClassDetails(classId)
@@ -101,7 +114,7 @@ const handleCopyClick = () => {
 
                 <div className="flex-row">
                     <p>Copy this student onboarding message and send it to them to complete onboarding</p>
-                    <button onClick={handleCopyClick}>Copy Message</button>
+                    {/* <button onClick={handleCopyClick}>Copy Message</button> */}
                 </div>
             <table className="students">
                 <tr>
