@@ -356,6 +356,24 @@ button {
     gap: 10px;
 }
 
+.classes-toggle {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.class-in-toggle {
+    display: flex;
+    align-items: center;
+    gap: 20px;
+}
+
+.other-classes-toggle {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+}
+
 
 @media screen and (min-width:768px) {
     .mainpage-container {

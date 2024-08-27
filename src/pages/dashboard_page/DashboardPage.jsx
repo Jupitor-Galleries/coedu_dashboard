@@ -12,7 +12,7 @@ const DashboardPage = () => {
 
   // const organization = useParams().organization;
   const classId = useParams().classId;
-  const [recent, setRecent] = useState({});
+  const [recent, setRecent] = useState(null);
   const [classes, setClasses] = useState([]);
   const [currentUser, setCurrentUser] = useState(null);
 
