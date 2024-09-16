@@ -138,82 +138,90 @@ const MainPage = ({ classs, currentUser, recent, classes, setClasses, querries }
               <>
                 <h3>Recent Activities</h3>
 
+              {
+                recent?.assignment.name?<NavLink className={`rec cloudy-blue`}>
+                <div className="flex-row-space">
+                  <h4>Assignment - {recent?.assignment?.name}</h4>
 
-                <NavLink className={`rec cloudy-blue`}>
-                  <div className="flex-row-space">
-                    <h4>Assignment - {recent?.assignment?.name}</h4>
+                </div>
 
+                <div className="flex-row-space">
+                  <div className="flex-column-center">
+                    <p>Sent</p>
+                    <h3>{recent?.assignment?.sent}</h3>
                   </div>
-
-                  <div className="flex-row-space">
-                    <div className="flex-column-center">
-                      <p>Sent</p>
-                      <h3>{recent?.assignment?.sent}</h3>
-                    </div>
-                    <hr />
-                    <div className="flex-column-center">
-                      <p>Delivered</p>
-                      <h3>{recent?.assignment?.delivered}</h3>
-                    </div>
-                    <hr />
-                    <div className="flex-column-center">
-                      <p>Opened</p>
-                      <h3>{recent?.assignment?.read}</h3>
-                    </div>
-                    <hr />
-                    <div className="flex-column-center">
-                      <p>Submitted</p>
-                      <h3>{recent?.assignment?.submitted}</h3>
-                    </div>
+                  <hr />
+                  <div className="flex-column-center">
+                    <p>Delivered</p>
+                    <h3>{recent?.assignment?.delivered}</h3>
                   </div>
-                </NavLink>
-                <NavLink className={`rec cloudy-blue`}>
-                  <div className="flex-row-space">
-                    <h4>Resource - {recent?.resource?.name || "Introduction To React"}</h4>
-
+                  <hr />
+                  <div className="flex-column-center">
+                    <p>Opened</p>
+                    <h3>{recent?.assignment?.read}</h3>
                   </div>
-
-                  <div className="flex-row-space">
-                    <div className="flex-column-center">
-                      <p>Sent</p>
-                      <h3>{recent?.resource?.sent}</h3>
-                    </div>
-                    <hr />
-                    <div className="flex-column-center">
-                      <p>Delivered</p>
-                      <h3>{recent?.resource?.delivered}</h3>
-                    </div>
-                    <hr />
-                    <div className="flex-column-center">
-                      <p>Opened</p>
-                      <h3>{recent?.resource?.read}</h3>
-                    </div>
+                  <hr />
+                  <div className="flex-column-center">
+                    <p>Submitted</p>
+                    <h3>{recent?.assignment?.submitted}</h3>
                   </div>
-                </NavLink>
+                </div>
+              </NavLink> : null
+              }
 
-                <NavLink className={`rec cloudy-blue`}>
-                  <div className="flex-row-space">
-                    <h4>Announcement - {recent?.announcement?.name || "Class today at 6pm"}</h4>
+              {
+                recent?.resource?.name?  <NavLink className={`rec cloudy-blue`}>
+                <div className="flex-row-space">
+                  <h4>Resource - {recent?.resource?.name}</h4>
 
+                </div>
+
+                <div className="flex-row-space">
+                  <div className="flex-column-center">
+                    <p>Sent</p>
+                    <h3>{recent?.resource?.sent}</h3>
                   </div>
-
-                  <div className="flex-row-space">
-                    <div className="flex-column-center">
-                      <p>Sent</p>
-                      <h3>{recent?.announcement?.sent}</h3>
-                    </div>
-                    <hr />
-                    <div className="flex-column-center">
-                      <p>Delivered</p>
-                      <h3>{recent?.announcement?.delivered}</h3>
-                    </div>
-                    <hr />
-                    <div className="flex-column-center">
-                      <p>Opened</p>
-                      <h3>{recent?.announcement?.read}</h3>
-                    </div>
+                  <hr />
+                  <div className="flex-column-center">
+                    <p>Delivered</p>
+                    <h3>{recent?.resource?.delivered}</h3>
                   </div>
-                </NavLink>
+                  <hr />
+                  <div className="flex-column-center">
+                    <p>Opened</p>
+                    <h3>{recent?.resource?.read}</h3>
+                  </div>
+                </div>
+              </NavLink> : null
+              }
+                
+               {
+                recent?.announcement?.name? <NavLink className={`rec cloudy-blue`}>
+                <div className="flex-row-space">
+                  <h4>Announcement - {recent?.announcement?.name || "Class today at 6pm"}</h4>
+
+                </div>
+
+                <div className="flex-row-space">
+                  <div className="flex-column-center">
+                    <p>Sent</p>
+                    <h3>{recent?.announcement?.sent}</h3>
+                  </div>
+                  <hr />
+                  <div className="flex-column-center">
+                    <p>Delivered</p>
+                    <h3>{recent?.announcement?.delivered}</h3>
+                  </div>
+                  <hr />
+                  <div className="flex-column-center">
+                    <p>Opened</p>
+                    <h3>{recent?.announcement?.read}</h3>
+                  </div>
+                </div>
+              </NavLink> : null
+               }
+
+                
 
               </> : <p style={{ textAlign: "center", marginTop: "100px", fontSize: "30px" }}>Congratulations on Creating a new class, you can now share manage and distribute resources to students</p>
           }
