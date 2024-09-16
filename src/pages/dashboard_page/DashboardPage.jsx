@@ -15,6 +15,7 @@ const DashboardPage = () => {
   const [recent, setRecent] = useState(null);
   const [classes, setClasses] = useState([]);
   const [currentUser, setCurrentUser] = useState(null);
+  const active2 = "dashboard"
 
   const getCurrentUs = async() => {
     const res = await getCurrentUser();
@@ -67,7 +68,7 @@ useEffect(() => {
 
   return (
     <div className='dashboard-container'>
-        <SideNav organization={"organization"} classId={classId} currentUser={currentUser} />
+        <SideNav organization={"organization"} classId={classId} currentUser={currentUser} active={active2} />
         <MainPage classs={classId} currentUser={currentUser} recent={recent} classes={classes} setClasses={setClasses} querries={querries} />
     </div>
   )

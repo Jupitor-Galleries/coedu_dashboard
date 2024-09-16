@@ -17,6 +17,7 @@ const Events = () => {
   const classId = useParams().classId;
   const [modalOpened, setModalOpened] = useState(false);
   const [events, setEvents] = useState([]);
+  const active2 = "events"
 
   const [querries, setQuerries] = useState([]);
 
@@ -61,7 +62,7 @@ const fetchQuerries = async() => {
     }, [])
   return (
     <div className="dashboard-container">
-      <SideNav organization={"organization"} classId={classId} currentUser={currentUser} />
+      <SideNav organization={"organization"} classId={classId} currentUser={currentUser} active={active2} />
       <div className="dashboard-page-data2">
         <div className="students-container">
           {/* <div className="notif-cont">

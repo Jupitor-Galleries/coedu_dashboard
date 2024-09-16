@@ -12,7 +12,7 @@ import { LiaRouteSolid } from "react-icons/lia";
 import { FaRegBuilding } from "react-icons/fa";
 import userImg from '../../assets/user.png';
 
-const SideNav = ({organization, classId, currentUser}) => {
+const SideNav = ({organization, classId, currentUser, active}) => {
 
     const navigate = useNavigate();
 
@@ -35,37 +35,37 @@ const SideNav = ({organization, classId, currentUser}) => {
                     {/* <NavLink>Home</NavLink> */}
                     <ul className="sidenav-links">
                         <li>
-                            <NavLink to={`/class/${classId}`} className="sidenav-link">
+                            <NavLink to={`/class/${classId}`} className={`sidenav-link ${active === "dashboard"? "active2": null}`}>
                                 <GoHomeFill />
                                 Dashboard
                             </NavLink>
                         </li>
                         <li>
-                            <NavLink to={`/students/${classId}`} className="sidenav-link">
+                            <NavLink to={`/students/${classId}`} className={`sidenav-link ${active === "students"? "active2": null}`}>
                                 <FaRegBuilding />
                                 Students
                             </NavLink>
                         </li>
                         <li>
-                            <NavLink to={`/announcements/${classId}`} className="sidenav-link">
+                            <NavLink to={`/announcements/${classId}`} className={`sidenav-link ${active === "announcements"? "active2": null}`}>
                                 <TbReport />
                                 Announcements
                             </NavLink>
                         </li>
                         <li>
-                            <NavLink to={`/assignments/${classId}`} className="sidenav-link">
+                            <NavLink to={`/assignments/${classId}`} className={`sidenav-link ${active === "assignments"? "active2": null}`}>
                                 <IoMdTime />
                                Assignments
                             </NavLink>
                         </li>
                         <li>
-                            <NavLink to={`/resources/${classId}`} className="sidenav-link">
+                            <NavLink to={`/resources/${classId}`} className={`sidenav-link ${active === "resources"? "active2": null}`}>
                                 <LiaRouteSolid />
                                 Resources
                             </NavLink>
                         </li>
                         <li>
-                            <NavLink to={`/events/${classId}`} className="sidenav-link">
+                            <NavLink to={`/events/${classId}`} className={`sidenav-link ${active === "events"? "active2": null}`}>
                                 <LiaRouteSolid />
                                 Events
                             </NavLink>
@@ -77,12 +77,12 @@ const SideNav = ({organization, classId, currentUser}) => {
                     <NavLink>General</NavLink>
                 </div> */}
                 <ul className="sidenav-links">
-                        <li>
+                        {/* <li>
                             <NavLink className="sidenav-link">
                                 <IoSettingsOutline />
                                 Settings
                             </NavLink>
-                        </li>
+                        </li> */}
                         {/* <li>
                             <NavLink to='/help' className="sidenav-link">
                                 <IoMdHelpCircleOutline />

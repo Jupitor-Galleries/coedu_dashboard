@@ -18,6 +18,7 @@ const AssignmentsTracking = () => {
     const [modalOpened, setModalOpened] = useState(false);
     const [classes, setClasses] = useState([])
     const [assignement, setAssignment] = useState({});
+    const active2 = "assignments"
 
     const [querries, setQuerries] = useState([]);
 
@@ -63,7 +64,7 @@ const fetchQuerries = async() => {
     },[])
   return (
     <div className='dashboard-container'>
-        <SideNav organization={"organization"} classId={classId} />
+        <SideNav organization={"organization"} classId={classId} active={active2} />
         <div className="dashboard-page-data2">
             <div className="students-container">
                 

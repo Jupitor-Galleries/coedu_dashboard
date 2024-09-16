@@ -12,6 +12,7 @@ const AssignmentWork = () => {
   const classId = useParams().classId;
   const [modalOpened, setModalOpened] = useState(false);
   const [assignements, setAssignments] = useState([]);
+  const active2 = "assignments"
 
   const [querries, setQuerries] = useState([]);
 
@@ -42,7 +43,7 @@ const fetchQuerries = async() => {
   }, []);
   return (
     <div className="dashboard-container">
-      <SideNav organization={"organization"} classId={classId} />
+      <SideNav organization={"organization"} classId={classId} active={active2} />
       <div className="mainpage-container2">
         <div className="students-container2">
           {/* <div className="notif-cont">

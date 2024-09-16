@@ -18,6 +18,7 @@ const Resources = () => {
   const [resources, setResources] = useState([]);
   const [clas, setClas] = useState();
   const [querries, setQuerries] = useState([]);
+  const active2 = "resources"
 
 const fetchQuerries = async() => {
   const res = await getQuerries(classId)
@@ -71,7 +72,7 @@ const fetchQuerries = async() => {
     }, [])
   return (
     <div className="dashboard-container">
-      <SideNav organization={"organization"} classId={classId} currentUser={currentUser} />
+      <SideNav organization={"organization"} classId={classId} currentUser={currentUser} active={active2} />
       <div className="dashboard-page-data2">
         <div className="students-container">
           {/* <div className="notif-cont">

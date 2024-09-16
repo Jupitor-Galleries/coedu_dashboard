@@ -17,6 +17,7 @@ const Assignments = () => {
   const [modalOpened, setModalOpened] = useState(false);
   const [assignements, setAssignments] = useState([]);
   const [loading, setLoading] = useState(false);
+  const active2 = "assignments"
 
   const [querries, setQuerries] = useState([]);
 
@@ -68,6 +69,7 @@ const fetchQuerries = async() => {
         organization={"organization"}
         classId={classId}
         currentUser={currentUser}
+        active={active2}
       />
       <div className="dashboard-page-data2">
         <div className="students-container">
