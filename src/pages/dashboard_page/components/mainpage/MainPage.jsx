@@ -10,13 +10,14 @@ import Loader from "../../../../components/loader/Loader";
 import CanvasJSReact from '@canvasjs/react-charts';
 import { LineChart } from '@mui/x-charts/LineChart';
 import { FaArrowCircleDown, FaPlus } from "react-icons/fa";
+import ClassModal from "../../../classes/modal/ClassModal";
 
 var CanvasJSChart = CanvasJSReact.CanvasJSChart;
 
 const MainPage = ({ classs, currentUser, recent, classes, setClasses, querries }) => {
   const classId = useParams().classId;
 
-  const [resourceModalOpened, setResourceModalOpened] = useState(false);
+  const [classModalOpened, setClassModalOpened] = useState(false);
   const [studentModalOpened, setStudentModalOpened] = useState(false);
   const [assignmentModalOpened, setAssignmentModalOpened] = useState(false);
   const [announcementModalOpened, setAnnouncementModalOpened] = useState(false);
@@ -86,7 +87,6 @@ const MainPage = ({ classs, currentUser, recent, classes, setClasses, querries }
                 {currentUser?.organization.name}
                 <FaArrowCircleDown />
               </div>
-              {/* <h3>{currentClass?.name}</h3> */}
               <div className="other-classes-toggle none" ref={classesRef}>
               {
                 classes.map((classs) => {
@@ -97,12 +97,21 @@ const MainPage = ({ classs, currentUser, recent, classes, setClasses, querries }
               }
               <div value="class-in-toggle">
                 Create New
-                <FaPlus />
+                
               </div>
               </div>
               
             </div>
+
+           
             <div className="flex-row">
+            <button
+                className="create-btn flex-row"
+                onClick={() => setClassModalOpened(true)}
+              >
+                Create Class
+                <FaPlus />
+              </button>
               <button
                 className="create-btn"
                 onClick={() => setAnnouncementModalOpened(true)}
@@ -244,6 +253,7 @@ const MainPage = ({ classs, currentUser, recent, classes, setClasses, querries }
         classId={classId}
         fetchStudents={allStudents}
       />
+    <ClassModal modalOpened={classModalOpened} onClose={() => setClassModalOpened(false)} />
       <Loader loading={loading} />
     </div>
   );

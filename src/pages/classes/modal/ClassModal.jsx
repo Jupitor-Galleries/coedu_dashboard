@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { addClass } from "../../../api/class"
+import { IoMdClose } from "react-icons/io";
 
 const ClassModal = ({modalOpened, onClose, fetchUserClasses}) => {
 
@@ -33,7 +34,12 @@ const ClassModal = ({modalOpened, onClose, fetchUserClasses}) => {
      
       
       <div className="gallery-modal-data">
-      <button className="close" onClick={onClose}>Close</button>
+      <div className="modal-close">
+          <button className="close" onClick={onClose}>
+           
+          <IoMdClose />
+          </button>
+        </div>
       <div className="modal-form">
         <div className='user-profile-stats'>
                Create New Class
