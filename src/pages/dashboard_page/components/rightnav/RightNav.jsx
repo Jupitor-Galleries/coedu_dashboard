@@ -3,11 +3,15 @@ import './RightNav.css';
 import { IoMdText } from 'react-icons/io';
 import { FaBell } from 'react-icons/fa';
 import { NavLink } from 'react-router-dom/dist';
+import RespondMessageModal from './RespondMessageModal';
+
 
 const RightNav = ({ querries }) => {
     const [unresolved, setUnresolved] = useState([]);
     const [resolved, setResolved] = useState([]);
     const [messages, setMessages] = useState([]);
+    const [messageModalOpen, setMessageModalOpen] = useState(false);
+    const [openedMessage, setOpenedMessage] = useState(null);
 
     const getUnresolved = () => {
         setUnresolved(querries.filter(query => query.resolved === false));
@@ -47,7 +51,7 @@ const RightNav = ({ querries }) => {
                                         <p>{message.queryText}</p>
                                         <div className="flex-row-space">
                                             <small><i>by {message.phoneNumber}</i></small>
-                                            <button>Reply</button>
+                                            <button onClick={() => {setOpenedMessage(message); setMessageModalOpen(true)}}>Reply</button>
                                         </div>
                                     </div>
                                 )
@@ -55,15 +59,15 @@ const RightNav = ({ querries }) => {
                         }</>
                 }
 
-                <hr />
+                {/* <hr />
                 <div className="flex-row-space">
                     <div className="flex-row">
                         <FaBell />
                         <p>Reminders</p>
                     </div>
                     <p>Clear</p>
-                </div>
-                {
+                </div> */}
+                {/* {
                     reminders.length < 1 ? <p>You have no no active reminders at the moment</p> : <>
                         {
                             reminders.map((reminder) => {
@@ -75,9 +79,11 @@ const RightNav = ({ querries }) => {
                                 )
                             })
                         }</>
-                }
+                } */}
 
             </div>
+
+            <RespondMessageModal modalOpened={messageModalOpen} onClose={() => setMessageModalOpen(false)} message={openedMessage} />
         </div>
     )
 }

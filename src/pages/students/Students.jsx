@@ -8,11 +8,12 @@ import { useParams } from 'react-router-dom';
 import { getClassStudents, getClassDetails } from '../../api/class'
 import SideNav from '../dashboard_page/components/sidenav/SideNav';
 import { FaDotCircle } from 'react-icons/fa';
-import { IoMdMore } from 'react-icons/io';
+import { IoMdMore, IoMdRemove } from 'react-icons/io';
 import RightNav from '../dashboard_page/components/rightnav/RightNav';
 import { getCurrentUser } from '../../api/auth';
 import { getQuerries } from '../../api/querries';
 import * as XLSX from 'xlsx';
+import { MdDelete } from "react-icons/md";
 
 const Students = () => {
     const classId = useParams().classId;
@@ -64,13 +65,6 @@ const handleCopyClick = () => {
     ${fourthMessage} ${code} ${fifthMessage}
     
     ${sixthMessage}`
-    // navigator.clipboard.writeText(textToCopy)
-    //   .then(() => {
-    //     alert('Text copied to clipboard!', textToCopy, navigator.clipboard);
-    //   })
-    //   .catch(err => {
-    //     console.error('Failed to copy text: ', err);
-    //   });
   };
     const classDetails = async()=>{
         const res = await getClassDetails(classId)
@@ -115,7 +109,7 @@ const handleCopyClick = () => {
 
                 <div className="flex-row">
                     <p>Copy this student onboarding message and send it to them to complete onboarding</p>
-                    {/* <button onClick={handleCopyClick}>Copy Message</button> */}
+                    <button onClick={handleCopyClick}>Copy Message</button>
                 </div>
             <table className="students">
                 <tr>
@@ -143,7 +137,7 @@ const handleCopyClick = () => {
                                 </td>
                                 <td>
                                     <div className="ico">
-                                    <IoMdMore />
+                                    <MdDelete />
                                     </div>
                                 </td>
                             </tr>

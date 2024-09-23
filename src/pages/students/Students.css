@@ -71,6 +71,11 @@ th, td {
     margin-left: 220px;
 }
 
+.ico {
+    font-size: 22px;
+    color: red;
+}
+
 @media screen and (min-width: 768px) {
     .students-container {
         width: 71%;
