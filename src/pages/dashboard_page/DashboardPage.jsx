@@ -26,8 +26,7 @@ const DashboardPage = () => {
   }
 
   const fetchUserClasses = async () => {
-    const res = await getUserClasses()
-    console.log(res)
+    const res = await getUserClasses();
     if(res?.status) {
         setClasses(res.data.classes)
     }

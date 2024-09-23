@@ -64,7 +64,6 @@ const StudentModal = ({ modalOpened, onClose, classId, fetchStudents }) => {
     reader.readAsArrayBuffer(file);
   };
 
-  console.log(data);
 
   if (!modalOpened) {
     return null;

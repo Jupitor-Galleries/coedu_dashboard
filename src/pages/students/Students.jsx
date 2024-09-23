@@ -30,13 +30,12 @@ const Students = () => {
     const [fifthMessage, setFifthMessage] = useState("to join the class.");
     const [sixthMessage, setSixthMessage] = useState("Start your journey with our AI assistant today.");
     const [code, setCode] = useState(4123);
-    const [whatsappNumber, setWhatsappNumber] = useState("+26079293183");
+    const [whatsappNumber, setWhatsappNumber] = useState("+260779293183");
     const [querries, setQuerries] = useState([]);
     const active2 = "students";
 
     const fetchQuerries = async () => {
         const res = await getQuerries(classId)
-        console.log(res);
 
         if (res?.status) {
             setQuerries(res.data)
@@ -46,8 +45,9 @@ const Students = () => {
     const getClass = async () => {
         const res = await getClassDetails(classId);
 
-        if (res.status) {
-            setClas(res.data)
+        if (res.status) {            
+            setClas(res.data);
+            setCode(res.data.class.classCode)
         }
     }
 
@@ -75,13 +75,9 @@ const Students = () => {
     ${fourthMessage} ${code} ${fifthMessage}
     
     ${sixthMessage}`
+    navigator.clipboard.writeText(textToCopy)
     };
-    // const classDetails = async () => {
-    //     const res = await getClassDetails(classId)
-    //     if (res?.status) {
-    //         setClas(res.data.class)
-    //     }
-    // }
+
     const allStudents = async () => {
         const res = await getClassStudents(classId)
         if (res?.status) {
@@ -98,7 +94,10 @@ const Students = () => {
     const getCurrentUs = async () => {
         const res = await getCurrentUser();
         if (res.status) {
+            console.log(res.data);
+            
             setCurrentUser(res.data)
+            setWhatsappNumber(res.data.organization.whatsappNumber)
         }
     }
 
