@@ -23,3 +23,34 @@ export const getQuerries = async(classId)=>{
         console.error('There was a problem with the fetch operation:', error);
     }
   }
+
+
+
+  export const replyToQuerry = async (messageId, message) => {
+    const url = `${baseUrl}/api/chat/reply`;
+    const body = {
+        messageId,
+        message
+    };
+    const token = localStorage.getItem('jwt');
+    try {
+        const response = await fetch(url, {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+                'Authorization': `Bearer ${token}`
+            },
+            body: JSON.stringify(body)
+        });
+        const data = await response.json();
+        console.log("the response", data)
+        if (!response.ok) {
+            return { status: false, message: "failed to reply to messae",error:data.error  }
+        }
+
+        
+        return { status: true, data: data }
+    } catch (error) {
+        console.error('There was a problem with the fetch operation:', error);
+    }
+};
