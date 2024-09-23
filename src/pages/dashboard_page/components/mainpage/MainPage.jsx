@@ -11,6 +11,7 @@ import CanvasJSReact from '@canvasjs/react-charts';
 import { LineChart } from '@mui/x-charts/LineChart';
 import { FaArrowCircleDown, FaPlus } from "react-icons/fa";
 import ClassModal from "../../../classes/modal/ClassModal";
+import emptyClassImg from '../../assets/Frame 30332.png';
 
 var CanvasJSChart = CanvasJSReact.CanvasJSChart;
 
@@ -232,7 +233,10 @@ const MainPage = ({ classs, currentUser, recent, classes, setClasses, querries }
 
                 
 
-              </> : <p style={{ textAlign: "center", marginTop: "100px", fontSize: "30px" }}>Congratulations on Creating a new class, you can now share manage and distribute resources to students</p>
+              </> : 
+              
+              // <p style={{ textAlign: "center", marginTop: "100px", fontSize: "30px" }}>Congratulations on Creating a new class, you can now share manage and distribute resources to students</p>
+              <img style={{width: "80%"}} src={emptyClassImg} alt="welcome" />
           }
 
 
