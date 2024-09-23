@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import ReactDOM from 'react-dom';
-import {CopyToClipboard} from 'react-copy-to-clipboard';
+import { CopyToClipboard } from 'react-copy-to-clipboard';
 import { NavLink } from 'react-router-dom';
 import './Students.css'
 import StudentModal from '../dashboard_page/components/modal/StudentModal';
@@ -14,6 +14,7 @@ import { getCurrentUser } from '../../api/auth';
 import { getQuerries } from '../../api/querries';
 import * as XLSX from 'xlsx';
 import { MdDelete } from "react-icons/md";
+import { deleteStudent, deleteStudents } from '../../api/students';
 
 const Students = () => {
     const classId = useParams().classId;
@@ -31,126 +32,134 @@ const Students = () => {
     const [code, setCode] = useState(4123);
     const [whatsappNumber, setWhatsappNumber] = useState("+26079293183");
     const [querries, setQuerries] = useState([]);
-    const active2 = "students"
+    const active2 = "students";
 
-    console.log(currentUser?.organization.whatsappNumber, clas?.class?.classCode);
-    
+    const fetchQuerries = async () => {
+        const res = await getQuerries(classId)
+        console.log(res);
 
-const fetchQuerries = async() => {
-  const res = await getQuerries(classId)
-  console.log(res);
-  
-  if(res?.status) {
-      setQuerries(res.data)
-  }
-}
-
-const getClass = async() => {
-    const res = await getClassDetails(classId);
-    console.log(res);
-    
-    if (res.status) {
-        setClas(res.data)
+        if (res?.status) {
+            setQuerries(res.data)
+        }
     }
-}
+
+    const getClass = async () => {
+        const res = await getClassDetails(classId);
+
+        if (res.status) {
+            setClas(res.data)
+        }
+    }
 
 
-const handleCopyClick = () => {
-    console.log("I'm here", textToCopy);
-    
-    const textToCopy = `${firstMessage} https://wa.me/${whatsappNumber}?text=${code} ${secondMessage}
+    const removeStudent = async (studentId) => {
+
+        const res = await deleteStudent(studentId);
+        if (res?.status) {
+            allStudents();
+            alert("Student Deleted")
+        } else {
+            alert(res.error)
+        }
+
+
+    }
+
+
+    const handleCopyClick = () => {
+
+        const textToCopy = `${firstMessage} https://wa.me/${whatsappNumber}?text=${code} ${secondMessage}
     
     ${thirdMessage}
     
     ${fourthMessage} ${code} ${fifthMessage}
     
     ${sixthMessage}`
-  };
-    const classDetails = async()=>{
-        const res = await getClassDetails(classId)
-        console.log("class details", res)
-        if(res?.status){
-            setClas(res.data.class)
-        }
-    }
-    const allStudents = async() => {
+    };
+    // const classDetails = async () => {
+    //     const res = await getClassDetails(classId)
+    //     if (res?.status) {
+    //         setClas(res.data.class)
+    //     }
+    // }
+    const allStudents = async () => {
         const res = await getClassStudents(classId)
-        if(res?.status) {
+        if (res?.status) {
             setStudents(res.data.students)
         }
     }
+
     useEffect(() => {
         allStudents()
         getClass()
-    },[])
-
-
-    const getCurrentUs = async() => {
-      const res = await getCurrentUser();
-      if(res.status) {
-        console.log(res.data);
-        setCurrentUser(res.data)
-      }
-    }
-  
-    useEffect(() => {
-      getCurrentUs();
-      fetchQuerries();
     }, [])
-  return (
-    <div className='dashboard-container'>
-        <SideNav organization={"organization"} classId={classId} currentUser={currentUser} active={active2} />
-        <div className="dashboard-page-data2">
-            <div className="students-container">
-                <div className="h">
-                    <h4>{currentUser?.organization.name}</h4>
-                    <button className='create-btn' onClick={() => setModalOpened(true)}>Add New Students</button>
-                </div>
 
-                <div className="flex-row">
-                    <p>Copy this student onboarding message and send it to them to complete onboarding</p>
-                    <button onClick={handleCopyClick}>Copy Message</button>
-                </div>
-            <table className="students">
-                <tr>
-                    <th>Name</th>
-                    <th>Whatsapp Number</th>
-                    {/* <th>Class Code</th> */}
-                    <th>Status</th>
-                    <th>Action</th>
-                </tr>
-                {
-                    students.map((student) => {
-                        return (
-                            <tr>
-                                <td>
-                                    {student.name}
-                                </td>
-                                <td>
-                                    {student.whatsappNumber}
-                                </td>
-                                {/* <td>
+
+    const getCurrentUs = async () => {
+        const res = await getCurrentUser();
+        if (res.status) {
+            setCurrentUser(res.data)
+        }
+    }
+
+    useEffect(() => {
+        getCurrentUs();
+        fetchQuerries();
+    }, [])
+    return (
+        <div className='dashboard-container'>
+            <SideNav organization={"organization"} classId={classId} currentUser={currentUser} active={active2} />
+            <div className="dashboard-page-data2">
+                <div className="students-container">
+                    <div className="h">
+                        <h4>{currentUser?.organization.name}</h4>
+                        <button className='create-btn' onClick={() => setModalOpened(true)}>Add New Students</button>
+                    </div>
+
+                    <div className="flex-row">
+                        <p>Copy this student onboarding message and send it to them to complete onboarding</p>
+                        <button onClick={handleCopyClick}>Copy Message</button>
+                    </div>
+                    <table className="students">
+                        <tr>
+                            <th>Name</th>
+                            <th>Whatsapp Number</th>
+                            {/* <th>Class Code</th> */}
+                            <th>Status</th>
+                            <th>Action</th>
+                        </tr>
+                        {
+                            students.map((student) => {
+                                return (
+                                    <tr>
+                                        <td>
+                                            {student.name}
+                                        </td>
+                                        <td>
+                                            {student.whatsappNumber}
+                                        </td>
+                                        {/* <td>
                                     {clas?.name}
                                 </td> */}
-                                <td>
-                                    {student.accepted == true? "joined" : "pending"}
-                                </td>
-                                <td>
-                                    <div className="ico">
-                                    <MdDelete />
-                                    </div>
-                                </td>
-                            </tr>
-                        )
-                    })
-                }
-            </table>
+                                        <td>
+                                            {student.accepted == true ? "joined" : "pending"}
+                                        </td>
+                                        <td>
+                                            <div className="ico" onClick={() => removeStudent(student._id)}>
+                                                <MdDelete />
+                                            </div>
+                                        </td>
+                                    </tr>
+                                )
+                            })
+                        }
+                    </table>
+                </div>
+                <RightNav querries={querries} />
+                <StudentModal modalOpened={modalOpened} onClose={() => setModalOpened(false)} classId={classId} fetchStudents={allStudents} />
             </div>
-            <RightNav querries={querries} />
-            <StudentModal modalOpened={modalOpened} onClose={() => setModalOpened(false)} classId={classId} fetchStudents={allStudents} />
         </div>
-    </div>
-  )
+    )
 }
 
 export default Students

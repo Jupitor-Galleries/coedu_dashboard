@@ -16,7 +16,7 @@ const RespondMessageModal = ({ modalOpened, onClose, message }) => {
   const respondQuery = async() => {
     // setLoading(true);
       
-        const res = await replyToQuerry(message._id, response);
+        const res = await replyToQuerry(message.messageId, response);
         if(res?.status){
           // setLoading(false);
           onClose();
