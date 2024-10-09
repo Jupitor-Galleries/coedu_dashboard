@@ -37,7 +37,7 @@ export const Steps = () => {
                 <input type="text" name="schoolname" id="schoolname" value={schoolName} onChange={(e) => setSchoolName(e.target.value)} required />
             </div>
             <div className="form-group">
-                <label htmlFor="adminname">Admin's FullName</label>
+                <label htmlFor="adminname">Admin's Full Name</label>
                 <input type="text" name="adminname" id="adminname" value={adminName} onChange={(e) => setAdminName(e.target.value)} required />
             </div>
             <div className="form-group">

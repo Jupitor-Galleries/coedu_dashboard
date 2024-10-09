@@ -44,7 +44,12 @@ const DashboardPage = () => {
     console.log(res);
     
     if(res?.status) {
+      if(!res.data.assignment.name && !res.data.resource.name && !res.data.announcement.name) {
+        console.log("We are here");
+        return
+      } else {
         setRecent(res.data)
+      }
     }
 }
 

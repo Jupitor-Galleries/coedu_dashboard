@@ -1,20 +1,23 @@
 import React, { useState, useEffect } from "react";
 import { addClass } from "../../../api/class"
 import { IoMdClose } from "react-icons/io";
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 const ClassModal = ({modalOpened, onClose, fetchUserClasses}) => {
 
     const [className, setClassName] = useState("");
     const [startDate, setStartDate] = useState('');
-    const [endDate, setEndDate] = useState('');
+    const [endDate, setEndDate] = useState('Not Required');
     const [description, setDescription] = useState("");
     const [file, setFile] = useState("");
 
     const createClass = async() => {
+      const notify = () => toast("Class created successfully");
        
-       const res = await addClass(className, startDate, endDate)
+       const res = await addClass(className, startDate, startDate)
        if (res.status) {
-           alert("Class created successfully");
+           notify();
            fetchUserClasses()
            onClose()
        }else{
@@ -53,10 +56,11 @@ const ClassModal = ({modalOpened, onClose, fetchUserClasses}) => {
           <label htmlFor="startdate">Start date</label>
           <input type="date" value={startDate} onChange={(e) => setStartDate(e.target.value)} />
         </div>
-        <div className="form-group">
+        {/* <div className="form-group">
           <label htmlFor="enddate">End Date</label>
           <input type="date"  value={endDate} onChange={(e) => setEndDate(e.target.value)} />
-        </div>
+        </div> */}
+         <ToastContainer />
 
         <button className="c-btn" onClick={() => createClass()}>Create</button>
         </div>

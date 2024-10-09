@@ -48,7 +48,7 @@ const Signin = () => {
                 {/* <label htmlFor="password">Password</label> */}
                 <input type="password" name="password" placeholder='enter pasword' id="password" value={password} onChange={(e) => setPassword(e.target.value)} />
             </div>
-            <button className="signin-btn" onClick={() => signin()}>Signin</button>
+            <button className="signin-btn" onClick={() => signin()}>Sign in</button>
             {/* or
             <div className="google-auth">
                 Signin with Google

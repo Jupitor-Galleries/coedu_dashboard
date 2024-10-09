@@ -4,6 +4,8 @@ import "./Modal.css";
 import { IoMdClose } from "react-icons/io";
 import * as XLSX from "xlsx";
 import { addStudents } from "../../../../api/students";
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 const StudentModal = ({ modalOpened, onClose, classId, fetchStudents }) => {
   const [classes, setClasses] = useState([
@@ -20,10 +22,12 @@ const StudentModal = ({ modalOpened, onClose, classId, fetchStudents }) => {
   const [status, setStatus] = useState("upload");
 
   const submitAddStudent = async () => {
+    const notify = () => toast("student add successfully");
     const res = await addStudent(classId, fullName, whatsappNumber, gender);
     if (res.status) {
-      // onClose()
-      alert("student add successfully");
+      notify()
+      onClose()
+      // alert("student add successfully");
       fetchStudents();
     } else {
       alert("failed to add student");
@@ -31,10 +35,12 @@ const StudentModal = ({ modalOpened, onClose, classId, fetchStudents }) => {
   };
 
   const submitAddStudents = async () => {
+    const notify = () => toast("students add successfully");
     const res = await addStudents(students, classId);
     if (res.status) {
-      // onClose()
-      alert("students add successfully");
+      notify();
+      onClose()
+      // alert("students add successfully");
       fetchStudents();
     } else {
       alert("failed to add student");
