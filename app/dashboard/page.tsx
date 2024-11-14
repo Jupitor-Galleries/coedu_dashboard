@@ -4,6 +4,7 @@ import {
   BreadcrumbList,
   BreadcrumbPage,
 } from "@/components/ui/breadcrumb"
+import { Button } from "@/components/ui/button"
 import { Separator } from "@/components/ui/separator"
 import {
   SidebarInset,
@@ -12,13 +13,14 @@ import {
 } from "@/components/ui/sidebar"
 import { SidebarLeft } from "@/components/ui/sidebar-left"
 import { SidebarRight } from "@/components/ui/sidebar-right"
+import { LucidePlus } from "lucide-react"
 
 export default function Dashboard() {
   return (
     <SidebarProvider>
-      <SidebarLeft />
-      <SidebarInset>
-        <header className="sticky top-0 flex h-14 shrink-0 items-center gap-2 bg-background">
+      <SidebarLeft variant="floating"/>
+      <SidebarInset className="bg-[#F1F5FF]">
+        <header className="sticky top-0 flex h-14 shrink-0 items-center gap-2">
           <div className="flex flex-1 items-center gap-2 px-3">
             <SidebarTrigger />
             <Separator orientation="vertical" className="mr-2 h-4" />
@@ -31,11 +33,15 @@ export default function Dashboard() {
                 </BreadcrumbItem>
               </BreadcrumbList>
             </Breadcrumb>
+            <div className="flex ms-auto gap-4">
+                <Button className="rounded-sm">Add Students</Button>
+                <Button className="rounded-sm border border-black" variant="ghost">Create <LucidePlus/></Button>
+            </div>
           </div>
         </header>
         <div className="flex flex-1 flex-col gap-4 p-4">
-          <div className="mx-auto h-24 w-full max-w-3xl rounded-xl bg-muted/50" />
-          <div className="mx-auto h-[100vh] w-full max-w-3xl rounded-xl bg-muted/50" />
+          <div className="mx-auto h-24 w-full max-w-3xl rounded-xl bg-white/50" />
+          <div className="mx-auto h-[100vh] w-full max-w-3xl rounded-xl bg-white/50" />
         </div>
       </SidebarInset>
       <SidebarRight />
