@@ -1,26 +1,21 @@
-"use client"
+"use client";
 
-import * as React from "react"
-import {
-  AudioWaveform,
-  Command,
-  LogOut,
-  Settings2,
-} from "lucide-react"
+import * as React from "react";
+import { AudioWaveform, Command, LogOut, Settings2 } from "lucide-react";
 
-import { NavMain } from "@/components/ui/nav-main"
-import { NavSecondary } from "@/components/ui/nav-secondary"
+import { NavMain } from "@/components/ui/nav-main";
+import { NavSecondary } from "@/components/ui/nav-secondary";
 import {
   Sidebar,
   SidebarContent,
   SidebarHeader,
   SidebarRail,
-} from "@/components/ui/sidebar"
-import { GoHome, GoMegaphone, GoBook, GoBookmark } from "react-icons/go"
+} from "@/components/ui/sidebar";
+import { GoHome, GoMegaphone, GoBook, GoBookmark } from "react-icons/go";
 import { LuGraduationCap } from "react-icons/lu";
-import { NavClasses } from "./nav-classes"
-import Image from "next/image"
-
+import { NavClasses } from "./nav-classes";
+import Image from "next/image";
+import { usePathname } from "next/navigation";
 
 // This is sample data.
 const data = {
@@ -44,31 +39,30 @@ const data = {
   navMain: [
     {
       title: "Dashboard",
-      url: "#",
+      url: "/dashboard",
       icon: GoHome,
-      isActive: true,
     },
     {
       title: "Students",
-      url: "#",
+      url: "/dashboard/students",
       icon: LuGraduationCap,
       badge: "10",
     },
     {
-        title: "Announcements",
-        url: "#",
-        icon: GoMegaphone,
-      },
-      {
-        title: "Assignments",
-        url: "#",
-        icon: GoBook,
-      },
-      {
-        title: "Resources",
-        url: "#",
-        icon: GoBookmark,
-      },
+      title: "Announcements",
+      url: "/dashboard/announcements",
+      icon: GoMegaphone,
+    },
+    {
+      title: "Assignments",
+      url: "/dashboard/assignments",
+      icon: GoBook,
+    },
+    {
+      title: "Resources",
+      url: "/dashboard/resources",
+      icon: GoBookmark,
+    },
   ],
   navSecondary: [
     {
@@ -78,7 +72,7 @@ const data = {
     },
     {
       title: "Logout",
-      url: "#",
+      url: "/login",
       icon: LogOut,
     },
   ],
@@ -91,30 +85,43 @@ const data = {
     {
       name: "Class 2",
       url: "#",
-      number: 30
+      number: 30,
     },
     {
       name: "Class 3",
       url: "#",
-      number: 42
+      number: 42,
     },
   ],
-}
+};
 
 export function SidebarLeft({
   ...props
 }: React.ComponentProps<typeof Sidebar>) {
+  const pathname = usePathname();
+  const navMainWithActiveState = data.navMain.map((item) => ({
+    ...item,
+    isActive:
+      pathname === item.url ||
+      (item.url !== "/dashboard" && pathname.startsWith(item.url)),
+  }));
   return (
     <Sidebar className="border-r-0" {...props}>
       <SidebarHeader>
-        <Image src="/images/logo.svg" alt="co edu logo" width={100} height={100} className="mx-auto my-5"/>
-        <NavMain items={data.navMain} />
+        <Image
+          src="/images/logo.svg"
+          alt="co edu logo"
+          width={100}
+          height={100}
+          className="mx-auto my-5"
+        />
+        <NavMain items={navMainWithActiveState} />
       </SidebarHeader>
       <SidebarContent>
-        <NavClasses classes={data.classes}/>
+        <NavClasses classes={data.classes} />
         <NavSecondary items={data.navSecondary} className="mt-auto" />
       </SidebarContent>
       <SidebarRail />
     </Sidebar>
-  )
+  );
 }
