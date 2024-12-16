@@ -20,6 +20,7 @@ export default function Page() {
       if (token) {
         localStorage.setItem('coEdu_jwt', token);
         // navigate to the dashboard
+        alert("success, we are navigating you to the dashboard")
         router.push('/dashboard')
       } else {
         console.error('No token found!');
