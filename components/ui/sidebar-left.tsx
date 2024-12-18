@@ -72,7 +72,7 @@ const data = {
     },
     {
       title: "Logout",
-      url: "/login",
+      url: "/logout",
       icon: LogOut,
     },
   ],
