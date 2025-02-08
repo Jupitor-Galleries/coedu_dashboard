@@ -9,12 +9,52 @@ import { FiEye, FiEyeOff } from "react-icons/fi";
 import { FcGoogle } from "react-icons/fc";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
+import { useSearchParams } from 'next/navigation'
+import { useEffect } from 'react';
+import { useRouter } from 'next/navigation'
 
 export function SignupForm() {
   const [password, setPassword] = useState("");
   const [confirmPassword, setConfirmPassword] = useState("");
   const [showPassword, setShowPassword] = useState(false);
+
   const backend_url = process.env.NEXT_PUBLIC_BACKEND_URL;
+
+  const searchParams = useSearchParams()
+  const router = useRouter()
+
+  useEffect(() => {
+    const status = searchParams.get('success') === 'true';
+    
+    if (status) {
+      // save token and navigate to the dashboard
+      const token = searchParams.get('token');
+      if (token) {
+        localStorage.setItem('coEdu_jwt', token);
+        // navigate to the dashboard
+        alert("success, we are navigating you to the dashboard")
+        router.push('/dashboard')
+      } else {
+        console.error('No token found!');
+        alert("error while signing up")
+      }
+    }else{
+      // show error message
+      const message = searchParams.get('message');
+      if (message){
+        alert(message)
+      }
+    }
+  }, [searchParams]);
+
+
+  const handleGoogleSignup = () => {
+    // Redirect the user to the /google route on your backend
+    const googleSignupUrl = process.env.NEXT_PUBLIC_BACKEND_URL;
+    
+    window.location.href = `${googleSignupUrl}/api/auth/google`;
+  };
+
 
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
@@ -35,6 +75,7 @@ export function SignupForm() {
     });
     if (response.ok) {
       toast.success("Registration successful");
+      router.push('/dashboard')
     } else {
       const errorData = await response.json()
       console.log(errorData);
@@ -52,10 +93,11 @@ export function SignupForm() {
           </CardTitle>
         </CardHeader>
         <CardContent>
-          <Button className="w-full mb-4 flex items-center justify-center border border-gray-300 bg-white text-gray-700 hover:bg-gray-100">
+          <Button onClick={handleGoogleSignup} className="w-full mb-4 flex items-center justify-center border border-gray-300 bg-white text-gray-700 hover:bg-gray-100">
             <FcGoogle className="mr-2" />
             Sign up with Google
           </Button>
+          <h4 className="text-gray-300 text-center pb-2">- OR -</h4>
           <form onSubmit={handleSubmit}>
             <div className="grid gap-4">
               <Input id="name" type="text" placeholder="Enter your name" />
