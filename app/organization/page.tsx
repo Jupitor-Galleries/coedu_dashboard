@@ -1,11 +1,11 @@
 "use client";
 
-import Link from "next/link";
+// import Link from "next/link";
 import { useRouter } from "next/navigation";
 import { useState, useEffect } from "react";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
-import { FiArrowLeft, FiX } from "react-icons/fi";
+import { FiArrowLeft } from "react-icons/fi";
 import { OrganizationForm } from "@/components/ui/organization-form";
 import Modal from "@/components/ui/modal";
 import { Organization } from "@/types/organization";

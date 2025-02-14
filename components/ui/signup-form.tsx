@@ -33,7 +33,7 @@ export function SignupForm() {
         localStorage.setItem('coEdu_jwt', token);
         // navigate to the dashboard
         alert("success, we are navigating you to the dashboard")
-        router.push('/dashboard')
+        router.push('/organization')
       } else {
         console.error('No token found!');
         alert("error while signing up")
@@ -62,22 +62,23 @@ export function SignupForm() {
       toast.error("Passwords do not match");
       return;
     }
+    const form = e.target as HTMLFormElement;
     const response = await fetch(`${backend_url}/api/auth/register`, {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
       },
       body: JSON.stringify({
-        name: (e.target as any).name.value,
-        email: (e.target as any).email.value,
+        name: (form.elements.namedItem('name') as HTMLInputElement).value,
+        email: (form.elements.namedItem('email') as HTMLInputElement).value,
         password,
       }),
     });
     if (response.ok) {
       toast.success("Registration successful");
-      router.push('/dashboard')
+      router.push('/organization');
     } else {
-      const errorData = await response.json()
+      const errorData = await response.json();
       console.log(errorData);
       toast.error(errorData.error);
     }
