@@ -1,16 +1,16 @@
 "use client";
 
-import Link from "next/link";
+import { Suspense } from "react";
 import { useRouter, useSearchParams } from "next/navigation";
 import { useState, useEffect } from "react";
 import { Button } from "@/components/ui/button";
-import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
-import { FiArrowLeft, FiX } from "react-icons/fi";
+import { Card, CardHeader, CardTitle } from "@/components/ui/card";
+import { FiArrowLeft } from "react-icons/fi";
 import { ClassForm } from "@/components/ui/class-form";
 import Modal from "@/components/ui/modal";
 import { Class } from "@/types/class";
 
-export default function ClassesPage() {
+ function ClassesComponent() {
   const router = useRouter();
   const searchParams = useSearchParams();
   const organizationId = searchParams.get("organizationId");
@@ -42,38 +42,48 @@ export default function ClassesPage() {
   };
 
   return (
-    <div className="container mx-auto p-4 flex flex-col justify-center items-center min-h-screen">
-      <div className="flex justify-between items-center mb-4 w-full max-w-4xl">
-        <Button variant="ghost" onClick={() => router.back()}>
-          <FiArrowLeft className="mr-2" />
-        </Button>
-        <div className="text-[24px] text-gray-300 bg-transparent">
-          Add New Class <Button className="text-white" onClick={() => setShowDialog(true)}>+</Button>
+    <Suspense fallback={<div>Loading...</div>}>
+      <div className="container mx-auto p-4 flex flex-col justify-center items-center min-h-screen">
+        <div className="flex justify-between items-center mb-4 w-full max-w-4xl">
+          <Button variant="ghost" onClick={() => router.back()}>
+            <FiArrowLeft className="mr-2" />
+          </Button>
+          <div className="text-[24px] text-gray-300 bg-transparent">
+            Add New Class <Button className="text-white" onClick={() => setShowDialog(true)}>+</Button>
+          </div>
         </div>
+        <div className="w-full md:w-[872px] mb-8 text-center">
+          <h1 className="text-[40px] md:text-[70px] font-bold mb-4">All Your Classes Are Here.</h1>
+          <p className="text-gray-300 text-[16px] md:text-[24px]">Here are the classes you’ve created. You can add more by clicking the ‘+’ on the top right corner.</p>
+        </div>
+        <div className="flex flex-wrap justify-center gap-4">
+          {classes && classes.map((cls) => (
+            <Card key={cls.id} className="w-full sm:w-64 cursor-pointer" onClick={() => handleClassClick(cls)}>
+              <CardHeader>
+                <CardTitle>{cls.name}</CardTitle>
+              </CardHeader>
+              {/* <CardContent>
+                <p>{`Start Date: ${new Date(cls.startDate).toLocaleDateString()}`}</p>
+                <p>{`End Date: ${new Date(cls.endDate).toLocaleDateString()}`}</p>
+                <p>{`Languages: ${cls.languages.join(", ")}`}</p>
+              </CardContent> */}
+            </Card>
+          ))}
+        </div>
+        {showDialog && (
+          <Modal onClose={() => setShowDialog(false)}>
+            <ClassForm organizationId={organizationId || ""} />
+          </Modal>
+        )}
       </div>
-      <div className="w-full md:w-[872px] mb-8 text-center">
-        <h1 className="text-[40px] md:text-[70px] font-bold mb-4">All Your Classes Are Here.</h1>
-        <p className="text-gray-300 text-[16px] md:text-[24px]">Here are the classes you’ve created. You can add more by clicking the ‘+’ on the top right corner.</p>
-      </div>
-      <div className="flex flex-wrap justify-center gap-4">
-        {classes && classes.map((cls) => (
-          <Card key={cls.id} className="w-full sm:w-64 cursor-pointer" onClick={() => handleClassClick(cls)}>
-            <CardHeader>
-              <CardTitle>{cls.name}</CardTitle>
-            </CardHeader>
-            {/* <CardContent>
-              <p>{`Start Date: ${new Date(cls.startDate).toLocaleDateString()}`}</p>
-              <p>{`End Date: ${new Date(cls.endDate).toLocaleDateString()}`}</p>
-              <p>{`Languages: ${cls.languages.join(", ")}`}</p>
-            </CardContent> */}
-          </Card>
-        ))}
-      </div>
-      {showDialog && (
-        <Modal onClose={() => setShowDialog(false)}>
-          <ClassForm organizationId={organizationId || ""} />
-        </Modal>
-      )}
-    </div>
+    </Suspense>
+  );
+}
+
+export default function ClassPage() {
+  return (
+    <Suspense fallback={<div>Loading...</div>}>
+      <ClassesComponent />
+    </Suspense>
   );
 }

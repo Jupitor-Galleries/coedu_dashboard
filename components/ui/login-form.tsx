@@ -30,7 +30,7 @@ export function LoginForm() {
         localStorage.setItem('coEdu_jwt', token);
         // navigate to the dashboard
         alert("success, we are navigating you to the dashboard");
-        router.push('/dashboard');
+        router.push('/organization');
       } else {
         console.error('No token found!');
         alert("error while logging in");
@@ -54,20 +54,21 @@ export function LoginForm() {
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     setLoading(true);
+    const form = e.target as HTMLFormElement;
     const response = await fetch(`${backend_url}/api/auth/login`, {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
       },
       body: JSON.stringify({
-        email: (e.target as any).email.value,
+        email: (form.elements.namedItem('email') as HTMLInputElement).value,
         password,
       }),
     });
     setLoading(false);
     if (response.ok) {
       toast.success("Login successful");
-      router.push('/dashboard');
+      router.push('/organization');
     } else {
       const errorData = await response.json();
       console.log(errorData);

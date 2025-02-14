@@ -1,11 +1,14 @@
 import { SignupForm } from "@/components/ui/signup-form";
+import { Suspense } from "react";
 
 export default function Page() {
   return (
     <div className="flex h-screen w-full items-center justify-center">
       <div>
         <h2 className="lg:text-3xl lg:w-4/6 text-center mx-auto font-bold mb-8">Welcome, create your account </h2>
-        <SignupForm />
+        <Suspense fallback={<div>Loading...</div>}>
+          <SignupForm />
+        </Suspense>
       </div>
     </div>
   );
