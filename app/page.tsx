@@ -1,9 +1,16 @@
+import { LoginForm } from "@/components/ui/login-form";
+import { Suspense } from "react";
 import { GoHome } from "react-icons/go";
 
 export default function Home() {
   return (
-    <div className="grid grid-rows-[20px_1fr_20px] items-center justify-items-center min-h-screen p-8 pb-20 gap-16 sm:p-20 font-[family-name:var(--font-geist-sans)]">
-      <GoHome size={48} className="cursor-pointer"/>
+    <div className="flex h-screen w-full items-center justify-center">
+      <div>
+        <h2 className="lg:text-3xl lg:w-4/6 text-center mx-auto font-bold mb-8">Welcome, login to your account </h2>
+        <Suspense fallback={<div>Loading...</div>}>
+          <LoginForm />
+        </Suspense>
+      </div>
     </div>
   );
 }
