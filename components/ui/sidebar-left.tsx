@@ -1,7 +1,7 @@
 "use client";
 
-import * as React from "react";
 import { AudioWaveform, Command, LogOut, Settings2 } from "lucide-react";
+import { useClass } from "@/context/ClassContext";
 
 import { NavMain } from "@/components/ui/nav-main";
 import { NavSecondary } from "@/components/ui/nav-secondary";
@@ -16,6 +16,7 @@ import { LuGraduationCap } from "react-icons/lu";
 import { NavClasses } from "./nav-classes";
 import Image from "next/image";
 import { usePathname } from "next/navigation";
+import { useState, useEffect } from "react";
 
 // This is sample data.
 const data = {
@@ -99,12 +100,62 @@ export function SidebarLeft({
   ...props
 }: React.ComponentProps<typeof Sidebar>) {
   const pathname = usePathname();
+  const { classId } = useClass();
+  const [classes, setClasses] = useState([]);
+  const [organizationId, setOrganizationId] = useState<string | null>(null);
+
+  useEffect(() => {
+    async function fetchClasses() {
+      try {
+        const token = localStorage.getItem("coEdu_jwt");
+        if (!token) throw new Error("No access token found");
+
+        const classResponse = await fetch(
+          `${process.env.NEXT_PUBLIC_BACKEND_URL}/api/classes/${classId}`,
+          {
+            headers: {
+              Authorization: `Bearer ${token}`,
+            },
+          }
+        );
+        console.log("the response from classes", classResponse)
+        if (!classResponse.ok) throw new Error("Failed to fetch class details");
+
+        const classData = await (classResponse.json());
+        const organizationId = classData.class.organization;
+        setOrganizationId(organizationId)
+
+        console.log("the organization id is", organizationId)
+        const userClassesResponse = await fetch(
+          `${process.env.NEXT_PUBLIC_BACKEND_URL}/api/classes/user?organizationId=${organizationId}`,
+          {
+            headers: {
+              Authorization: `Bearer ${token}`,
+            },
+          }
+        );
+        console.log("response from fetching all classes for user", userClassesResponse)
+        if (!userClassesResponse.ok) throw new Error("Failed to fetch user classes");
+
+        const userClassesData = await userClassesResponse.json();
+        setClasses(userClassesData);
+      } catch (error) {
+        console.error("Error fetching classes:", error);
+      }
+    }
+
+    if (classId) {
+      fetchClasses();
+    }
+  }, [classId]);
+
   const navMainWithActiveState = data.navMain.map((item) => ({
     ...item,
     isActive:
       pathname === item.url ||
       (item.url !== "/dashboard" && pathname.startsWith(item.url)),
   }));
+
   return (
     <Sidebar className="border-r-0" {...props}>
       <SidebarHeader>
@@ -118,7 +169,7 @@ export function SidebarLeft({
         <NavMain items={navMainWithActiveState} />
       </SidebarHeader>
       <SidebarContent>
-        <NavClasses classes={data.classes} />
+        <NavClasses classes={classes} organizationId={organizationId || ''} />
         <NavSecondary items={data.navSecondary} className="mt-auto" />
       </SidebarContent>
       <SidebarRail />
