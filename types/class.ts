@@ -1,9 +1,9 @@
 export interface Class {
-  id: number;
+  _id: number;
   name: string;
   startDate: string;
   endDate: string;
   languages: string[];
-  organizationId: string;
+  organization: string;
   active: boolean;
 }

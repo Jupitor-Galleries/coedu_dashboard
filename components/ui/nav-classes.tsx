@@ -9,16 +9,25 @@ import {
 } from "@/components/ui/sidebar";
 import { GoPlus } from "react-icons/go";
 import { Button } from "./button";
+import { useRouter } from "next/navigation";
 
 export function NavClasses({
   classes,
+  organizationId,
 }: {
   classes: {
     name: string;
-    url: string;
+    _id: string;
     number: number;
   }[];
+  organizationId: string;
 }) {
+  const router = useRouter();
+
+  const handleClassClick = (classId: string) => {
+    router.push(`/dashboard?organizationId=${organizationId}&classId=${classId}`);
+  };
+
   return (
     <SidebarGroup className="group-data-[collapsible=icon]:hidden">
       <SidebarGroupLabel>
@@ -29,8 +38,11 @@ export function NavClasses({
       </SidebarGroupLabel>
       <SidebarMenu>
         {classes.map((item) => (
-          <SidebarMenuItem key={item.name} className="">
-            <SidebarMenuButton className="flex items-center text-sm justify-between hover:bg-transparent cursor-default">
+          <SidebarMenuItem key={item._id} className="">
+            <SidebarMenuButton
+              className="flex items-center text-sm justify-between hover:bg-transparent cursor-pointer"
+              onClick={() => handleClassClick(item._id)}
+            >
               <div className="flex items-center gap-1">
                 <p>📚</p>
                 <p className="ms-2">{item.name}</p>

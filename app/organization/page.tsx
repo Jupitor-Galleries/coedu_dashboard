@@ -1,39 +1,47 @@
 "use client";
 
+import { Suspense } from "react";
 import { useRouter } from "next/navigation";
 import { useState, useEffect } from "react";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
-import { FiArrowLeft } from "react-icons/fi";
 import { OrganizationForm } from "@/components/ui/organization-form";
 import { Organization } from "@/types/organization";
 import WhatsAppNumberModal from "@/components/ui/whatsapp-number-modal";
 import Modal from "@/components/ui/modal";
 import { Button } from "@/components/ui/button";
+import { AuthProvider, useAuth } from "@/context/AuthContext";
 
-export default function OrganizationPage() {
+function OrganizationComponent() {
   const router = useRouter();
+  const { isAuthenticated, loading } = useAuth();
   const [showDialog, setShowDialog] = useState(false);
   const [showInactiveModal, setShowInactiveModal] = useState(false);
   const [organizations, setOrganizations] = useState<Organization[]>([]);
 
   const fetchOrganizations = async () => {
-    const token = localStorage.getItem("coEdu_jwt");
-    const response = await fetch(`${process.env.NEXT_PUBLIC_BACKEND_URL}/api/organization/user-organizations`, {
-      headers: {
-        "Authorization": `Bearer ${token}`,
-      },
-    });
-    if (response.ok) {
-      const data = await response.json();
-      setOrganizations(data);
-    } else {
-      console.error("Failed to fetch organizations");
+    try {
+      const token = localStorage.getItem("coEdu_jwt");
+      const response = await fetch(`${process.env.NEXT_PUBLIC_BACKEND_URL}/api/organization/user-organizations`, {
+        headers: {
+          "Authorization": `Bearer ${token}`,
+        },
+      });
+      if (response.ok) {
+        const data = await response.json();
+        setOrganizations(data);
+      } else {
+        console.error("Failed to fetch organizations");
+      }
+    } catch (error) {
+      console.error("An error occurred while fetching organizations:", error);
     }
   };
 
   useEffect(() => {
-    fetchOrganizations();
-  }, []);
+    if (isAuthenticated) {
+      fetchOrganizations();
+    }
+  }, [isAuthenticated]);
 
   const handleOrganizationClick = (org: Organization) => {
     if (org.active) {
@@ -47,6 +55,10 @@ export default function OrganizationPage() {
     setShowDialog(false);
     fetchOrganizations(); // Reload organizations after closing the form
   };
+
+  if (loading) {
+    return <div>Loading...</div>;
+  }
 
   return (
     <div className="container mx-auto p-4 flex flex-col justify-center items-center min-h-screen">
@@ -85,5 +97,15 @@ export default function OrganizationPage() {
         <WhatsAppNumberModal onClose={() => setShowInactiveModal(false)} />
       )}
     </div>
+  );
+}
+
+export default function OrganizationPage() {
+  return (
+    <AuthProvider>
+      <Suspense fallback={<div>Loading...</div>}>
+        <OrganizationComponent />
+      </Suspense>
+    </AuthProvider>
   );
 }

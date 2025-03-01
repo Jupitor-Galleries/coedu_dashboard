@@ -1,5 +1,6 @@
 "use client";
 
+import { Suspense } from "react";
 import { useRouter, useSearchParams } from "next/navigation";
 import { useState, useEffect } from "react";
 import { Button } from "@/components/ui/button";
@@ -8,11 +9,13 @@ import { FiArrowLeft } from "react-icons/fi";
 import { ClassForm } from "@/components/ui/class-form";
 import Modal from "@/components/ui/modal";
 import { Class } from "@/types/class";
+import { AuthProvider, useAuth } from "@/context/AuthContext";
 
-export default function ClassesPage() {
+function ClassesComponent() {
   const router = useRouter();
   const searchParams = useSearchParams();
   const organizationId = searchParams.get("organizationId");
+  const { isAuthenticated, loading } = useAuth();
   const [showDialog, setShowDialog] = useState(false);
   const [classes, setClasses] = useState<Class[]>([]);
 
@@ -32,17 +35,24 @@ export default function ClassesPage() {
   };
 
   useEffect(() => {
-    fetchClasses();
-  }, [organizationId]);
+    if (isAuthenticated) {
+      fetchClasses();
+    }
+  }, [isAuthenticated, organizationId]);
 
   const handleClassClick = (cls: Class) => {
-    router.push(`/dashboard?organizationId=${cls.organizationId}&classId=${cls.id}`);
+    console.log(cls)
+    router.push(`/dashboard?organizationId=${cls.organization}&classId=${cls._id}`);
   };
 
   const handleFormClose = () => {
     setShowDialog(false);
     fetchClasses(); // Reload classes after closing the form
   };
+
+  if (loading) {
+    return <div>Loading...</div>;
+  }
 
   return (
     <div className="container mx-auto p-4 flex flex-col justify-center items-center min-h-screen">
@@ -60,7 +70,7 @@ export default function ClassesPage() {
       </div>
       <div className="flex flex-wrap justify-center gap-4">
         {classes && classes.map((cls) => (
-          <Card key={cls.id} className="w-full sm:w-64 cursor-pointer" onClick={() => handleClassClick(cls)}>
+          <Card key={cls._id} className="w-full sm:w-64 cursor-pointer" onClick={() => handleClassClick(cls)}>
             <CardHeader>
               <CardTitle>{cls.name}</CardTitle>
             </CardHeader>
@@ -78,5 +88,15 @@ export default function ClassesPage() {
         </Modal>
       )}
     </div>
+  );
+}
+
+export default function ClassesPage() {
+  return (
+    <AuthProvider>
+      <Suspense fallback={<div>Loading...</div>}>
+        <ClassesComponent />
+      </Suspense>
+    </AuthProvider>
   );
 }
