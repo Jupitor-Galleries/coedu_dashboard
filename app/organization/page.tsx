@@ -3,7 +3,7 @@
 import { Suspense } from "react";
 import { useRouter } from "next/navigation";
 import { useState, useEffect } from "react";
-import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
+import { Card, CardHeader, CardTitle } from "@/components/ui/card";
 import { OrganizationForm } from "@/components/ui/organization-form";
 import { Organization } from "@/types/organization";
 import WhatsAppNumberModal from "@/components/ui/whatsapp-number-modal";
@@ -28,7 +28,9 @@ function OrganizationComponent() {
       });
       if (response.ok) {
         const data = await response.json();
-        setOrganizations(data);
+        // Remove duplicates based on _id
+        const uniqueOrgs = Array.from(new Map(data.map((org: Organization) => [org._id, org])).values());
+        setOrganizations(uniqueOrgs as Organization[]);
       } else {
         console.error("Failed to fetch organizations");
       }
@@ -61,33 +63,62 @@ function OrganizationComponent() {
   }
 
   return (
-    <div className="container mx-auto p-4 flex flex-col justify-center items-center min-h-screen">
-      <div className="flex justify-between items-center mb-4 w-full max-w-4xl">
-        <div className="flex-grow"></div>
-        <div className="flex items-center">
-          <div className="text-[24px] text-gray-300 bg-transparent mr-2">
-            Create Organization
+    <div className="container mx-auto p-4 min-h-screen">
+      <div className="w-full max-w-4xl mx-auto">
+        <div className="flex flex-col sm:flex-row justify-between items-center gap-4 mb-8">
+          <div className="flex flex-col sm:flex-row items-center gap-4 w-full">
+            <Button 
+              className="w-full sm:w-auto text-white"
+              onClick={() => setShowDialog(true)}
+            >
+              Create Organization +
+            </Button>
+            <Button 
+              variant="outline" 
+              onClick={() => {
+                localStorage.removeItem("coEdu_jwt");
+                localStorage.removeItem("classId");
+                router.push("/login");
+              }}
+              className="w-full sm:w-auto flex items-center justify-center gap-2"
+            >
+              <span>Logout</span>
+              <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                <path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4"/>
+                <polyline points="16 17 21 12 16 7"/>
+                <line x1="21" y1="12" x2="9" y2="12"/>
+              </svg>
+            </Button>
           </div>
-          <Button className="text-white" onClick={() => setShowDialog(true)}>+</Button>
+        </div>
+
+        <div className="text-center mb-8">
+          <h1 className="text-2xl sm:text-5xl lg:text-[70px] font-bold mb-4">
+            All Your Organizations Are Here.
+          </h1>
+          <p className="text-gray-300 text-sm sm:text-lg lg:text-[24px]">
+            Here are the organizations you&apos;ve created. You can add more by clicking the Create Organization button.
+          </p>
+        </div>
+
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
+          {organizations && organizations.map((org) => (
+            <Card 
+              key={org._id} 
+              className={`w-full cursor-pointer ${org.active ? 'bg-green-50' : 'bg-red-50'}`} 
+              onClick={() => handleOrganizationClick(org)}
+            >
+              <CardHeader>
+                <CardTitle className="text-base sm:text-lg">{org.name}</CardTitle>
+                <p className={`text-sm ${org.active ? 'text-green-600' : 'text-red-600'}`}>
+                  {org.active ? 'Active' : 'Inactive'}
+                </p>
+              </CardHeader>
+            </Card>
+          ))}
         </div>
       </div>
-      <div className="w-full md:w-[872px] mb-8 text-center">
-        <h1 className="text-[40px] md:text-[70px] font-bold mb-4">All Your Organizations Are Here.</h1>
-        <p className="text-gray-300 text-[16px] md:text-[24px]">Here are the organizations you’ve created. You can add more by clicking the ‘+’ on the top right corner.</p>
-      </div>
-      <div className="flex flex-wrap justify-center gap-4">
-        {organizations && organizations.map((org) => (
-          <Card key={org._id} className={`w-full sm:w-64 cursor-pointer ${org.active ? 'bg-green-100' : 'bg-red-100'}`} onClick={() => handleOrganizationClick(org)}>
-            <CardHeader>
-              <CardTitle>{org.name}</CardTitle>
-            </CardHeader>
-            <CardContent>
-              {/* Additional organization details can go here */}
-              <p>{org.active ? 'Active' : 'Inactive'}</p>
-            </CardContent>
-          </Card>
-        ))}
-      </div>
+
       {showDialog && (
         <Modal onClose={handleFormClose}>
           <OrganizationForm />

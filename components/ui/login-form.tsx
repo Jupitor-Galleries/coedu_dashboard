@@ -67,6 +67,10 @@ export function LoginForm() {
     });
     setLoading(false);
     if (response.ok) {
+      console.log(response);
+      const data = await response.json();
+      const token = data.token;
+      localStorage.setItem('coEdu_jwt', token);
       toast.success("Login successful");
       router.push('/organization');
     } else {
