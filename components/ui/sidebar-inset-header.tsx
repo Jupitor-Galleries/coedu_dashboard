@@ -26,7 +26,15 @@ interface ClassDetails {
   // Add other properties as needed
 }
 
-export default function SideBarInsetHeader() {
+interface SideBarInsetHeaderProps {
+  showAnnouncementsButton?: boolean;
+  onNewAnnouncementClick?: () => void;
+}
+
+export default function SideBarInsetHeader({
+  showAnnouncementsButton,
+  onNewAnnouncementClick,
+}: SideBarInsetHeaderProps) {
   const [showAddStudentModal, setShowAddStudentModal] = useState(false);
   const [showAddStudentFileModal, setShowAddStudentFileModal] = useState(false);
 
@@ -67,32 +75,43 @@ export default function SideBarInsetHeader() {
   };
 
   return (
-    <header className="sticky top-0 flex h-14 shrink-0 items-center gap-2">
-      <div className="flex flex-1 items-center gap-2 px-3">
+    <header className="sticky top-0 z-10 flex h-14 shrink-0 items-center gap-2 border-b bg-white px-3">
+      <div className="flex flex-1 items-center gap-2">
         <SidebarTrigger />
         <Separator orientation="vertical" className="mr-2 h-4" />
         <Breadcrumb>
           <BreadcrumbList>
             <BreadcrumbItem>
               <BreadcrumbPage className="line-clamp-1">
-                {classDetails?.name || "Class Name"}
+                {classDetails?.name || "Select a Class"}
               </BreadcrumbPage>
             </BreadcrumbItem>
           </BreadcrumbList>
         </Breadcrumb>
-        <div className="flex ms-auto gap-4">
-          <DropdownMenu>
-            <DropdownMenuTrigger asChild>
-              <Button className="rounded-sm">Add Students</Button>
-            </DropdownMenuTrigger>
-            <DropdownMenuContent>
-              <DropdownMenuItem onClick={() => setShowAddStudentModal(true)}>Add Student from Form</DropdownMenuItem>
-              <DropdownMenuItem onClick={() => setShowAddStudentFileModal(true)}>Add Students from File</DropdownMenuItem>
-            </DropdownMenuContent>
-          </DropdownMenu>
-          <Button className="rounded-sm border border-black" variant="ghost">
-            Create <LucidePlus />
-          </Button>
+        <div className="flex ms-auto gap-4 items-center">
+          {classId && (
+            <DropdownMenu>
+              <DropdownMenuTrigger asChild>
+                <Button size="sm" className="rounded-sm">Add Students</Button>
+              </DropdownMenuTrigger>
+              <DropdownMenuContent>
+                <DropdownMenuItem onClick={() => setShowAddStudentModal(true)}>Add Single Student</DropdownMenuItem>
+                <DropdownMenuItem onClick={() => setShowAddStudentFileModal(true)}>Upload Student List</DropdownMenuItem>
+              </DropdownMenuContent>
+            </DropdownMenu>
+          )}
+          
+          {/* Conditionally render New Announcement button */}
+          {showAnnouncementsButton && classId && (
+            <Button 
+              size="sm" 
+              className="rounded-sm inline-flex items-center gap-1"
+              onClick={onNewAnnouncementClick}
+            >
+               <LucidePlus size={16} />
+              New Announcement
+            </Button>
+          )}
         </div>
       </div>
       {showAddStudentModal && (

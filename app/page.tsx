@@ -55,7 +55,7 @@ const LandingPage = () => {
         } else {
           router.push("/organization");
         }
-      } catch (error) {
+      } catch (error: unknown) {
         console.error("Error:", error);
         localStorage.removeItem("coEdu_jwt");
         localStorage.removeItem("classId");

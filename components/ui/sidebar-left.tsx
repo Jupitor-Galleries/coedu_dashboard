@@ -11,7 +11,7 @@ import {
   SidebarHeader,
   SidebarRail,
 } from "@/components/ui/sidebar";
-import { GoHome, GoMegaphone, GoBook, GoBookmark } from "react-icons/go";
+import { GoHome, GoMegaphone } from "react-icons/go";
 import { LuGraduationCap } from "react-icons/lu";
 import { NavClasses } from "./nav-classes";
 import Image from "next/image";
@@ -54,16 +54,16 @@ const data = {
       url: "/dashboard/announcements",
       icon: GoMegaphone,
     },
-    {
-      title: "Assignments",
-      url: "/dashboard/assignments",
-      icon: GoBook,
-    },
-    {
-      title: "Resources",
-      url: "/dashboard/resources",
-      icon: GoBookmark,
-    },
+    // {
+    //   title: "Assignments",
+    //   url: "/dashboard/assignments",
+    //   icon: GoBook,
+    // },
+    // {
+    //   title: "Resources",
+    //   url: "/dashboard/resources",
+    //   icon: GoBookmark,
+    // },
   ],
   navSecondary: [
     {

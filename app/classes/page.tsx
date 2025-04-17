@@ -18,6 +18,24 @@ function ClassesComponent() {
   const { isAuthenticated, loading } = useAuth();
   const [showDialog, setShowDialog] = useState(false);
   const [classes, setClasses] = useState<Class[]>([]);
+  const [organizationName, setOrganizationName] = useState("");
+
+  const fetchOrganizationDetails = async () => {
+    try {
+      const token = localStorage.getItem("coEdu_jwt");
+      const response = await fetch(`${process.env.NEXT_PUBLIC_BACKEND_URL}/api/organization/${organizationId}`, {
+        headers: {
+          "Authorization": `Bearer ${token}`,
+        },
+      });
+      if (response.ok) {
+        const data = await response.json();
+        setOrganizationName(data.name);
+      }
+    } catch (error) {
+      console.error("Error fetching organization details:", error);
+    }
+  };
 
   const fetchClasses = async () => {
     const token = localStorage.getItem("coEdu_jwt");
@@ -35,7 +53,8 @@ function ClassesComponent() {
   };
 
   useEffect(() => {
-    if (isAuthenticated) {
+    if (isAuthenticated && organizationId) {
+      fetchOrganizationDetails();
       fetchClasses();
     }
   }, [isAuthenticated, organizationId]);
@@ -55,33 +74,78 @@ function ClassesComponent() {
   }
 
   return (
-    <div className="container mx-auto p-4 flex flex-col justify-center items-center min-h-screen">
-      <div className="flex justify-between items-center mb-4 w-full max-w-4xl">
-        <Button variant="ghost" onClick={() => router.back()}>
-          <FiArrowLeft className="mr-2" />
-        </Button>
-        <div className="text-[24px] text-gray-300 bg-transparent">
-          Add New Class <Button className="text-white" onClick={() => setShowDialog(true)}>+</Button>
+    <div className="container mx-auto p-4 min-h-screen">
+      <div className="w-full max-w-4xl mx-auto">
+        <div className="flex flex-col sm:flex-row justify-between items-center gap-4 mb-8">
+          <Button 
+            variant="ghost" 
+            onClick={() => router.back()} 
+            className="w-full sm:w-auto flex items-center justify-center gap-2"
+          >
+            <FiArrowLeft />
+            <span>Back to Organizations</span>
+          </Button>
+          <div className="flex flex-col sm:flex-row items-center gap-4 w-full sm:w-auto">
+            <Button 
+              className="w-full sm:w-auto text-white"
+              onClick={() => setShowDialog(true)}
+            >
+              Add New Class +
+            </Button>
+            <Button 
+              variant="outline" 
+              onClick={() => {
+                localStorage.removeItem("coEdu_jwt");
+                localStorage.removeItem("classId");
+                router.push("/login");
+              }}
+              className="w-full sm:w-auto flex items-center justify-center gap-2"
+            >
+              <span>Logout</span>
+              <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                <path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4"/>
+                <polyline points="16 17 21 12 16 7"/>
+                <line x1="21" y1="12" x2="9" y2="12"/>
+              </svg>
+            </Button>
+          </div>
+        </div>
+
+        <div className="text-center mb-12">
+          <p className="text-blue-600 text-lg mb-2">Organization</p>
+          <h1 className="text-3xl font-bold mb-2">{organizationName}</h1>
+          <div className="h-1 w-20 bg-blue-500 mx-auto mb-8"></div>
+          <h2 className="text-2xl sm:text-4xl lg:text-5xl font-bold mb-4">
+            Manage Your Classes
+          </h2>
+          <p className="text-gray-300 text-sm sm:text-lg max-w-2xl mx-auto">
+            View and manage all classes under {organizationName}. Add new classes or click on existing ones to access their dashboard.
+          </p>
+        </div>
+
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+          {classes && classes.length > 0 ? (
+            classes.map((cls) => (
+              <Card 
+                key={cls._id} 
+                className="w-full cursor-pointer hover:shadow-lg transition-all duration-300 hover:scale-105 border-t-4 border-t-blue-500" 
+                onClick={() => handleClassClick(cls)}
+              >
+                <CardHeader className="p-6">
+                  <CardTitle className="text-xl mb-2">{cls.name}</CardTitle>
+                  <p className="text-sm text-gray-500">Click to view dashboard</p>
+                </CardHeader>
+              </Card>
+            ))
+          ) : (
+            <div className="col-span-full text-center py-8">
+              <p className="text-gray-500 mb-4">No classes found</p>
+              <Button onClick={() => setShowDialog(true)}>Create Your First Class</Button>
+            </div>
+          )}
         </div>
       </div>
-      <div className="w-full md:w-[872px] mb-8 text-center">
-        <h1 className="text-[40px] md:text-[70px] font-bold mb-4">All Your Classes Are Here.</h1>
-        <p className="text-gray-300 text-[16px] md:text-[24px]">Here are the classes you’ve created. You can add more by clicking the ‘+’ on the top right corner.</p>
-      </div>
-      <div className="flex flex-wrap justify-center gap-4">
-        {classes && classes.map((cls) => (
-          <Card key={cls._id} className="w-full sm:w-64 cursor-pointer" onClick={() => handleClassClick(cls)}>
-            <CardHeader>
-              <CardTitle>{cls.name}</CardTitle>
-            </CardHeader>
-            {/* <CardContent>
-              <p>{`Start Date: ${new Date(cls.startDate).toLocaleDateString()}`}</p>
-              <p>{`End Date: ${new Date(cls.endDate).toLocaleDateString()}`}</p>
-              <p>{`Languages: ${cls.languages.join(", ")}`}</p>
-            </CardContent> */}
-          </Card>
-        ))}
-      </div>
+
       {showDialog && (
         <Modal onClose={handleFormClose}>
           <ClassForm organizationId={organizationId || ""} />
