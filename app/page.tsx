@@ -2,8 +2,14 @@
 
 import { useEffect, useState } from "react";
 import { useRouter } from "next/navigation";
+import LandingHeader from '@/components/LandingHeader';
+import HeroSection from '@/components/HeroSection';
+import FeaturesSection from '@/components/FeaturesSection';
+import AboutSection from '@/components/AboutSection';
+import TestimonialsSection from '@/components/TestimonialsSection';
+import LandingFooter from '@/components/LandingFooter';
 
-const LandingPage = () => {
+const HomePage = () => {
   const [loading, setLoading] = useState(true);
   const router = useRouter();
 
@@ -11,10 +17,10 @@ const LandingPage = () => {
     const checkAuthAndRedirect = async () => {
       const token = localStorage.getItem("coEdu_jwt");
 
-      if (!token) {
-        router.push("/login");
-        return;
-      }
+      // if (!token) {
+      //   // router.push("/login");
+      //   return;
+      // }
 
       try {
         // Validate token
@@ -59,7 +65,7 @@ const LandingPage = () => {
         console.error("Error:", error);
         localStorage.removeItem("coEdu_jwt");
         localStorage.removeItem("classId");
-        router.push("/login");
+        // router.push("/login");
       } finally {
         setLoading(false);
       }
@@ -76,7 +82,18 @@ const LandingPage = () => {
     );
   }
 
-  return null;
+  return (
+    <div className="min-h-screen flex flex-col bg-[#F1F5FF]">
+      <LandingHeader />
+      <main className="flex-1 flex flex-col gap-0">
+        <HeroSection />
+        <FeaturesSection />
+        <AboutSection />
+        <TestimonialsSection />
+      </main>
+      <LandingFooter />
+    </div>
+  );
 };
 
-export default LandingPage;
+export default HomePage;
